@@ -9,11 +9,11 @@ import { DEADLINES } from "../data/deadlines";
 
 const now = new Date();
 
-const upcomingDeadlines = DEADLINES.filter(d => new Date(d.date) > now)
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+const upcomingDeadlines = DEADLINES.filter(d => new Date(d.startDate) > now)
+  .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
 
-const pastDeadlines = DEADLINES.filter(d => new Date(d.date) <= now)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort past deadlines newest first
+const pastDeadlines = DEADLINES.filter(d => new Date(d.startDate) <= now)
+  .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()); // Sort past deadlines newest first
 ---
 
 <Layout title="Deadlines - SE31 Hub" description="Important public cohort deadlines for SE31.">
