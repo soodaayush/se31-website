@@ -1,5 +1,6 @@
 ---
 import { SITE_CONFIG } from "../data/siteConfig";
+import ThemeToggle from "./ThemeToggle.astro";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -28,8 +29,9 @@ const navLinks = [
           </a>
         ))}
       </div>
-      <div>
-        <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0">
+      <div class="flex items-center gap-4 mt-4 lg:mt-0">
+        <ThemeToggle />
+        <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white">
           GitHub
         </a>
       </div>
