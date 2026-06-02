@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_CONFIG } from "../data/siteConfig";
+---
+
+<Layout title="Contribute - SE31 Hub" description="How to contribute to the SE31 Hub website.">
+  <Navbar />
+  <main class="container mx-auto px-4 py-8 max-w-3xl">
+    <h1 class="text-4xl font-bold text-center mb-8">Contribute to SE31 Hub</h1>
+
+    <section class="mb-8">
+      <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+        The SE31 Hub is an open-source project built by students, for students. We welcome contributions from anyone in the SE31 cohort!
+        Your help ensures this site remains a valuable resource for everyone.
+      </p>
+      <p class="text-lg text-gray-700 dark:text-gray-300">
+        Contributing is a great way to practice your web development skills, learn new technologies, and give back to your community.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Contribution Options</h2>
+      <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+        <li><strong>Add a verified resource:</strong> Share useful links to academic tools, student life guides, or dev resources.</li>
+        <li><strong>Add a public project:</strong> Showcase your personal projects or team creations.</li>
+        <li><strong>Add or correct a public deadline:</strong> Help keep the cohort informed about important dates.</li>
+        <li><strong>Improve design or accessibility:</strong> Enhance the site's look, feel, and usability.</li>
+        <li><strong>Fix bugs:</strong> Help us squash any issues you find!</li>
+        <li><strong>Suggest new features:</strong> Propose ideas to make the hub even better.</li>
+      </ul>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Local Development Instructions</h2>
+      <p class="text-gray-700 dark:text-gray-300 mb-4">
+        Get the site running on your local machine to make changes:
+      </p>
+      <ol class="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+        <li><strong>Clone the repository:</strong>
+          <pre class="bg-gray-200 dark:bg-gray-900 p-2 rounded mt-1 text-sm overflow-x-auto"><code>git clone {SITE_CONFIG.githubUrl}.git</code></pre>
+        </li>
+        <li><strong>Navigate into the directory:</strong>
+          <pre class="bg-gray-200 dark:bg-gray-900 p-2 rounded mt-1 text-sm overflow-x-auto"><code>cd se31-hub</code></pre>
+        </li>
+        <li><strong>Install dependencies:</strong>
+          <pre class="bg-gray-200 dark:bg-gray-900 p-2 rounded mt-1 text-sm overflow-x-auto"><code>npm install</code></pre>
+        </li>
+        <li><strong>Run the development server:</strong>
+          <pre class="bg-gray-200 dark:bg-gray-900 p-2 rounded mt-1 text-sm overflow-x-auto"><code>npm run dev</code></pre>
+          <p class="text-sm mt-1">The site will be available at <a href="http://localhost:4321" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">http://localhost:4321</a></p>
+        </li>
+        <li><strong>Build for production (optional):</strong>
+          <pre class="bg-gray-200 dark:bg-gray-900 p-2 rounded mt-1 text-sm overflow-x-auto"><code>npm run build</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Editable Data Files</h2>
+      <p class="text-gray-700 dark:text-gray-300 mb-4">
+        Much of the site's content is managed through simple TypeScript data files. You can update these directly:
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+        <li><code>src/data/deadlines.ts</code>: To add or update important dates.</li>
+        <li><code>src/data/resources.ts</code>: For adding new helpful links.</li>
+        <li><code>src/data/projects.ts</code>: To showcase your cohort's projects.</li>
+      </ul>
+      <p class="text-gray-700 dark:text-gray-300 mt-4">
+        Please follow the existing data structure and TypeScript types when adding new entries.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Quick Links for Contribution</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="btn bg-gray-700 text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-bold transition duration-300">
+          View Repository
+        </a>
+        <a href={`${SITE_CONFIG.githubUrl}/issues/new/choose`} target="_blank" rel="noopener noreferrer" class="btn bg-red-600 text-white hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition duration-300">
+          Open an Issue
+        </a>
+        <a href={`${SITE_CONFIG.githubUrl}/compare`} target="_blank" rel="noopener noreferrer" class="btn bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-lg font-bold transition duration-300">
+          Submit a Pull Request
+        </a>
+      </div>
+    </section>
+
+    <section class="bg-red-50 dark:bg-red-900 p-6 rounded-lg mb-8">
+      <h2 class="text-2xl font-bold text-red-800 dark:text-red-200 mb-4">Contribution Policy</h2>
+      <ul class="list-disc list-inside space-y-2 text-red-700 dark:text-red-300">
+        <li>Do not submit private personal information.</li>
+        <li>Do not submit unofficial deadlines without a verifiable source.</li>
+        <li>Do not upload copyrighted course material or sensitive academic content.</li>
+        <li>Be respectful and constructive in all interactions and contributions.</li>
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>

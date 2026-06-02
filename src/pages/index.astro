@@ -1,0 +1,93 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import EmptyState from "../components/EmptyState.astro";
+import ResourceCard from "../components/ResourceCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { SITE_CONFIG } from "../data/siteConfig";
+import { DEADLINES } from "../data/deadlines";
+import { RESOURCES } from "../data/resources";
+import { PROJECTS } from "../data/projects";
+
+import DeadlineCard from "../components/DeadlineCard.astro";
+// Sort deadlines by date, then pick the next 3 upcoming ones
+const now = new Date();
+const upcomingDeadlines = DEADLINES.filter(d => new Date(d.date) > now)
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  .slice(0, 3);
+
+const featuredResources = RESOURCES.filter(r => r.official).slice(0, 3); // Example: show official resources
+const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3); // Example: show featured projects
+---
+
+<Layout title="Home - SE31 Hub" description={SITE_CONFIG.tagline}>
+  <Navbar />
+  <main>
+    <section class="hero bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 px-4 text-center">
+      <div class="container mx-auto">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Waterloo Software Engineering Class of 2031</h1>
+        <p class="text-xl sm:text-2xl mb-6">{SITE_CONFIG.tagline}</p>
+        <p class="text-lg sm:text-xl mb-8">A student-built home for deadlines, resources, projects and cohort contributions.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/deadlines" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">View Deadlines</a>
+          <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Contribute on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="upcoming-deadlines py-16 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-10">Upcoming Deadlines</h2>
+        {upcomingDeadlines.length > 0 ? (
+          <div class="grid md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {upcomingDeadlines.map((deadline) => (
+              <DeadlineCard deadline={deadline} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState message="No upcoming deadlines found. Verified deadlines will be added soon!" />
+        )}
+      </div>
+    </section>
+
+    <section class="featured-resources bg-gray-100 dark:bg-gray-800 py-16 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-10">Featured Resources</h2>
+        {featuredResources.length > 0 ? (
+          <div class="grid md:grid-cols-3 gap-8">
+            {featuredResources.map((resource) => (
+              <ResourceCard resource={resource} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState message="No featured resources found. Check back later for curated links!" />
+        )}
+      </div>
+    </section>
+
+    <section class="featured-projects py-16 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-10">Featured Projects</h2>
+        {featuredProjects.length > 0 ? (
+          <div class="grid md:grid-cols-3 gap-8">
+            {featuredProjects.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState message="No featured projects found. Be the first to showcase your project!" />
+        )}
+      </div>
+    </section>
+
+    <section class="contribute-cta bg-blue-600 text-white py-16 px-4 text-center">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-4">Want to Contribute?</h2>
+        <p class="text-lg mb-8">This website is open-source and built by students, for students. Your contributions are welcome!</p>
+        <a href="/contribute" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Learn How to Contribute</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

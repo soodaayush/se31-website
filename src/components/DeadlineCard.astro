@@ -1,0 +1,54 @@
+---
+import type { Deadline } from "../data/types";
+import Badge from "./Badge.astro";
+import Countdown from "./Countdown.tsx";
+
+interface Props {
+  deadline: Deadline;
+  isPast?: boolean;
+}
+
+const { deadline, isPast = false } = Astro.props;
+
+const categoryColorMap: { [key: string]: string } = {
+  "Academic": "bg-red-500",
+  "Co-op": "bg-blue-500",
+  "Student Life": "bg-green-500",
+};
+
+const textColor = isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-900 dark:text-gray-100";
+const descriptionColor = isPast ? "text-gray-400 dark:text-gray-500" : "text-gray-600 dark:text-gray-300";
+const badgeColor = isPast ? "bg-gray-400" : categoryColorMap[deadline.category] || "bg-gray-500";
+---
+
+<div class={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 ${isPast ? "opacity-70" : ""}`}>
+  <div class="flex justify-between items-start mb-2">
+    <h3 class={`text-xl font-semibold ${textColor}`}>
+      {deadline.title}
+    </h3>
+    <Badge text={deadline.category} color={badgeColor} />
+  </div>
+  <p class={`mb-4 ${descriptionColor}`}>
+    {new Date(deadline.date).toLocaleString('en-US', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'short' })}
+  </p>
+  {deadline.description && (
+    <p class={`text-sm mb-4 ${descriptionColor}`}>
+      {deadline.description}
+    </p>
+  )}
+  {deadline.sourceUrl && (
+    <p class="text-sm">
+      <a href={deadline.sourceUrl} target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">
+        {deadline.sourceLabel || "Source"}
+      </a>
+    </p>
+  )}
+  {deadline.verified && (
+    <div class="mt-2">
+      <Badge text="Verified" color="bg-green-600" />
+    </div>
+  )}
+  <div class="mt-4">
+    <Countdown targetDate={deadline.date} client:load />
+  </div>
+</div>

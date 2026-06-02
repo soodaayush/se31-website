@@ -1,0 +1,41 @@
+---
+import type { Project } from "../data/types";
+import Badge from "./Badge.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 h-full flex flex-col">
+  <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+    {project.name}
+  </h3>
+  {project.authors && project.authors.length > 0 && (
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+      By: {project.authors.join(", ")}
+    </p>
+  )}
+  <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+    {project.description}
+  </p>
+  <div class="flex flex-wrap gap-2 mb-4">
+    {project.tags.map((tag) => (
+      <Badge text={tag} color="bg-purple-500" />
+    ))}
+  </div>
+  <div class="flex flex-wrap gap-2 mt-auto">
+    {project.repoUrl && (
+      <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white text-sm px-3 py-1 rounded hover:bg-blue-700 transition duration-300">
+        GitHub Repo
+      </a>
+    )}
+    {project.demoUrl && (
+      <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="inline-block bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700 transition duration-300">
+        Live Demo
+      </a>
+    )}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+---
+import type { Resource } from "../data/types";
+import Badge from "./Badge.astro";
+
+interface Props {
+  resource: Resource;
+}
+
+const { resource } = Astro.props;
+
+const categoryColorMap: { [key: string]: string } = {
+  "University": "bg-indigo-500",
+  "Academics": "bg-red-500",
+  "Co-op": "bg-blue-500",
+  "Student life": "bg-green-500",
+  "Developer tools": "bg-purple-500",
+  "Community": "bg-yellow-500",
+};
+---
+
+<a href={resource.url} target="_blank" rel="noopener noreferrer" class="block bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300 h-full">
+  <div class="flex justify-between items-start mb-2">
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
+      {resource.title}
+    </h3>
+    <Badge text={resource.category} color={categoryColorMap[resource.category] || "bg-gray-500"} />
+  </div>
+  <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+    {resource.description}
+  </p>
+  {resource.official && (
+    <div class="mt-2">
+      <Badge text="Official" color="bg-green-600" />
+    </div>
+  )}
+</a>

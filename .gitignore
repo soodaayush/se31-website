@@ -1,0 +1,44 @@
+# Gitignore for Astro projects
+
+# Dependencies
+/node_modules
+/.pnpm-store/
+/.pnpm-cache/
+
+# Build outputs
+/dist/
+/.astro/
+
+# Debug and editor
+.env
+.env.*
+.vscode/
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+.cache/
+.webc-cache/
+*.pem
+
+# IDE-specific
+.idea/
+.fleet/
+.idea_modules/
+*.iml
+.project
+.classpath
+.settings/
+.vscode/
+.history/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.Trash/
+Thumbs.db
+ehthumbs.db
+.directory

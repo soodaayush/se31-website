@@ -1,0 +1,19 @@
+---
+import { SITE_CONFIG } from "../data/siteConfig";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gray-800 text-white p-4 mt-auto">
+  <div class="container mx-auto text-center text-sm">
+    <p class="mb-2">{SITE_CONFIG.disclaimer}</p>
+    <p class="mb-2">
+      &copy; {currentYear} SE31 Hub. All rights reserved.
+    </p>
+    <p>
+      <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">
+        Contribute on GitHub
+      </a>
+    </p>
+  </div>
+</footer>

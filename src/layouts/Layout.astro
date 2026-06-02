@@ -1,0 +1,36 @@
+---
+import { SITE_CONFIG } from "../data/siteConfig";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE_CONFIG.siteTitle, description = SITE_CONFIG.tagline } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white min-h-screen flex flex-col">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  html {
+    font-family: system-ui, sans-serif;
+    color-scheme: light dark;
+  }
+</style>

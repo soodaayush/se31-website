@@ -1,0 +1,44 @@
+---
+import { SITE_CONFIG } from "../data/siteConfig";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Deadlines", href: "/deadlines" },
+  { name: "Resources", href: "/resources" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contribute", href: "/contribute" },
+];
+---
+
+<header class="bg-gray-800 text-white p-4 sticky top-0 z-50">
+  <nav class="container mx-auto flex items-center justify-between flex-wrap">
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+      <a href="/" class="text-2xl font-bold tracking-tight">SE31</a>
+    </div>
+    <div class="block lg:hidden">
+      <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
+        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      </button>
+    </div>
+    <div id="nav-content" class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden">
+      <div class="text-sm lg:flex-grow">
+        {navLinks.map((link) => (
+          <a href={link.href} class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
+            {link.name}
+          </a>
+        ))}
+      </div>
+      <div>
+        <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  document.getElementById('nav-toggle').onclick = function() {
+    document.getElementById('nav-content').classList.toggle('hidden');
+  }
+</script>
