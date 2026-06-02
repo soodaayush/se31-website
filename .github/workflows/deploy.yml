@@ -30,7 +30,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          GITHUB_ACTIONS: "true"
+          BASE_URL: "/se31-website/"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
