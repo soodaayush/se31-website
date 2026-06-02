@@ -7,7 +7,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  base: '/se31-website', // TODO: Adjust this to your GitHub Pages repository name
+  base: '/', 
   vite: {
     plugins: [tailwindcss()]
   },
