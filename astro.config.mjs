@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/se31-website/' : '/',
+  base: process.env.GITHUB_ACTIONS ? '/se31-website/' : '/',
   vite: {
     plugins: [tailwindcss()],
     css: {
