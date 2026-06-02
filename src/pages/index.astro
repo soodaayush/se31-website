@@ -5,20 +5,23 @@ import Footer from "../components/Footer.astro";
 import EmptyState from "../components/EmptyState.astro";
 import ResourceCard from "../components/ResourceCard.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import DeadlineCard from "../components/DeadlineCard.astro";
 import { SITE_CONFIG } from "../data/siteConfig";
 import { DEADLINES } from "../data/deadlines";
 import { RESOURCES } from "../data/resources";
 import { PROJECTS } from "../data/projects";
 
-import DeadlineCard from "../components/DeadlineCard.astro";
-// Sort deadlines by date, then pick the next 3 upcoming ones
+// Sort deadlines by date
 const now = new Date();
-const upcomingDeadlines = DEADLINES.filter(d => new Date(d.date) > now)
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-  .slice(0, 3);
+const allUpcoming = DEADLINES.filter(d => new Date(d.startDate) > now)
+  .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
 
-const featuredResources = RESOURCES.filter(r => r.official).slice(0, 3); // Example: show official resources
-const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3); // Example: show featured projects
+const actionableDeadlines = allUpcoming
+  .filter(d => d.deadlineType === 'action')
+  .slice(0, 3); // Top 3 action items
+
+const featuredResources = RESOURCES.filter(r => r.official).slice(0, 3);
+const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3);
 ---
 
 <Layout title="Home - SE31 Hub" description={SITE_CONFIG.tagline}>
@@ -30,23 +33,23 @@ const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3); // Exampl
         <p class="text-xl sm:text-2xl mb-6">{SITE_CONFIG.tagline}</p>
         <p class="text-lg sm:text-xl mb-8">A student-built home for deadlines, resources, projects and cohort contributions.</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="/se31-website/deadlines" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">View Deadlines</a>
+          <a href="/deadlines" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">View Deadlines</a>
           <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Contribute on GitHub</a>
         </div>
       </div>
     </section>
 
-    <section class="upcoming-deadlines py-16 px-4">
+    <section class="actionable-deadlines py-16 px-4">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10">Upcoming Deadlines</h2>
-        {upcomingDeadlines.length > 0 ? (
+        <h2 class="text-3xl font-bold text-center mb-10">Deadlines requiring action</h2>
+        {actionableDeadlines.length > 0 ? (
           <div class="grid md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {upcomingDeadlines.map((deadline) => (
+            {actionableDeadlines.map((deadline) => (
               <DeadlineCard deadline={deadline} />
             ))}
           </div>
         ) : (
-          <EmptyState message="No upcoming deadlines found. Verified deadlines will be added soon!" />
+          <EmptyState message="No current deadlines requiring action." />
         )}
       </div>
     </section>
@@ -85,7 +88,7 @@ const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3); // Exampl
       <div class="container mx-auto">
         <h2 class="text-3xl font-bold mb-4">Want to Contribute?</h2>
         <p class="text-lg mb-8">This website is open-source and built by students, for students. Your contributions are welcome!</p>
-        <a href="/se31-website/contribute" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Learn How to Contribute</a>
+        <a href="/contribute" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Learn How to Contribute</a>
       </div>
     </section>
   </main>

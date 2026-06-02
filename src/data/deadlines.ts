@@ -2,60 +2,209 @@ import type { Deadline } from "./types";
 
 export const DEADLINES: Deadline[] = [
   {
-    id: "orientation-fall-2024",
-    title: "Fall 2024 Orientation",
-    date: "2024-09-02T09:00:00-04:00", // September 2, 2024 9:00 AM America/Toronto
-    category: "Academic",
-    description: "Welcome to Waterloo! Official orientation events for incoming students.",
-    sourceLabel: "UWaterloo Registrar",
-    sourceUrl: "https://uwaterloo.ca/registrar",
+    id: "residence-guarantee-application-2026",
+    title: "Residence guarantee application and deposit due",
+    category: "housing",
+    startDate: "2026-06-08T23:59:00-04:00",
+    deadlineType: "action",
+    appliesTo: "Students seeking first-year residence guarantee",
+    description:
+      "Submit the New Student Residence Application and $500 deposit by 11:59 p.m. ET.",
+    sourceLabel: "Campus Housing — First-Year and Transfer Students",
+    sourceUrl: "https://uwaterloo.ca/campus-housing/first-year-transfer",
     verified: true,
+    lastVerified: "2026-06-02",
+    priority: "high"
   },
   {
-    id: "coop-info-session-fall-2024",
-    title: "Co-op Information Session",
-    date: "2024-10-15T14:30:00-04:00", // October 15, 2024 2:30 PM America/Toronto
-    category: "Co-op",
-    description: "Learn about the co-op program and upcoming application cycles.",
-    sourceLabel: "CECA",
-    sourceUrl: "https://uwaterloo.ca/co-operative-education",
+    id: "housing-accommodations-2026",
+    title: "Residence accommodation request deadline",
+    category: "housing",
+    startDate: "2026-06-08T23:59:00-04:00",
+    deadlineType: "action",
+    appliesTo: "Students requesting accessible or creed-based housing accommodations",
+    description:
+      "Complete the accessible and/or creed-based housing process by the residence guarantee deadline.",
+    sourceLabel: "Campus Housing — Housing Accommodations",
+    sourceUrl: "https://uwaterloo.ca/campus-housing/applications/housing-accommodations",
     verified: true,
+    lastVerified: "2026-06-02",
+    priority: "high"
   },
   {
-    id: "winter-2025-course-selection",
-    title: "Winter 2025 Course Selection Period",
-    date: "2024-11-20T23:59:59-05:00", // November 20, 2024 11:59 PM America/Toronto
-    category: "Academic",
-    description: "Window to select courses for the Winter 2025 term on Quest.",
-    sourceLabel: "Quest",
-    sourceUrl: "https://quest.pecs.uwaterloo.ca/",
-    verified: false, // Example of an unverified entry
+    id: "osap-recommended-deadline-2026",
+    title: "Recommended OSAP application deadline",
+    category: "financial",
+    startDate: "2026-06-15",
+    deadlineType: "action",
+    appliesTo: "Students applying for OSAP",
+    description:
+      "Waterloo Ready lists June 15 as the recommended deadline to apply for OSAP.",
+    sourceLabel: "Waterloo Ready — Important Dates",
+    sourceUrl: "https://uwaterloo.ca/welcome-warriors/waterloo-ready/important-dates",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "high"
   },
   {
-    id: "hackathon-example-past",
-    title: "SE31 Hackathon (Example Past)",
-    date: "2023-03-10T17:00:00-05:00", // March 10, 2023 5:00 PM America/Toronto
-    category: "Student Life",
-    description: "A fun weekend of building cool projects with your cohort!",
-    sourceLabel: "SE31 Discord",
-    sourceUrl: "#",
-    verified: false,
+    id: "engineering-ready-day-2026",
+    title: "Engineering Faculty Ready Day",
+    category: "orientation",
+    startDate: "2026-07-11",
+    deadlineType: "event",
+    appliesTo: "Incoming Engineering students",
+    description: "Faculty Ready Day for incoming Engineering students.",
+    sourceLabel: "Waterloo Ready — Important Dates",
+    sourceUrl: "https://uwaterloo.ca/welcome-warriors/waterloo-ready/important-dates",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "normal"
   },
-  // Add more example deadlines here. For real deployment, ensure these are actual dates or clearly marked as placeholders.
+  {
+    id: "view-fall-schedule-2026",
+    title: "Fall class schedule available in Quest",
+    category: "academic",
+    startDate: "2026-07-22",
+    deadlineType: "event",
+    appliesTo: "All registered students",
+    description:
+      "Students can begin viewing their fall term class schedule and Drop/Add appointment information in Quest.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/view-next-terms-schedule-and-appointments",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "normal"
+  },
+  {
+    id: "tuition-fees-due-fall-2026",
+    title: "Tuition and fees due",
+    category: "financial",
+    startDate: "2026-08-25",
+    deadlineType: "action",
+    appliesTo: "All students",
+    description:
+      "Pay in full or become Fees Arranged by this date. Waterloo Ready also identifies this date as the deadline to opt out of optional or voluntary fees.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/tuition-and-fees-due",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "high"
+  },
+  {
+    id: "first-year-orientation-2026",
+    title: "First Year Orientation",
+    category: "orientation",
+    startDate: "2026-09-06",
+    endDate: "2026-09-12",
+    deadlineType: "event",
+    appliesTo: "Incoming first-year students",
+    description: "Official first-year Orientation week.",
+    sourceLabel: "Welcome Warriors — First Year Orientation",
+    sourceUrl: "https://uwaterloo.ca/welcome-warriors/orientation/first-year-orientation",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "normal"
+  },
+  {
+    id: "classes-begin-fall-2026",
+    title: "Fall classes begin",
+    category: "academic",
+    startDate: "2026-09-09",
+    deadlineType: "event",
+    appliesTo: "All students",
+    description: "First day of Fall 2026 classes.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-begin",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "normal"
+  },
+  {
+    id: "add-period-ends-fall-2026",
+    title: "Last day to add a class",
+    category: "academic",
+    startDate: "2026-09-22",
+    deadlineType: "action",
+    appliesTo: "Students making class changes",
+    description: "Last day to add a class for Fall 2026.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/add-period-ends",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "high"
+  },
+  {
+    id: "drop-without-record-fall-2026",
+    title: "Last day to drop a class from the academic record",
+    category: "academic",
+    startDate: "2026-09-29",
+    deadlineType: "action",
+    appliesTo: "Students considering dropping a course",
+    description:
+      "Classes dropped on or before this date are removed from the academic record.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/last-day-to-drop-a-class-from-the-academic-record",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "high"
+  },
+  {
+    id: "reading-week-fall-2026",
+    title: "Fall Reading Week",
+    category: "academic",
+    startDate: "2026-10-10",
+    endDate: "2026-10-18",
+    deadlineType: "event",
+    appliesTo: "Undergraduate students",
+    description: "All classes cancelled during Fall Reading Week.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/reading-week",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "normal"
+  },
+  {
+    id: "wd-period-ends-fall-2026",
+    title: "Last day to drop a class and receive a WD grade",
+    category: "academic",
+    startDate: "2026-11-24",
+    deadlineType: "action",
+    appliesTo: "Students considering withdrawal",
+    description:
+      "Last day to drop a class and receive a WD designation rather than entering the WF period.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/drop-with-wd-ends",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "high"
+  },
+  {
+    id: "classes-end-fall-2026",
+    title: "Fall classes end",
+    category: "academic",
+    startDate: "2026-12-08",
+    deadlineType: "event",
+    appliesTo: "All students",
+    description: "Last day of Fall 2026 classes.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-end",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "normal"
+  },
+  {
+    id: "final-exams-fall-2026",
+    title: "Final examination period",
+    category: "academic",
+    startDate: "2026-12-10",
+    endDate: "2026-12-22",
+    deadlineType: "event",
+    appliesTo: "Students with scheduled final exams",
+    description: "Fall 2026 final examinations are scheduled during this period.",
+    sourceLabel: "Undergraduate Important Dates",
+    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/final-examinations-begin",
+    verified: true,
+    lastVerified: "2026-06-02",
+    priority: "normal"
+  }
 ];
-
-// Example of an empty array with comments for production readiness:
-/*
-export const DEADLINES: Deadline[] = [];
-// When no deadlines are present, the website should display a friendly empty state.
-// Contributors can add new deadlines by editing this file and submitting a pull request.
-// Each deadline should include:
-// - id (unique string)
-// - title (brief name)
-// - date (ISO 8601 string, e.g., "YYYY-MM-DDTHH:mm:ss-HH:MM" for America/Toronto)
-// - category (e.g., "Academic", "Co-op", "Student Life")
-// - description (optional, brief details)
-// - sourceLabel (optional, e.g., "Quest", "CECA")
-// - sourceUrl (optional, link to official source)
-// - verified (boolean, true if confirmed by official source)
-*/

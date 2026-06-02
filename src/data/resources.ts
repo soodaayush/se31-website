@@ -2,66 +2,101 @@ import type { Resource } from "./types";
 
 export const RESOURCES: Resource[] = [
   {
-    title: "University of Waterloo Official Website",
-    description: "The main website for the University of Waterloo.",
+    title: "Waterloo Ready Important Dates",
+    description: "Official new-student timeline covering residence, OSAP, Engineering Ready Day, schedules, fees, Orientation and classes.",
     category: "University",
-    url: "https://uwaterloo.ca/",
+    url: "https://uwaterloo.ca/welcome-warriors/waterloo-ready/important-dates",
     official: true,
   },
   {
-    title: "Quest Student Information System",
-    description: "Access your grades, course selection, and academic records.",
+    title: "First Year Orientation",
+    description: "Official Orientation dates, registration information and International Orientation information.",
+    category: "Student life",
+    url: "https://uwaterloo.ca/welcome-warriors/orientation/first-year-orientation",
+    official: true,
+  },
+  {
+    title: "Campus Housing: First-Year and Transfer Students",
+    description: "Residence guarantee, deposit, placement and residence application information.",
+    category: "University",
+    url: "https://uwaterloo.ca/campus-housing/first-year-transfer",
+    official: true,
+  },
+  {
+    title: "Campus Housing Move-In Guide",
+    description: "Move-in dates and arrival instructions for students living in residence.",
+    category: "University",
+    url: "https://uwaterloo.ca/campus-housing/movein-guide",
+    official: true,
+  },
+  {
+    title: "AccessAbility Services",
+    description: "Academic accommodation support for students with known or suspected disabilities, conditions, illness, injury or trauma-related impacts.",
+    category: "University",
+    url: "https://uwaterloo.ca/accessability-services/",
+    official: true,
+  },
+  {
+    title: "Undergraduate Important Dates",
+    description: "Official source for add/drop, fees, Reading Week, classes and examination dates.",
     category: "Academics",
-    url: "https://quest.pecs.uwaterloo.ca/",
+    url: "https://uwaterloo.ca/important-dates/undergraduate",
     official: true,
   },
   {
-    title: "Waterloo Works (Co-op Portal)",
-    description: "Official portal for co-op job applications and processes.",
-    category: "Co-op",
-    url: "https://waterlooworks.uwaterloo.ca/",
-    official: true,
-  },
-  {
-    title: "Software Engineering Course Calendar",
-    description: "Official course descriptions and academic regulations for SE.",
+    title: "Engineering First Year",
+    description: "Engineering-specific first-year information, automatic course enrolment and academic advising.",
     category: "Academics",
-    url: "https://ugradcalendar.uwaterloo.ca/group/ENG-Software-Engineering",
+    url: "https://uwaterloo.ca/engineering/undergraduate-students/first-year",
     official: true,
   },
   {
-    title: "Learn (Learning Management System)",
-    description: "Access course materials, submit assignments, and participate in discussions.",
+    title: "Engineering Course Selection, Enrolment and Electives",
+    description: "Explains that incoming 1A Engineering students are automatically enrolled in their courses.",
     category: "Academics",
-    url: "https://learn.uwaterloo.ca/",
+    url: "https://uwaterloo.ca/engineering/undergraduate-students/first-year/course-selection-enrolment-and-electives",
     official: true,
   },
   {
-    title: "VS Code",
-    description: "A popular free code editor for web development.",
-    category: "Developer tools",
-    url: "https://code.visualstudio.com/",
+    title: "Software Engineering Official Site",
+    description: "Official program information and future/current student resources.",
+    category: "Academics",
+    url: "https://uwaterloo.ca/software-engineering/",
+    official: true,
+  },
+  {
+    title: "Current Students Hub",
+    description: "Central Waterloo page linking to Quest, Portal, LEARN, email, WatCard, Student IT Services and The Centre.",
+    category: "University",
+    url: "https://uwaterloo.ca/students/",
+    official: true,
+  },
+  {
+    title: "Waterloo Engineering Society (EngSoc)",
+    description: "Engineering student society resources, events, representation and student spaces.",
+    category: "Community",
+    url: "https://www.engsoc.uwaterloo.ca/",
     official: false,
   },
   {
-    title: "Official UW Discord Hub",
-    description: "Join the official University of Waterloo Discord server to connect with students.",
+    title: "Waterloo Undergraduate Student Association (WUSA)",
+    description: "Undergraduate student association services, support and representation.",
     category: "Community",
-    url: "https://discord.com/invite/uwaterloo", // Placeholder, check official link
+    url: "https://wusa.ca/",
+    official: false,
+  },
+  {
+    title: "WUSA Clubs",
+    description: "Club directory for students looking for communities and activities.",
+    category: "Community",
+    url: "https://wusa.ca/clubs/",
+    official: false,
+  },
+  {
+    title: "Health and Well-Being",
+    description: "Official student page for Campus Wellness, Health Services and Counselling Services access.",
+    category: "University",
+    url: "https://uwaterloo.ca/students/health-and-well-being",
     official: true,
   },
-  // Add more safe generic entries or placeholders here.
-  // Make sure URLs are known with certainty or clearly marked for replacement.
 ];
-
-// Example of an empty array with comments for production readiness:
-/*
-export const RESOURCES: Resource[] = [];
-// Contributors can add new resources by editing this file and submitting a pull request.
-// Each resource should include:
-// - title (name of the resource)
-// - description (brief explanation)
-// - category (e.g., "University", "Academics", "Co-op", "Student life", "Developer tools", "Community")
-// - url (link to the resource)
-// - official (boolean, true if it's an official university resource)
-*/

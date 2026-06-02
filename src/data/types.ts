@@ -1,12 +1,17 @@
 export interface Deadline {
   id: string;
   title: string;
-  date: string; // ISO 8601 format
-  category: string;
-  description?: string;
-  sourceLabel?: string;
-  sourceUrl?: string;
+  category: "financial" | "housing" | "academic" | "orientation" | "residence" | "international";
+  startDate: string;
+  endDate?: string;
+  deadlineType: "action" | "event";
+  appliesTo: string;
+  description: string;
+  sourceLabel: string;
+  sourceUrl: string;
   verified: boolean;
+  lastVerified: string;
+  priority: "high" | "normal";
 }
 
 export interface Resource {
