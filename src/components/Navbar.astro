@@ -2,18 +2,20 @@
 import { SITE_CONFIG } from "../data/siteConfig";
 import ThemeToggle from "./ThemeToggle.astro";
 
+const base = import.meta.env.BASE_URL;
+
 const navLinks = [
-  { name: "Deadlines", href: "/deadlines" },
-  { name: "Resources", href: "/resources" },
-  { name: "Projects", href: "/projects" },
-  { name: "Contribute", href: "/contribute" },
+  { name: "Deadlines", href: "deadlines" },
+  { name: "Resources", href: "resources" },
+  { name: "Projects", href: "projects" },
+  { name: "Contribute", href: "contribute" },
 ];
 ---
 
 <header class="bg-gray-800 text-white p-4 sticky top-0 z-50">
   <nav class="container mx-auto flex items-center justify-between flex-wrap">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
-      <a href="/" class="text-2xl font-bold tracking-tight">SE31</a>
+      <a href={base} class="text-2xl font-bold tracking-tight">SE31</a>
     </div>
     <div class="block lg:hidden">
       <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
@@ -23,7 +25,7 @@ const navLinks = [
     <div id="nav-content" class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden">
       <div class="text-sm lg:flex-grow">
         {navLinks.map((link) => (
-          <a href={link.href} class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
+          <a href={`${base}${link.href}`} class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
             {link.name}
           </a>
         ))}

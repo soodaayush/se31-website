@@ -7,6 +7,8 @@ import EmptyState from "../components/EmptyState.astro";
 import Badge from "../components/Badge.astro";
 import { PROJECTS } from "../data/projects";
 
+const base = import.meta.env.BASE_URL;
+
 const allTags = Array.from(new Set(PROJECTS.flatMap(p => p.tags))).sort();
 ---
 
@@ -17,7 +19,7 @@ const allTags = Array.from(new Set(PROJECTS.flatMap(p => p.tags))).sort();
 
     <div class="bg-indigo-100 dark:bg-indigo-900 border-l-4 border-indigo-500 text-indigo-700 dark:text-indigo-300 p-4 mb-8" role="alert">
       <p class="font-bold">Showcase Your Work:</p>
-      <p>Have you built something cool? Add your project to the showcase! <a href="/se31-website/contribute" class="font-bold underline hover:text-indigo-900">Learn how to contribute.</a></p>
+      <p>Have you built something cool? Add your project to the showcase! <a href={`${base}contribute`} class="font-bold underline hover:text-indigo-900">Learn how to contribute.</a></p>
     </div>
 
     {PROJECTS.length > 0 ? (
