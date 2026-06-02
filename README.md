@@ -47,8 +47,8 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repository:**
     ```bash
-    git clone {SITE_CONFIG.githubUrl}.git # Replace with actual repo URL
-    cd se31-hub # Or your project directory name
+    git clone https://github.com/A-coder152/se31-website.git
+    cd se31-website
     ```
 2.  **Install NPM packages:**
     ```bash
@@ -65,9 +65,9 @@ To get a local copy up and running, follow these simple steps.
 We welcome contributions from members of the SE31 cohort! Please see our dedicated [CONTRIBUTING.md](CONTRIBUTING.md) guide for detailed instructions.
 
 **Quick links:**
--   [View Repository]({SITE_CONFIG.githubUrl})
--   [Open an Issue]({SITE_CONFIG.githubUrl}/issues/new/choose)
--   [Submit a Pull Request]({SITE_CONFIG.githubUrl}/compare)
+-   [View Repository](https://github.com/A-coder152/se31-website)
+-   [Open an Issue](https://github.com/A-coder152/se31-website/issues/new/choose)
+-   [Submit a Pull Request](https://github.com/A-coder152/se31-website/compare)
 
 ## Deployment
 
