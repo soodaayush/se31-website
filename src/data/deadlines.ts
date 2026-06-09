@@ -35,7 +35,7 @@ export const DEADLINES: Deadline[] = [
     id: "osap-recommended-deadline-2026",
     title: "Recommended OSAP application deadline",
     category: "financial",
-    startDate: "2026-06-15",
+    startDate: "2026-06-16",
     deadlineType: "action",
     appliesTo: "Students applying for OSAP",
     description:
@@ -50,7 +50,7 @@ export const DEADLINES: Deadline[] = [
     id: "engineering-ready-day-2026",
     title: "Engineering Faculty Ready Day",
     category: "orientation",
-    startDate: "2026-07-11",
+    startDate: "2026-07-12",
     deadlineType: "event",
     appliesTo: "Incoming Engineering students",
     description: "Faculty Ready Day for incoming Engineering students.",
