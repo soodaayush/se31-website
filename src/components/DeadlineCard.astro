@@ -2,6 +2,7 @@
 import type { Deadline } from "../data/types";
 import Badge from "./Badge.astro";
 import Countdown from "./Countdown.tsx";
+import { formatTorontoDate } from "../utils/date";
 
 interface Props {
   deadline: Deadline;
@@ -39,8 +40,8 @@ const isCountdownEligible = deadline.deadlineType === 'action' && deadline.start
     {deadline.deadlineType === 'action' ? 'Action Required' : 'Event'}
   </p>
   <p class={`mb-4 ${descriptionColor}`}>
-    {new Date(deadline.startDate).toLocaleString('en-US', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: deadline.startDate.length > 10 ? 'short' : undefined })}
-    {deadline.endDate && ` - ${new Date(deadline.endDate).toLocaleString('en-US', { timeZone: 'America/Toronto', dateStyle: 'full', timeStyle: 'short' })}`}
+    {formatTorontoDate(deadline.startDate)}
+    {deadline.endDate && ` - ${formatTorontoDate(deadline.endDate)}`}
   </p>
   <p class={`text-sm mb-4 ${descriptionColor}`}>
     {deadline.description}
