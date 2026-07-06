@@ -1,0 +1,116 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { TIMETABLE } from "../data/timetable";
+
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+const times = [
+  "08:30","09:00","09:30","10:00","10:30","11:00","11:30",
+  "12:00","12:30","13:00","13:30","14:00","14:30","15:00",
+  "15:30","16:00","16:30","17:00","17:30"
+];
+
+function timeToRow(time: string) {
+  const [h, m] = time.split(":").map(Number);
+  return ((h - 8) * 60 + (m - 30)) / 30 + 2;
+}
+
+function rowSpan(start: string, end: string) {
+  const [sh, sm] = start.split(":").map(Number);
+  const [eh, em] = end.split(":").map(Number);
+
+  const mins =
+    (eh * 60 + em) -
+    (sh * 60 + sm);
+
+  return mins / 30;
+}
+---
+
+<Layout title="Timetable - SE31 Hub">
+    <Navbar />
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">
+            Weekly Timetable
+        </h1>
+
+        <div
+            class="overflow-x-auto rounded-lg border border-gray-300 dark:border-gray-700"
+        >
+            <div
+                class="grid timetable bg-white dark:bg-gray-900 min-w-[900px]"
+            >
+                <!-- Top Left -->
+                <div class="border"></div>
+
+                <!-- Days -->
+                {
+                    days.map((day) => (
+                        <div class="border p-2 font-bold text-center bg-gray-100 dark:bg-gray-800">
+                            {day}
+                        </div>
+                    ))
+                }
+
+                <!-- Time labels -->
+                {
+                    times.map((time) => (
+                        <>
+                            <div class="border px-2 py-1 text-sm text-right text-gray-600 dark:text-gray-400">
+                                {time}
+                            </div>
+
+                            {days.map(() => (
+                                <div class="border border-gray-200 dark:border-gray-700 h-12"></div>
+                            ))}
+                        </>
+                    ))
+                }
+
+                <!-- Events -->
+                {
+                    TIMETABLE.map((event) => (
+                        <div
+                            class="rounded-md shadow-sm border border-black/10 p-2 text-sm z-10 overflow-hidden"
+                            style={`
+                background:${event.color};
+                grid-column:${days.indexOf(event.day) + 2};
+                grid-row:${timeToRow(event.start)} / span ${rowSpan(event.start, event.end)};
+              `}
+                        >
+                            <div class="font-semibold">
+                                {event.course}
+                            </div>
+
+                            <div class="text-xs">
+                                {event.type}
+                            </div>
+
+                            {
+                                event.location && (
+                                    <div class="text-xs opacity-75">
+                                        {event.location}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+.timetable {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    grid-template-rows: 40px repeat(19, 48px);
+    position: relative;
+}
+</style>
