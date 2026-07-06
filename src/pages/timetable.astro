@@ -6,26 +6,22 @@ import { TIMETABLE } from "../data/timetable";
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-const times = [
-  "08:30","09:00","09:30","10:00","10:30","11:00","11:30",
-  "12:00","12:30","13:00","13:30","14:00","14:30","15:00",
-  "15:30","16:00","16:30","17:00","17:30"
-];
+const START_HOUR = 8;
+const START_MINUTE = 30;
 
-function timeToRow(time: string) {
+function minutes(time: string) {
   const [h, m] = time.split(":").map(Number);
-  return ((h - 8) * 60 + (m - 30)) / 30 + 2;
+  return h * 60 + m;
 }
 
-function rowSpan(start: string, end: string) {
-  const [sh, sm] = start.split(":").map(Number);
-  const [eh, em] = end.split(":").map(Number);
+const startMinutes = START_HOUR * 60 + START_MINUTE;
 
-  const mins =
-    (eh * 60 + em) -
-    (sh * 60 + sm);
+function top(start: string) {
+  return ((minutes(start) - startMinutes) / 30) * 48;
+}
 
-  return mins / 30;
+function height(start: string, end: string) {
+  return ((minutes(end) - minutes(start)) / 30) * 48;
 }
 ---
 
@@ -37,68 +33,77 @@ function rowSpan(start: string, end: string) {
             Weekly Timetable
         </h1>
 
-        <div
-            class="overflow-x-auto rounded-lg border border-gray-300 dark:border-gray-700"
-        >
-            <div
-                class="grid timetable bg-white dark:bg-gray-900 min-w-[900px]"
-            >
-                <!-- Top Left -->
-                <div class="border"></div>
+        <div class="overflow-x-auto">
+            <div class="schedule">
+
+                <!-- Top-left corner -->
+                <div class="corner"></div>
+
+                <!-- Day headers -->
+                {
+                    days.map(day => (
+                        <div class="day-header">{day}</div>
+                    ))
+                }
+
+                <!-- Time column -->
+                <div class="times">
+                    {
+                        Array.from({ length: 19 }).map((_, i) => {
+                            const mins = startMinutes + i * 30;
+                            const h = Math.floor(mins / 60);
+                            const m = mins % 60;
+
+                            return (
+                                <div class="time">
+                                    {`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`}
+                                </div>
+                            );
+                        })
+                    }
+                </div>
 
                 <!-- Days -->
                 {
-                    days.map((day) => (
-                        <div class="border p-2 font-bold text-center bg-gray-100 dark:bg-gray-800">
-                            {day}
-                        </div>
-                    ))
-                }
+                    days.map(day => (
+                        <div class="day-column">
 
-                <!-- Time labels -->
-                {
-                    times.map((time) => (
-                        <>
-                            <div class="border px-2 py-1 text-sm text-right text-gray-600 dark:text-gray-400">
-                                {time}
-                            </div>
-
-                            {days.map(() => (
-                                <div class="border border-gray-200 dark:border-gray-700 h-12"></div>
-                            ))}
-                        </>
-                    ))
-                }
-
-                <!-- Events -->
-                {
-                    TIMETABLE.map((event) => (
-                        <div
-                            class="rounded-md shadow-sm border border-black/10 p-2 text-sm z-10 overflow-hidden"
-                            style={`
-                background:${event.color};
-                grid-column:${days.indexOf(event.day) + 2};
-                grid-row:${timeToRow(event.start)} / span ${rowSpan(event.start, event.end)};
-              `}
-                        >
-                            <div class="font-semibold">
-                                {event.course}
-                            </div>
-
-                            <div class="text-xs">
-                                {event.type}
-                            </div>
-
+                            <!-- Background -->
                             {
-                                event.location && (
-                                    <div class="text-xs opacity-75">
-                                        {event.location}
-                                    </div>
-                                )
+                                Array.from({ length: 19 }).map(() => (
+                                    <div class="slot"></div>
+                                ))
+                            }
+
+                            <!-- Events -->
+                            {
+                                TIMETABLE
+                                    .filter(e => e.day === day)
+                                    .map(event => (
+                                        <div
+                                            class="event"
+                                            style={`
+                                                top:${top(event.start)}px;
+                                                height:${height(event.start, event.end)}px;
+                                                background:${event.color};
+                                            `}
+                                        >
+                                            <strong>{event.course}</strong><br />
+                                            {event.type}
+                                            {
+                                                event.location &&
+                                                <>
+                                                    <br />
+                                                    <small>{event.location}</small>
+                                                </>
+                                            }
+                                        </div>
+                                    ))
                             }
                         </div>
                     ))
                 }
+
             </div>
         </div>
     </main>
@@ -107,10 +112,85 @@ function rowSpan(start: string, end: string) {
 </Layout>
 
 <style>
-.timetable {
+.schedule {
     display: grid;
     grid-template-columns: 80px repeat(5, 1fr);
-    grid-template-rows: 40px repeat(19, 48px);
+    grid-template-rows: 48px auto;
+    min-width: 950px;
+    border: 1px solid rgb(209 213 219);
+}
+
+.corner {
+    border-right: 1px solid rgb(209 213 219);
+    border-bottom: 1px solid rgb(209 213 219);
+}
+
+.day-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-left: 1px solid rgb(209 213 219);
+    border-bottom: 1px solid rgb(209 213 219);
+    background: rgb(243 244 246);
+}
+
+.times {
+    display: flex;
+    flex-direction: column;
+}
+
+.time {
+    height: 48px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-right: .5rem;
+    padding-top: .2rem;
+    font-size: .8rem;
+    border-right: 1px solid rgb(209 213 219);
+    border-bottom: 1px solid rgb(229 231 235);
+}
+
+.day-column {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgb(209 213 219);
+}
+
+.slot {
+    height: 48px;
+    border-bottom: 1px solid rgb(229 231 235);
+}
+
+.event {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+
+    padding: .4rem;
+    border-radius: .5rem;
+    border: 1px solid rgba(0,0,0,.15);
+
+    font-size: .8rem;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.dark .day-header {
+    background: rgb(31 41 55);
+}
+
+.dark .schedule,
+.dark .corner,
+.dark .day-header,
+.dark .time,
+.dark .day-column {
+    border-color: rgb(75 85 99);
+}
+
+.dark .slot {
+    border-color: rgb(55 65 81);
 }
 </style>
