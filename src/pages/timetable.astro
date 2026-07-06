@@ -133,36 +133,39 @@ const times = Array.from({ length: 19 }, (_, i) => {
 									.filter(e => e.day === day)
 									.map(event => (
 										<div
-											class="
-												absolute
-												left-[1px]
-												right-[1px]
-												z-[5]
-												box-border
-												flex
-												flex-col
-												justify-center
-												overflow-hidden
-												rounded-lg
-												border
-												border-black/10
-												p-2
-												text-[0.8rem]
-												leading-tight
-												dark:border-white/15
-											"
+											class:list={[
+												`
+													absolute
+													left-[1px]
+													right-[1px]
+													z-[5]
+													box-border
+													flex
+													flex-col
+													justify-center
+													overflow-hidden
+													rounded-lg
+													border
+													border-black/10
+													p-2
+													text-[0.8rem]
+													leading-tight
+													shadow-sm
+													dark:border-white/15
+												`,
+												event.color,
+											]}
 											style={`
 												top:${top(event.start)}px;
 												height:${height(event.start, event.end)}px;
-												background:${event.color};
 											`}
 										>
 											<div class="mb-1 font-bold">
 												{event.course}
 											</div>
-
+							
 											<div>{event.type}</div>
-
+							
 											{
 												event.location && (
 													<div class="mt-1 text-[0.72rem] opacity-80">
