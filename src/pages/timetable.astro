@@ -6,24 +6,29 @@ import { TIMETABLE } from "../data/timetable";
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-const START_HOUR = 8;
-const START_MINUTE = 30;
+const START = 8 * 60 + 30;
 const SLOT_HEIGHT = 48;
+const HEADER_HEIGHT = 48;
 
-function minutes(time: string) {
+function toMinutes(time: string) {
 	const [h, m] = time.split(":").map(Number);
 	return h * 60 + m;
 }
 
-const startMinutes = START_HOUR * 60 + START_MINUTE;
-
-function top(start: string) {
-	return ((minutes(start) - startMinutes) / 30) * SLOT_HEIGHT;
+function top(time: string) {
+	return ((toMinutes(time) - START) / 30) * SLOT_HEIGHT;
 }
 
 function height(start: string, end: string) {
-	return ((minutes(end) - minutes(start)) / 30) * SLOT_HEIGHT;
+	return ((toMinutes(end) - toMinutes(start)) / 30) * SLOT_HEIGHT;
 }
+
+const times = Array.from({ length: 19 }, (_, i) => {
+	const mins = START + i * 30;
+	const h = Math.floor(mins / 60);
+	const m = mins % 60;
+	return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+});
 ---
 
 <Layout title="Timetable - SE31 Hub">
@@ -35,66 +40,58 @@ function height(start: string, end: string) {
 		</h1>
 
 		<div class="overflow-x-auto">
-			<div class="schedule">
+
+			<div class="table">
 
 				<div class="corner"></div>
 
 				{
-					days.map((day) => (
-						<div class="day-header">
-							{day}
-						</div>
+					days.map(day => (
+						<div class="header">{day}</div>
 					))
 				}
 
 				<div class="times">
 					{
-						Array.from({ length: 19 }).map((_, i) => {
-							const mins = startMinutes + i * 30;
-							const h = Math.floor(mins / 60);
-							const m = mins % 60;
-
-							return (
-								<div class="time">
-									{`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`}
-								</div>
-							);
-						})
+						times.map(time => (
+							<div class="time">{time}</div>
+						))
 					}
 				</div>
 
 				{
-					days.map((day) => (
-						<div class="day-column">
+					days.map(day => (
+						<div class="column">
 
 							{
-								Array.from({ length: 19 }).map(() => (
+								times.map(() => (
 									<div class="slot"></div>
 								))
 							}
 
 							{
-								TIMETABLE.filter((e) => e.day === day).map((event) => (
-									<div
-										class="event"
-										style={`
-											top:${top(event.start)}px;
-											height:${height(event.start, event.end)}px;
-											background:${event.color};
-										`}
-									>
-										<div class="event-title">{event.course}</div>
-										<div>{event.type}</div>
+								TIMETABLE
+									.filter(e => e.day === day)
+									.map(event => (
+										<div
+											class="lesson"
+											style={`
+												top:${top(event.start)}px;
+												height:${height(event.start, event.end)}px;
+												background:${event.color};
+											`}
+										>
+											<div class="course">{event.course}</div>
+											<div>{event.type}</div>
 
-										{
-											event.location && (
-												<div class="event-location">
+											{
+												event.location &&
+												<div class="location">
 													{event.location}
 												</div>
-											)
-										}
-									</div>
-								))
+											}
+										</div>
+									))
 							}
 
 						</div>
@@ -102,6 +99,7 @@ function height(start: string, end: string) {
 				}
 
 			</div>
+
 		</div>
 	</main>
 
@@ -109,12 +107,12 @@ function height(start: string, end: string) {
 </Layout>
 
 <style>
-.schedule {
+.table {
 	display: grid;
-	grid-template-columns: 80px repeat(5, 1fr);
+	grid-template-columns: 80px repeat(5, minmax(170px, 1fr));
 	grid-template-rows: 48px auto;
 
-	min-width: 950px;
+	min-width: 930px;
 
 	border: 1px solid rgb(209 213 219);
 	background: white;
@@ -123,26 +121,29 @@ function height(start: string, end: string) {
 .corner {
 	border-right: 1px solid rgb(209 213 219);
 	border-bottom: 1px solid rgb(209 213 219);
-	background: white;
+	background: inherit;
 }
 
-.day-header {
+.header {
+	height: 48px;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
 	font-weight: 700;
 
+	background: rgb(243 244 246);
+
 	border-left: 1px solid rgb(209 213 219);
 	border-bottom: 1px solid rgb(209 213 219);
-
-	background: rgb(243 244 246);
 }
 
 .times {
 	display: flex;
 	flex-direction: column;
-	background: white;
+
+	background: inherit;
 }
 
 .time {
@@ -152,88 +153,115 @@ function height(start: string, end: string) {
 	align-items: center;
 	justify-content: center;
 
-	font-size: .8rem;
+	font-size: 0.8rem;
 
 	border-right: 1px solid rgb(209 213 219);
 	border-bottom: 1px solid rgb(229 231 235);
 }
 
-.day-column {
+.column {
 	position: relative;
+
 	display: flex;
 	flex-direction: column;
 
+	background: inherit;
+
 	border-left: 1px solid rgb(209 213 219);
-	background: white;
 }
 
 .slot {
 	height: 48px;
+
 	border-bottom: 1px solid rgb(229 231 235);
-}
-
-.event {
-	position: absolute;
-
-	left: 2px;
-	right: 2px;
-
-	padding: .45rem;
-
-	border-radius: .5rem;
-	border: 1px solid rgba(0,0,0,.12);
 
 	box-sizing: border-box;
+}
 
-	font-size: .8rem;
-	line-height: 1.2;
+.lesson {
+	position: absolute;
 
-	overflow: hidden;
+	left: 1px;
+	right: 1px;
+
+	padding: 0.5rem;
+
+	border-radius: 0.5rem;
+	border: 1px solid rgba(0, 0, 0, 0.12);
+
+	box-sizing: border-box;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 
-	z-index: 10;
+	font-size: 0.8rem;
+	line-height: 1.2;
+
+	overflow: hidden;
+
+	z-index: 5;
 }
 
-.event-title {
+.course {
 	font-weight: 700;
-	margin-bottom: .2rem;
+	margin-bottom: 0.2rem;
 }
 
-.event-location {
-	font-size: .72rem;
-	opacity: .8;
-	margin-top: .15rem;
+.location {
+	font-size: 0.72rem;
+	opacity: 0.8;
+	margin-top: 0.15rem;
 }
 
-/* Dark mode */
+/* ---------- Dark mode ---------- */
 
-.dark .schedule,
-.dark .corner,
-.dark .times,
-.dark .day-column {
+:global(html.dark) .table {
 	background: rgb(17 24 39);
 	border-color: rgb(75 85 99);
 }
 
-.dark .day-header {
+:global(html.dark) .corner {
+	background: rgb(17 24 39);
+	border-color: rgb(75 85 99);
+}
+
+:global(html.dark) .header {
 	background: rgb(31 41 55);
+	color: rgb(243 244 246);
+
 	border-color: rgb(75 85 99);
 }
 
-.dark .time {
+:global(html.dark) .times {
 	background: rgb(17 24 39);
+}
+
+:global(html.dark) .time {
+	background: rgb(17 24 39);
+	color: rgb(209 213 219);
+
 	border-color: rgb(55 65 81);
 }
 
-.dark .slot {
+:global(html.dark) .column {
+	background: rgb(17 24 39);
+	border-color: rgb(75 85 99);
+}
+
+:global(html.dark) .slot {
 	border-color: rgb(55 65 81);
 }
 
-.dark .event {
-	border-color: rgba(255,255,255,.12);
-	color: black;
+:global(html.dark) .lesson {
+	border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+	.table {
+		min-width: 900px;
+	}
 }
 </style>
