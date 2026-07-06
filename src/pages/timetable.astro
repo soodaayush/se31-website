@@ -8,189 +8,232 @@ const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 const START_HOUR = 8;
 const START_MINUTE = 30;
+const SLOT_HEIGHT = 48;
 
 function minutes(time: string) {
-  const [h, m] = time.split(":").map(Number);
-  return h * 60 + m;
+	const [h, m] = time.split(":").map(Number);
+	return h * 60 + m;
 }
 
 const startMinutes = START_HOUR * 60 + START_MINUTE;
 
 function top(start: string) {
-  return ((minutes(start) - startMinutes) / 30) * 48;
+	return ((minutes(start) - startMinutes) / 30) * SLOT_HEIGHT;
 }
 
 function height(start: string, end: string) {
-  return ((minutes(end) - minutes(start)) / 30) * 48;
+	return ((minutes(end) - minutes(start)) / 30) * SLOT_HEIGHT;
 }
 ---
 
 <Layout title="Timetable - SE31 Hub">
-    <Navbar />
+	<Navbar />
 
-    <main class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-center mb-8">
-            Weekly Timetable
-        </h1>
+	<main class="container mx-auto px-4 py-8">
+		<h1 class="text-4xl font-bold text-center mb-8">
+			Weekly Timetable
+		</h1>
 
-        <div class="overflow-x-auto">
-            <div class="schedule">
+		<div class="overflow-x-auto">
+			<div class="schedule">
 
-                <!-- Top-left corner -->
-                <div class="corner"></div>
+				<div class="corner"></div>
 
-                <!-- Day headers -->
-                {
-                    days.map(day => (
-                        <div class="day-header">{day}</div>
-                    ))
-                }
+				{
+					days.map((day) => (
+						<div class="day-header">
+							{day}
+						</div>
+					))
+				}
 
-                <!-- Time column -->
-                <div class="times">
-                    {
-                        Array.from({ length: 19 }).map((_, i) => {
-                            const mins = startMinutes + i * 30;
-                            const h = Math.floor(mins / 60);
-                            const m = mins % 60;
+				<div class="times">
+					{
+						Array.from({ length: 19 }).map((_, i) => {
+							const mins = startMinutes + i * 30;
+							const h = Math.floor(mins / 60);
+							const m = mins % 60;
 
-                            return (
-                                <div class="time">
-                                    {`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`}
-                                </div>
-                            );
-                        })
-                    }
-                </div>
+							return (
+								<div class="time">
+									{`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`}
+								</div>
+							);
+						})
+					}
+				</div>
 
-                <!-- Days -->
-                {
-                    days.map(day => (
-                        <div class="day-column">
+				{
+					days.map((day) => (
+						<div class="day-column">
 
-                            <!-- Background -->
-                            {
-                                Array.from({ length: 19 }).map(() => (
-                                    <div class="slot"></div>
-                                ))
-                            }
+							{
+								Array.from({ length: 19 }).map(() => (
+									<div class="slot"></div>
+								))
+							}
 
-                            <!-- Events -->
-                            {
-                                TIMETABLE
-                                    .filter(e => e.day === day)
-                                    .map(event => (
-                                        <div
-                                            class="event"
-                                            style={`
-                                                top:${top(event.start)}px;
-                                                height:${height(event.start, event.end)}px;
-                                                background:${event.color};
-                                            `}
-                                        >
-                                            <strong>{event.course}</strong><br />
-                                            {event.type}
-                                            {
-                                                event.location &&
-                                                <>
-                                                    <br />
-                                                    <small>{event.location}</small>
-                                                </>
-                                            }
-                                        </div>
-                                    ))
-                            }
-                        </div>
-                    ))
-                }
+							{
+								TIMETABLE.filter((e) => e.day === day).map((event) => (
+									<div
+										class="event"
+										style={`
+											top:${top(event.start)}px;
+											height:${height(event.start, event.end)}px;
+											background:${event.color};
+										`}
+									>
+										<div class="event-title">{event.course}</div>
+										<div>{event.type}</div>
 
-            </div>
-        </div>
-    </main>
+										{
+											event.location && (
+												<div class="event-location">
+													{event.location}
+												</div>
+											)
+										}
+									</div>
+								))
+							}
 
-    <Footer />
+						</div>
+					))
+				}
+
+			</div>
+		</div>
+	</main>
+
+	<Footer />
 </Layout>
 
 <style>
 .schedule {
-    display: grid;
-    grid-template-columns: 80px repeat(5, 1fr);
-    grid-template-rows: 48px auto;
-    min-width: 950px;
-    border: 1px solid rgb(209 213 219);
+	display: grid;
+	grid-template-columns: 80px repeat(5, 1fr);
+	grid-template-rows: 48px auto;
+
+	min-width: 950px;
+
+	border: 1px solid rgb(209 213 219);
+	background: white;
 }
 
 .corner {
-    border-right: 1px solid rgb(209 213 219);
-    border-bottom: 1px solid rgb(209 213 219);
+	border-right: 1px solid rgb(209 213 219);
+	border-bottom: 1px solid rgb(209 213 219);
+	background: white;
 }
 
 .day-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    border-left: 1px solid rgb(209 213 219);
-    border-bottom: 1px solid rgb(209 213 219);
-    background: rgb(243 244 246);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-weight: 700;
+
+	border-left: 1px solid rgb(209 213 219);
+	border-bottom: 1px solid rgb(209 213 219);
+
+	background: rgb(243 244 246);
 }
 
 .times {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	background: white;
 }
 
 .time {
-    height: 48px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    padding-right: .5rem;
-    padding-top: .2rem;
-    font-size: .8rem;
-    border-right: 1px solid rgb(209 213 219);
-    border-bottom: 1px solid rgb(229 231 235);
+	height: 48px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: .8rem;
+
+	border-right: 1px solid rgb(209 213 219);
+	border-bottom: 1px solid rgb(229 231 235);
 }
 
 .day-column {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid rgb(209 213 219);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+
+	border-left: 1px solid rgb(209 213 219);
+	background: white;
 }
 
 .slot {
-    height: 48px;
-    border-bottom: 1px solid rgb(229 231 235);
+	height: 48px;
+	border-bottom: 1px solid rgb(229 231 235);
 }
 
 .event {
-    position: absolute;
-    left: 4px;
-    right: 4px;
+	position: absolute;
 
-    padding: .4rem;
-    border-radius: .5rem;
-    border: 1px solid rgba(0,0,0,.15);
+	left: 2px;
+	right: 2px;
 
-    font-size: .8rem;
-    overflow: hidden;
-    box-sizing: border-box;
+	padding: .45rem;
+
+	border-radius: .5rem;
+	border: 1px solid rgba(0,0,0,.12);
+
+	box-sizing: border-box;
+
+	font-size: .8rem;
+	line-height: 1.2;
+
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	z-index: 10;
 }
 
-.dark .day-header {
-    background: rgb(31 41 55);
+.event-title {
+	font-weight: 700;
+	margin-bottom: .2rem;
 }
+
+.event-location {
+	font-size: .72rem;
+	opacity: .8;
+	margin-top: .15rem;
+}
+
+/* Dark mode */
 
 .dark .schedule,
 .dark .corner,
-.dark .day-header,
-.dark .time,
+.dark .times,
 .dark .day-column {
-    border-color: rgb(75 85 99);
+	background: rgb(17 24 39);
+	border-color: rgb(75 85 99);
+}
+
+.dark .day-header {
+	background: rgb(31 41 55);
+	border-color: rgb(75 85 99);
+}
+
+.dark .time {
+	background: rgb(17 24 39);
+	border-color: rgb(55 65 81);
 }
 
 .dark .slot {
-    border-color: rgb(55 65 81);
+	border-color: rgb(55 65 81);
+}
+
+.dark .event {
+	border-color: rgba(255,255,255,.12);
+	color: black;
 }
 </style>
