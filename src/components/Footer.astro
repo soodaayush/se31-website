@@ -4,14 +4,23 @@ import { SITE_CONFIG } from "../data/siteConfig";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-gray-800 text-white p-4 mt-auto">
-  <div class="container mx-auto text-center text-sm">
-    <p class="mb-2">{SITE_CONFIG.disclaimer}</p>
-    <p class="mb-2">
+<footer class="mt-auto bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+  <div class="container mx-auto p-4 text-center text-sm">
+    <p class="mb-2 text-gray-600 dark:text-gray-300">
+      {SITE_CONFIG.disclaimer}
+    </p>
+
+    <p class="mb-2 text-gray-700 dark:text-gray-200">
       &copy; {currentYear} SE31 Hub. All rights reserved.
     </p>
+
     <p>
-      <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">
+      <a
+        href={SITE_CONFIG.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-blue-600 dark:text-blue-400 hover:underline"
+      >
         Contribute on GitHub
       </a>
     </p>
