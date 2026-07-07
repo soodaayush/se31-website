@@ -14,27 +14,59 @@ const navLinks = [
 ];
 ---
 
-<header class="bg-gray-800 text-white p-4 sticky top-0 z-50">
-  <nav class="container mx-auto flex items-center justify-between flex-wrap">
-    <div class="flex items-center flex-shrink-0 text-white mr-6">
-      <a href={base} class="text-2xl font-bold tracking-tight">SE31</a>
+<header class="sticky top-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+  <nav class="container mx-auto flex items-center justify-between flex-wrap p-4">
+    <div class="flex items-center flex-shrink-0 mr-6">
+      <a
+        href={base}
+        class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
+        SE31
+      </a>
     </div>
+
     <div class="block lg:hidden">
-      <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
-        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      <button
+        id="nav-toggle"
+        class="flex items-center px-3 py-2 border rounded text-gray-700 dark:text-gray-200 border-gray-400 dark:border-gray-500 hover:text-black dark:hover:text-white"
+      >
+        <svg
+          class="fill-current h-3 w-3"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Menu</title>
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+        </svg>
       </button>
     </div>
-    <div id="nav-content" class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden">
+
+    <div
+      id="nav-content"
+      class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden"
+    >
       <div class="text-sm lg:flex-grow">
         {navLinks.map((link) => (
-          <a href={`${base}${link.href}`} class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
+          <a
+            href={`${base}${link.href}`}
+            class="block mt-4 lg:inline-block lg:mt-0 mr-4 text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white"
+          >
             {link.name}
           </a>
         ))}
       </div>
+
       <div class="flex items-center gap-4 mt-4 lg:mt-0">
         <ThemeToggle />
-        <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white">
+
+        <a
+          href={SITE_CONFIG.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block text-sm px-4 py-2 leading-none border rounded
+                 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white
+                 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-gray-800"
+        >
           GitHub
         </a>
       </div>
@@ -43,9 +75,10 @@ const navLinks = [
 </header>
 
 <script>
-  const toggle = document.getElementById('nav-toggle');
-  const content = document.getElementById('nav-content');
-  toggle?.addEventListener('click', () => {
-    content?.classList.toggle('hidden');
+  const toggle = document.getElementById("nav-toggle");
+  const content = document.getElementById("nav-content");
+
+  toggle?.addEventListener("click", () => {
+    content?.classList.toggle("hidden");
   });
 </script>
