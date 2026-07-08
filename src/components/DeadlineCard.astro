@@ -29,7 +29,7 @@ const badgeColor = isPast ? "bg-gray-400" : categoryColorMap[deadline.category] 
 const isCountdownEligible = deadline.deadlineType === 'action' && deadline.startDate.length > 10;
 ---
 
-<div class={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 ${isPast ? "opacity-70" : ""} flex flex-col`}>
+<div class={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 h-85 ${isPast ? "opacity-70" : ""} flex flex-col`}>
   <div class="flex justify-between items-start mb-2">
     <h3 class={`text-xl font-semibold ${textColor}`}>
       {deadline.title}
