@@ -7,3 +7,22 @@
 
 /* Force dark mode class usage in Tailwind v4 */
 @variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html.theme-transition-ready *,
+  html.theme-transition-ready *::before,
+  html.theme-transition-ready *::after {
+    transition-duration: 300ms;
+    transition-property: background-color, border-color, box-shadow, color, fill, stroke,
+      text-decoration-color;
+    transition-timing-function: ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.theme-transition-ready *,
+    html.theme-transition-ready *::before,
+    html.theme-transition-ready *::after {
+      transition-duration: 0ms;
+    }
+  }
+}

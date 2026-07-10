@@ -18,6 +18,10 @@
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    requestAnimationFrame(() => {
+      document.documentElement.classList.add('theme-transition-ready');
+    });
   })();
 
   document.getElementById('theme-toggle').addEventListener('click', () => {
