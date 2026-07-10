@@ -2,10 +2,9 @@
 
 **Tagline:** Built by SE31, for SE31.
 
-## Screenshot
+## Visit Site
 
-![Screenshot Placeholder](https://via.placeholder.com/1200x600?text=SE31+Hub+Website+Screenshot)
-*(A screenshot of the live website will be added here once deployed.)*
+Access the live site here: [SE31 Hub](https://advancedforge.github.io/se31-website/)
 
 ## Purpose
 
