@@ -70,7 +70,8 @@ export const DEADLINES: Deadline[] = [
     description:
       "Students can begin viewing their fall term class schedule and Drop/Add appointment information in Quest.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/view-next-terms-schedule-and-appointments",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/view-next-terms-schedule-and-appointments",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "normal"
@@ -85,7 +86,8 @@ export const DEADLINES: Deadline[] = [
     description:
       "Pay in full or become Fees Arranged by this date. Waterloo Ready also identifies this date as the deadline to opt out of optional or voluntary fees.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/tuition-and-fees-due",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/tuition-and-fees-due",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "high"
@@ -100,7 +102,8 @@ export const DEADLINES: Deadline[] = [
     appliesTo: "Incoming first-year students",
     description: "Official first-year Orientation week.",
     sourceLabel: "Welcome Warriors — First Year Orientation",
-    sourceUrl: "https://uwaterloo.ca/welcome-warriors/orientation/first-year-orientation",
+    sourceUrl:
+      "https://uwaterloo.ca/welcome-warriors/orientation/first-year-orientation",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "normal"
@@ -114,7 +117,8 @@ export const DEADLINES: Deadline[] = [
     appliesTo: "All students",
     description: "First day of Fall 2026 classes.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-begin",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-begin",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "normal"
@@ -128,7 +132,8 @@ export const DEADLINES: Deadline[] = [
     appliesTo: "Students making class changes",
     description: "Last day to add a class for Fall 2026.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/add-period-ends",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/add-period-ends",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "high"
@@ -143,7 +148,8 @@ export const DEADLINES: Deadline[] = [
     description:
       "Classes dropped on or before this date are removed from the academic record.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/last-day-to-drop-a-class-from-the-academic-record",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/last-day-to-drop-a-class-from-the-academic-record",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "high"
@@ -158,7 +164,8 @@ export const DEADLINES: Deadline[] = [
     appliesTo: "Undergraduate students",
     description: "All classes cancelled during Fall Reading Week.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/reading-week",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/reading-week",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "normal"
@@ -173,7 +180,8 @@ export const DEADLINES: Deadline[] = [
     description:
       "Last day to drop a class and receive a WD designation rather than entering the WF period.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/drop-with-wd-ends",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/drop-with-wd-ends",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "high"
@@ -187,7 +195,8 @@ export const DEADLINES: Deadline[] = [
     appliesTo: "All students",
     description: "Last day of Fall 2026 classes.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-end",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-end",
     verified: true,
     lastVerified: "2026-06-02",
     priority: "normal"
@@ -202,9 +211,68 @@ export const DEADLINES: Deadline[] = [
     appliesTo: "Students with scheduled final exams",
     description: "Fall 2026 final examinations are scheduled during this period.",
     sourceLabel: "Undergraduate Important Dates",
-    sourceUrl: "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/final-examinations-begin",
+    sourceUrl:
+      "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/final-examinations-begin",
     verified: true,
     lastVerified: "2026-06-02",
+    priority: "normal"
+  },
+  {
+    id: "classes-begin-winter-2027",
+    title: "Term 2 classes begin",
+    category: "academic",
+    startDate: "2027-01-11",
+    deadlineType: "event",
+    appliesTo: "Students enrolled in Term 2",
+    description: "First day of Term 2 classes.",
+    sourceLabel: "Term 2 Important Dates",
+    sourceUrl: "",
+    verified: false,
+    lastVerified: "2026-07-11",
+    priority: "normal"
+  },
+  {
+    id: "reading-week-winter-2027",
+    title: "Term 2 Reading Week",
+    category: "academic",
+    startDate: "2027-02-13",
+    endDate: "2027-02-21",
+    deadlineType: "event",
+    appliesTo: "Students enrolled in Term 2",
+    description: "Classes are cancelled during Term 2 Reading Week.",
+    sourceLabel: "Term 2 Important Dates",
+    sourceUrl: "",
+    verified: false,
+    lastVerified: "2026-07-11",
+    priority: "normal"
+  },
+  {
+    id: "final-exams-end-winter-2027",
+    title: "Term 2 final examinations end",
+    category: "academic",
+    startDate: "2027-04-29",
+    deadlineType: "event",
+    appliesTo: "Students with scheduled Term 2 final exams",
+    description: "Last day of the Term 2 final examination period.",
+    sourceLabel: "Term 2 Important Dates",
+    sourceUrl: "",
+    verified: false,
+    lastVerified: "2026-07-11",
+    priority: "normal"
+  },
+  {
+    id: "coop-term-spring-2027",
+    title: "Co-op work term",
+    category: "academic",
+    startDate: "2027-05-10",
+    endDate: "2027-08-20",
+    deadlineType: "event",
+    appliesTo: "Students completing a co-op work term",
+    description: "Spring 2027 co-op work term.",
+    sourceLabel: "Co-op Important Dates",
+    sourceUrl: "",
+    verified: false,
+    lastVerified: "2026-07-11",
     priority: "normal"
   }
 ];
