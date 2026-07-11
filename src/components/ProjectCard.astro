@@ -9,19 +9,19 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 h-80 flex flex-col">
+<div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 h-auto md:h-80 md:overflow-hidden flex flex-col">
   <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
     {project.name}
   </h3>
   {project.authors && project.authors.length > 0 && (
-    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2 md:truncate">
       By: {project.authors.join(", ")}
     </p>
   )}
-  <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+  <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow md:line-clamp-3">
     {project.description}
   </p>
-  <div class="flex flex-wrap gap-2 mb-4">
+  <div class="flex flex-wrap gap-2 mb-4 md:max-h-14 md:overflow-hidden">
     {project.tags.map((tag) => (
       <Badge text={tag} color="bg-purple-500" />
     ))}
