@@ -29,7 +29,7 @@ const badgeColor = isPast ? "bg-gray-400" : categoryColorMap[deadline.category] 
 const isCountdownEligible = deadline.deadlineType === 'action' && deadline.startDate.length > 10;
 ---
 
-<div class={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 h-auto md:h-85 md:overflow-hidden ${isPast ? "opacity-70" : ""} flex flex-col`}>
+<div class={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 ${isPast ? "opacity-70" : ""} flex flex-col`}>
   <div class="flex justify-between items-start mb-2">
     <h3 class={`text-xl font-semibold ${textColor} min-w-0`}>
       {deadline.title}
@@ -43,14 +43,14 @@ const isCountdownEligible = deadline.deadlineType === 'action' && deadline.start
     {formatTorontoDate(deadline.startDate)}
     {deadline.endDate && ` - ${formatTorontoDate(deadline.endDate)}`}
   </p>
-  <p class={`text-sm mb-4 ${descriptionColor} md:line-clamp-2`}>
+  <p class={`text-sm mb-4 ${descriptionColor}`}>
     {deadline.description}
   </p>
-  <p class="text-xs italic mb-4 text-gray-500 md:truncate">Applies to: {deadline.appliesTo}</p>
+  <p class="text-xs italic mb-4 text-gray-500">Applies to: {deadline.appliesTo}</p>
 
   <div class="mt-auto">
     {deadline.sourceUrl && (
-      <p class="text-sm mb-2 md:truncate">
+      <p class="text-sm mb-2">
         <a href={deadline.sourceUrl} target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">
           {deadline.sourceLabel}
         </a>
