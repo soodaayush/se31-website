@@ -6,6 +6,7 @@ const base = import.meta.env.BASE_URL;
 
 const navLinks = [
   { name: "Timetable", href: "timetable" },
+  { name: "Courses", href: "courses" },
   { name: "Deadlines", href: "deadlines" },
   { name: "Announcements", href: "announcements" },
   { name: "Resources", href: "resources" },
@@ -15,6 +16,10 @@ const navLinks = [
 
 const normalizePath = (path: string) => path.replace(/\/$/, "");
 const currentPath = normalizePath(Astro.url.pathname);
+const isActiveLink = (href: string) => {
+  const linkPath = normalizePath(`${base}${href}`);
+  return currentPath === linkPath || currentPath.startsWith(`${linkPath}/`);
+};
 ---
 
 <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
@@ -54,7 +59,7 @@ const currentPath = normalizePath(Astro.url.pathname);
             href={`${base}${link.href}`}
             class:list={[
               "relative block w-fit mt-4 lg:inline-block lg:mt-0 mr-4 text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-current after:transition-transform after:duration-200 hover:after:scale-x-100",
-              currentPath === normalizePath(`${base}${link.href}`) && "after:scale-x-100",
+              isActiveLink(link.href) && "after:scale-x-100",
             ]}
           >
             {link.name}
