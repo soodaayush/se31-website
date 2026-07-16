@@ -33,10 +33,10 @@ const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3);
       <div class="container mx-auto">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Waterloo Software Engineering Class of 2031</h1>
         <p class="text-xl sm:text-2xl mb-6">{SITE_CONFIG.tagline}</p>
-        <p class="text-lg sm:text-xl mb-8">A student-built home for deadlines, resources, projects and cohort contributions.</p>
+        <p class="text-lg sm:text-xl mb-8">A student-built home for courses, deadlines, resources, projects and cohort contributions.</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href={`${base}deadlines`} class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">View Deadlines</a>
-          <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Contribute on GitHub</a>
+          <a href={`${base}courses`} class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Explore 1A Courses</a>
+          <a href={`${base}deadlines`} class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">View Deadlines</a>
         </div>
       </div>
     </section>
