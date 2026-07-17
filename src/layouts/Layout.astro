@@ -10,6 +10,11 @@ interface Props {
 }
 
 const { title = SITE_CONFIG.siteTitle, description = SITE_CONFIG.tagline } = Astro.props;
+const relativePath = Astro.url.pathname.startsWith(base)
+  ? Astro.url.pathname.slice(base.length)
+  : Astro.url.pathname.replace(/^\//, "");
+const canonicalUrl = new URL(relativePath, SITE_CONFIG.siteUrl).toString();
+const socialImageUrl = new URL("favicon.png", SITE_CONFIG.siteUrl).toString();
 ---
 
 <!doctype html>
@@ -22,8 +27,40 @@ const { title = SITE_CONFIG.siteTitle, description = SITE_CONFIG.tagline } = Ast
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_CONFIG.siteTitle} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <script is:inline>
+      (() => {
+        let savedTheme = null;
+        try {
+          savedTheme = localStorage.getItem("theme");
+        } catch {
+          // Storage can be unavailable in privacy-restricted browsing contexts.
+        }
+        const useDark = savedTheme
+          ? savedTheme === "dark"
+          : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle("dark", useDark);
+        document.documentElement.style.colorScheme = useDark ? "dark" : "light";
+      })();
+    </script>
   </head>
   <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:font-semibold focus:text-blue-800 focus:shadow-lg focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-blue-600 dark:focus:bg-gray-800 dark:focus:text-blue-200"
+    >
+      Skip to main content
+    </a>
     <slot />
   </body>
 </html>

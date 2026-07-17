@@ -1,5 +1,1 @@
-blank_issues_enabled: false
-contact_links:
-  - name: ❓ Question or Other Issue
-    url: https://github.com/A-coder152/se31-website/discussions
-    about: Ask a question or discuss an idea.
+blank_issues_enabled: true

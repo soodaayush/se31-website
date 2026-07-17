@@ -2,21 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import { TIMETABLE } from "../data/timetable";
+import { TIMETABLE, TIMETABLE_META } from "../data/timetable";
+import { formatTorontoDate } from "../utils/date";
 
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 const START = 8 * 60 + 30;
 const SLOT_HEIGHT = 48;
-const COURSE_COLORS: Record<string, string> = {
-	"MATH 135": "bg-taupe-300 text-black dark:bg-stone-700 dark:text-white",
-	"MATH 117": "bg-green-200 text-black dark:bg-green-700 dark:text-white",
-	"CHE 102": "bg-yellow-200 text-black dark:bg-yellow-700 dark:text-white",
-	"MATH 115": "bg-red-300 text-black dark:bg-red-700 dark:text-white",
-	"CS 137": "bg-blue-200 text-black dark:bg-blue-700 dark:text-white",
-	"SE 101": "bg-fuchsia-300 text-black dark:bg-fuchsia-700 dark:text-black",
-};
-
 function toMinutes(time: string) {
 	const [h, m] = time.split(":").map(Number);
 	return h * 60 + m;
@@ -36,17 +28,58 @@ const times = Array.from({ length: 19 }, (_, i) => {
 	const m = mins % 60;
 	return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 });
+
+const missingLocationCount = TIMETABLE.filter((event) => !event.location).length;
 ---
 
-<Layout title="Timetable - SE31 Hub">
+<Layout title={`${TIMETABLE_META.term} Timetable - SE31 Hub`} description="A clearly labelled draft reference timetable for incoming SE31 students.">
 	<Navbar />
 
-	<main class="container mx-auto px-4 py-8">
-		<h1 class="mb-8 text-center text-4xl font-bold">
-			Weekly Timetable
-		</h1>
+	<main id="main-content" class="container mx-auto px-4 py-8" tabindex="-1">
+		<div class="mx-auto mb-8 max-w-4xl text-center">
+			<p class="mb-2 text-sm font-bold uppercase tracking-[0.18em] text-blue-700 dark:text-blue-300">
+				{TIMETABLE_META.status}
+			</p>
+			<h1 class="mb-3 text-4xl font-bold">{TIMETABLE_META.term} Weekly Timetable</h1>
+			<p class="text-gray-700 dark:text-gray-300">{TIMETABLE_META.audience}</p>
+		</div>
 
-		<div class="overflow-x-auto">
+		<div class="mx-auto mb-8 max-w-4xl rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-950 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-100">
+			<p class="font-bold">Draft schedule — verify before relying on it.</p>
+			<p class="mt-1">{TIMETABLE_META.notice}</p>
+			<p class="mt-3 text-sm">
+				{missingLocationCount} of {TIMETABLE.length} entries still have unconfirmed locations · Updated {formatTorontoDate(TIMETABLE_META.lastUpdated)} ·
+				{" "}<a href={TIMETABLE_META.sourceUrl} target="_blank" rel="noopener noreferrer" class="font-semibold underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">{TIMETABLE_META.sourceLabel}</a>
+			</p>
+		</div>
+
+		<section aria-labelledby="agenda-heading" class="lg:sr-only">
+			<h2 id="agenda-heading" class="mb-5 text-2xl font-bold">Daily agenda</h2>
+			<div class="space-y-8">
+				{days.map((day) => (
+					<section aria-labelledby={`agenda-${day.toLowerCase()}`}>
+						<h3 id={`agenda-${day.toLowerCase()}`} class="mb-3 text-xl font-bold">{day}</h3>
+						<ol class="space-y-3">
+							{TIMETABLE.filter((event) => event.day === day).map((event) => (
+								<li class={`rounded-xl border border-black/10 p-4 shadow-sm dark:border-white/15 ${event.color}`}>
+									<div class="flex flex-wrap items-baseline justify-between gap-2">
+										<strong class="text-lg">{event.course}</strong>
+										<span class="text-sm font-semibold">{event.type}</span>
+									</div>
+									<p class="mt-2 text-sm">
+										<time datetime={event.start}>{event.start}</time>–<time datetime={event.end}>{event.end}</time>
+										<span aria-hidden="true"> · </span>
+										<span>{event.location || "Location not confirmed"}</span>
+									</p>
+								</li>
+							))}
+						</ol>
+					</section>
+				))}
+			</div>
+		</section>
+
+		<div class="hidden overflow-x-auto lg:block" aria-hidden="true">
 			<div
 				class="
 					grid
@@ -161,7 +194,7 @@ const times = Array.from({ length: 19 }, (_, i) => {
 													shadow-sm
 													dark:border-white/15
 												`,
-												COURSE_COLORS[event.course],
+											event.color,
 											]}
 											style={`
 												top:${top(event.start)}px;
@@ -174,13 +207,9 @@ const times = Array.from({ length: 19 }, (_, i) => {
 							
 											<div>{event.type}</div>
 							
-											{
-												event.location && (
-													<div class="mt-1 text-[0.72rem] opacity-80">
-														{event.location}
-													</div>
-												)
-											}
+											<div class="mt-1 text-[0.72rem] opacity-80">
+												{event.location || "Location TBD"}
+											</div>
 										</div>
 									))
 							}
@@ -193,11 +222,3 @@ const times = Array.from({ length: 19 }, (_, i) => {
 
 	<Footer />
 </Layout>
-
-<style>
-@media (max-width: 768px) {
-	.grid {
-		min-width: 900px;
-	}
-}
-</style>

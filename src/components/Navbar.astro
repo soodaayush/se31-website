@@ -5,12 +5,10 @@ import ThemeToggle from "./ThemeToggle.astro";
 const base = import.meta.env.BASE_URL;
 
 const navLinks = [
-  { name: "Timetable", href: "timetable" },
   { name: "Courses", href: "courses" },
+  { name: "Timetable", href: "timetable" },
   { name: "Deadlines", href: "deadlines" },
-  { name: "Announcements", href: "announcements" },
   { name: "Resources", href: "resources" },
-  { name: "Projects", href: "projects" },
   { name: "Contribute", href: "contribute" },
 ];
 
@@ -36,7 +34,11 @@ const isActiveLink = (href: string) => {
     <div class="block lg:hidden">
       <button
         id="nav-toggle"
-        class="flex items-center px-3 py-2 border rounded text-gray-700 dark:text-gray-200 border-gray-400 dark:border-gray-500 hover:text-black dark:hover:text-white"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-controls="nav-content"
+        aria-expanded="false"
+        class="flex min-h-11 min-w-11 items-center justify-center px-3 py-2 border rounded text-gray-700 dark:text-gray-200 border-gray-400 dark:border-gray-500 hover:text-black dark:hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
       >
         <svg
           class="fill-current h-3 w-3"
@@ -57,8 +59,9 @@ const isActiveLink = (href: string) => {
         {navLinks.map((link) => (
           <a
             href={`${base}${link.href}`}
+            aria-current={isActiveLink(link.href) ? "page" : undefined}
             class:list={[
-              "relative block w-fit mt-4 lg:inline-block lg:mt-0 mr-4 text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-current after:transition-transform after:duration-200 hover:after:scale-x-100",
+              "relative flex min-h-11 items-center mt-2 lg:inline-flex lg:min-h-0 lg:mt-0 mr-4 text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600 after:absolute after:left-0 after:bottom-1 lg:after:-bottom-1 after:h-0.5 after:w-full after:origin-center after:scale-x-0 after:bg-current after:transition-transform after:duration-200 hover:after:scale-x-100",
               isActiveLink(link.href) && "after:scale-x-100",
             ]}
           >
@@ -102,7 +105,20 @@ const isActiveLink = (href: string) => {
   const toggle = document.getElementById("nav-toggle");
   const content = document.getElementById("nav-content");
 
+  const setMenuOpen = (isOpen: boolean) => {
+    content?.classList.toggle("hidden", !isOpen);
+    toggle?.setAttribute("aria-expanded", String(isOpen));
+    toggle?.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+  };
+
   toggle?.addEventListener("click", () => {
-    content?.classList.toggle("hidden");
+    setMenuOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
+      setMenuOpen(false);
+      toggle.focus();
+    }
   });
 </script>

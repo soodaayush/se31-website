@@ -14,11 +14,13 @@ The exact date and time of the deadline, including timezone if known (e.g., `YYY
 
 **Category:**
 Choose one:
+- Financial
+- Housing
 - Academic
 - Co-op
-- Student Life
-- Application
-- Other (please specify)
+- Orientation
+- Residence
+- International
 
 **Description (Optional):**
 A brief explanation of what the deadline is for.

@@ -8,6 +8,17 @@ export interface TimetableEntry {
   color: string;
 }
 
+export const TIMETABLE_META = {
+  term: "Fall 2026",
+  status: "Draft reference",
+  audience: "Incoming SE31 students",
+  lastUpdated: "2026-07-06",
+  sourceLabel: "Confirm your personal timetable in Quest",
+  sourceUrl: "https://uwaterloo.ca/quest/",
+  notice:
+    "Times and locations can vary by section. Missing locations are shown explicitly and should not be treated as confirmed.",
+} as const;
+
 export const TIMETABLE: TimetableEntry[] = [
   // Monday
   {
@@ -129,7 +140,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "15:30",
     end: "16:20",
     location: "",
-    color: "bg-indigo-400 dark:bg-indigo-700 text-white",
+    color: "bg-indigo-400 text-black dark:bg-indigo-700 dark:text-white",
   },
   {
     course: "MATH 135",
@@ -158,7 +169,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "12:30",
     end: "14:20",
     location: "E2 1792",
-    color: "bg-indigo-300 dark:bg-indigo-600 text-white",
+    color: "bg-indigo-300 text-black dark:bg-indigo-600 dark:text-white",
   },
   {
     course: "MATH 117",
@@ -214,6 +225,6 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "14:30",
     end: "15:20",
     location: "",
-    color: "bg-indigo-300 dark:bg-indigo-500 text-white",
+    color: "bg-indigo-300 text-black dark:bg-indigo-500 dark:text-white",
   },
 ];

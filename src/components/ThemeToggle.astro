@@ -3,30 +3,36 @@
 
 <button
   id="theme-toggle"
-  class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-  aria-label="Toggle theme"
+  type="button"
+  class="min-h-11 min-w-11 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+  aria-label="Switch colour theme"
 >
-  <span id="theme-icon">🌓</span>
+  <span id="theme-icon" aria-hidden="true">🌓</span>
 </button>
 
 <script is:inline>
-  // Ensure the theme is set immediately to avoid FOUC
-  (function() {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+
+  const syncThemeControl = () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    themeToggle?.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+    themeToggle?.setAttribute("title", isDark ? "Switch to light theme" : "Switch to dark theme");
+    if (themeIcon) themeIcon.textContent = isDark ? "☀️" : "🌙";
+  };
+
+  syncThemeControl();
+  requestAnimationFrame(() => document.documentElement.classList.add("theme-transition-ready"));
+
+  themeToggle?.addEventListener("click", () => {
+    const isDark = !document.documentElement.classList.contains("dark");
+    document.documentElement.classList.toggle("dark", isDark);
+    document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch {
+      // The visual control still works when persistent storage is unavailable.
     }
-
-    requestAnimationFrame(() => {
-      document.documentElement.classList.add('theme-transition-ready');
-    });
-  })();
-
-  document.getElementById('theme-toggle').addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark');
-    const isDark = document.documentElement.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    syncThemeControl();
   });
 </script>

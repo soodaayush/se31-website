@@ -25,7 +25,7 @@ Please verify all academic and administrative deadlines and information through 
 -   **Global Layout:** Responsive navigation and footer.
 -   **Home Page:** Hero section, upcoming deadlines preview, featured resources, featured projects, contribution CTA.
 -   **Deadlines Page:** Chronological list of upcoming and past deadlines with live countdowns, categories, sources, and verification status.
--   **Resources Page:** Curated directory of links, filterable by category, with official/unofficial indicators.
+-   **Resources Page:** Curated directory of links grouped by category, with clear source indicators.
 -   **Projects Page:** Showcase of cohort projects with details, links, and tags.
 -   **Contribute Page:** Detailed guide on how to contribute to the project.
 -   **Tech Stack:** Astro, TypeScript, Tailwind CSS.
@@ -46,7 +46,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/A-coder152/se31-website.git
+    git clone https://github.com/AdvancedForge/se31-website.git
     cd se31-website
     ```
 2.  **Install NPM packages:**
@@ -64,9 +64,9 @@ To get a local copy up and running, follow these simple steps.
 We welcome contributions from members of the SE31 cohort! Please see our dedicated [CONTRIBUTING.md](CONTRIBUTING.md) guide for detailed instructions.
 
 **Quick links:**
--   [View Repository](https://github.com/A-coder152/se31-website)
--   [Open an Issue](https://github.com/A-coder152/se31-website/issues/new/choose)
--   [Submit a Pull Request](https://github.com/A-coder152/se31-website/compare)
+-   [View Repository](https://github.com/AdvancedForge/se31-website)
+-   [Open an Issue](https://github.com/AdvancedForge/se31-website/issues/new/choose)
+-   [Submit a Pull Request](https://github.com/AdvancedForge/se31-website/compare)
 
 ## Deployment
 
