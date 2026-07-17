@@ -32,7 +32,7 @@ const times = Array.from({ length: 19 }, (_, i) => {
 const missingLocationCount = TIMETABLE.filter((event) => !event.location).length;
 ---
 
-<Layout title={`${TIMETABLE_META.term} Timetable - SE31 Hub`} description="A clearly labelled draft reference timetable for incoming SE31 students.">
+<Layout title={`${TIMETABLE_META.term} Timetable - SE31 Hub`} description="An unofficial planning draft for incoming SE31 students while official schedules remain unavailable.">
 	<Navbar />
 
 	<main id="main-content" class="container mx-auto px-4 py-8" tabindex="-1">
@@ -45,10 +45,10 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 		</div>
 
 		<div class="mx-auto mb-8 max-w-4xl rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-950 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-100">
-			<p class="font-bold">Draft schedule — verify before relying on it.</p>
+			<p class="font-bold">Unofficial schedule — do not rely on it yet.</p>
 			<p class="mt-1">{TIMETABLE_META.notice}</p>
 			<p class="mt-3 text-sm">
-				{missingLocationCount} of {TIMETABLE.length} entries still have unconfirmed locations · Updated {formatTorontoDate(TIMETABLE_META.lastUpdated)} ·
+				{missingLocationCount} of {TIMETABLE.length} entries still have unconfirmed locations · Last checked {formatTorontoDate(TIMETABLE_META.lastChecked)} ·
 				{" "}<a href={TIMETABLE_META.sourceUrl} target="_blank" rel="noopener noreferrer" class="font-semibold underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">{TIMETABLE_META.sourceLabel}</a>
 			</p>
 		</div>
@@ -62,10 +62,7 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 						<ol class="space-y-3">
 							{TIMETABLE.filter((event) => event.day === day).map((event) => (
 								<li class={`rounded-xl border border-black/10 p-4 shadow-sm dark:border-white/15 ${event.color}`}>
-									<div class="flex flex-wrap items-baseline justify-between gap-2">
-										<strong class="text-lg">{event.course}</strong>
-										<span class="text-sm font-semibold">{event.type}</span>
-									</div>
+									<strong class="text-lg">{event.course} {event.type}</strong>
 									<p class="mt-2 text-sm">
 										<time datetime={event.start}>{event.start}</time>–<time datetime={event.end}>{event.end}</time>
 										<span aria-hidden="true"> · </span>
@@ -202,10 +199,8 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 											`}
 										>
 											<div class="mb-1 font-bold">
-												{event.course}
+												{event.course} {event.type}
 											</div>
-							
-											<div>{event.type}</div>
 							
 											<div class="mt-1 text-[0.72rem] opacity-80">
 												{event.location || "Location TBD"}

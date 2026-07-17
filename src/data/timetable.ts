@@ -10,13 +10,13 @@ export interface TimetableEntry {
 
 export const TIMETABLE_META = {
   term: "Fall 2026",
-  status: "Draft reference",
+  status: "Unofficial planning draft",
   audience: "Incoming SE31 students",
-  lastUpdated: "2026-07-06",
-  sourceLabel: "Confirm your personal timetable in Quest",
+  lastChecked: "2026-07-16",
+  sourceLabel: "Check Quest when official schedules are released",
   sourceUrl: "https://uwaterloo.ca/quest/",
   notice:
-    "Times and locations can vary by section. Missing locations are shown explicitly and should not be treated as confirmed.",
+    "Official Fall 2026 schedules are not yet available in Quest. This community-created draft is unofficial, may change, and should not be used for enrolment or travel decisions.",
 } as const;
 
 export const TIMETABLE: TimetableEntry[] = [
@@ -140,7 +140,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "15:30",
     end: "16:20",
     location: "",
-    color: "bg-indigo-400 text-black dark:bg-indigo-700 dark:text-white",
+    color: "bg-fuchsia-300 text-black dark:bg-fuchsia-700 dark:text-white",
   },
   {
     course: "MATH 135",
@@ -169,7 +169,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "12:30",
     end: "14:20",
     location: "E2 1792",
-    color: "bg-indigo-300 text-black dark:bg-indigo-600 dark:text-white",
+    color: "bg-fuchsia-200 text-black dark:bg-fuchsia-700 dark:text-white",
   },
   {
     course: "MATH 117",
@@ -225,6 +225,6 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "14:30",
     end: "15:20",
     location: "",
-    color: "bg-indigo-300 text-black dark:bg-indigo-500 dark:text-white",
+    color: "bg-fuchsia-200 text-black dark:bg-fuchsia-600 dark:text-white",
   },
 ];
