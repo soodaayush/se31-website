@@ -1,14 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #111827;
-  --color-dark-text: #f9fafb;
+  --color-ink: #48301f;
+  --color-paper: #fffefb;
+  --color-panel: #fffefb;
+  --color-spruce: #48301f;
+  --color-lime: #f8cb10;
+  --color-sky: #83ced5;
+  --color-signal: #f4ad4b;
+  --color-muted: #5d584b;
+  --color-night: #241a14;
+  --color-night-panel: #302219;
+  --color-night-border: #735a47;
+  --color-pond: #83ced5;
+  --color-pond-deep: #6dacb1;
+  --color-feather: #fffefb;
+  --color-hardhat: #f8cb10;
+  --color-beak: #f4ad4b;
+  --color-brown: #48301f;
+  --font-sans: "Atkinson Hyperlegible", Verdana, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
 }
 
 /* Force dark mode class usage in Tailwind v4 */
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
+  html {
+    font-family: var(--font-sans);
+    color-scheme: light dark;
+  }
+
+  body {
+    background: var(--color-paper);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background: var(--color-sky);
+    color: var(--color-ink);
+  }
+
   html.theme-transition-ready *,
   html.theme-transition-ready *::before,
   html.theme-transition-ready *::after {
@@ -24,5 +62,164 @@
     html.theme-transition-ready *::after {
       transition-duration: 0ms;
     }
+  }
+}
+
+@layer components {
+  .goose-pattern {
+    background-image:
+      radial-gradient(circle at 2px 2px, rgb(72 48 31 / 0.11) 1.5px, transparent 1.6px),
+      linear-gradient(135deg, transparent 72%, rgb(109 172 177 / 0.1) 72%);
+    background-size: 24px 24px, 48px 48px;
+  }
+
+  .feather-pattern {
+    background-image:
+      radial-gradient(circle at 2px 2px, rgb(72 48 31 / 0.07) 1.25px, transparent 1.4px);
+    background-size: 28px 28px;
+  }
+
+  .dark .feather-pattern {
+    background-image:
+      radial-gradient(circle at 2px 2px, rgb(131 206 213 / 0.12) 1.25px, transparent 1.4px);
+  }
+
+  .hardhat-stripe {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-hardhat) 0,
+      var(--color-hardhat) 14px,
+      #e49215 14px,
+      #e49215 20px
+    );
+  }
+
+  .brand-card {
+    border: 2px solid rgb(72 48 31 / 0.26);
+    border-radius: 1.125rem;
+    background: var(--color-panel);
+    box-shadow: 4px 4px 0 rgb(72 48 31 / 0.1);
+  }
+
+  .sticker-label {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    background: var(--color-hardhat);
+    color: var(--color-ink);
+    padding: 0.32rem 0.72rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+  }
+
+  .dark .sticker-label {
+    border-color: var(--color-hardhat);
+  }
+
+  .dark .brand-card {
+    border-color: var(--color-night-border);
+    background: var(--color-night-panel);
+    box-shadow: 4px 4px 0 rgb(0 0 0 / 0.22);
+  }
+
+  .brand-button-primary,
+  .brand-button-highlight,
+  .brand-button-secondary {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.7rem 1.1rem;
+    font-weight: 750;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .brand-button-primary {
+    border: 2px solid var(--color-ink);
+    background: var(--color-hardhat);
+    color: var(--color-ink);
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .brand-button-primary:hover {
+    background: #ffdc45;
+    box-shadow: 1px 1px 0 var(--color-ink);
+    transform: translate(2px, 2px);
+  }
+
+  .brand-button-highlight {
+    border: 2px solid var(--color-ink);
+    background: var(--color-sky);
+    color: var(--color-ink);
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .brand-button-highlight:hover {
+    background: #a5e1e6;
+    box-shadow: 1px 1px 0 var(--color-ink);
+    transform: translate(2px, 2px);
+  }
+
+  .brand-button-secondary {
+    border: 2px solid currentColor;
+    color: var(--color-ink);
+  }
+
+  .dark .brand-button-secondary {
+    color: var(--color-paper);
+  }
+
+  .brand-button-secondary:hover {
+    background: rgb(131 206 213 / 0.22);
+    transform: translateY(-1px);
+  }
+
+  .dark .brand-button-secondary:hover {
+    background: rgb(247 245 237 / 0.08);
+  }
+
+  .brand-button-primary:focus-visible,
+  .brand-button-highlight:focus-visible,
+  .brand-button-secondary:focus-visible,
+  .brand-text-link:focus-visible {
+    outline: 3px solid var(--color-spruce);
+    outline-offset: 3px;
+  }
+
+  .dark .brand-button-primary:focus-visible,
+  .dark .brand-button-highlight:focus-visible,
+  .dark .brand-button-secondary:focus-visible,
+  .dark .brand-text-link:focus-visible {
+    outline-color: var(--color-lime);
+  }
+
+  .brand-text-link {
+    text-decoration-color: var(--color-signal);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.25rem;
+  }
+
+  .brand-text-link:hover {
+    text-decoration-line: underline;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-button-primary,
+  .brand-button-highlight,
+  .brand-button-secondary {
+    transition-duration: 0ms;
+  }
+
+  .brand-button-primary:hover,
+  .brand-button-highlight:hover,
+  .brand-button-secondary:hover {
+    transform: none;
   }
 }

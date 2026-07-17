@@ -6,10 +6,12 @@ interface Props {
 const { message } = Astro.props;
 ---
 
-<div class="text-center py-8 px-4 sm:px-6 lg:px-8">
-  <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+<div class="brand-card feather-pattern px-4 py-10 text-center sm:px-6 lg:px-8">
+  <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#48301f] bg-[#83ced5] shadow-[3px_3px_0_#48301f]">
+  <svg class="h-9 w-9 text-[#48301f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H9a2 2 0 01-2-2zm-3 8h14a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z" />
   </svg>
-  <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No content available</h3>
-  <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{message}</p>
+  </div>
+  <h3 class="mt-5 text-xl font-black text-ink dark:text-paper">No content available</h3>
+  <p class="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted dark:text-[#fffefb]/80">{message}</p>
 </div>

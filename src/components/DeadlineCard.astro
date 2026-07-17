@@ -18,59 +18,64 @@ const { deadline, status: suppliedStatus } = Astro.props;
 const status = suppliedStatus ?? getDeadlineStatus(deadline);
 const isPast = status === "past";
 const isOngoing = status === "ongoing";
+const statusBorder = isPast
+  ? "border-l-[#48301f]/55"
+  : isOngoing
+    ? "border-l-[#83ced5]"
+    : "border-l-[#f4ad4b]";
 
 const categoryStyleMap: Record<string, { color: string; textColor: string }> = {
   academic: {
-    color: "bg-red-100 dark:bg-red-950",
-    textColor: "text-red-800 dark:text-red-200",
+    color: "bg-[#f4ad4b]",
+    textColor: "text-[#48301f]",
   },
   "co-op": {
-    color: "bg-blue-100 dark:bg-blue-950",
-    textColor: "text-blue-800 dark:text-blue-200",
+    color: "bg-[#83ced5]",
+    textColor: "text-[#48301f]",
   },
   orientation: {
-    color: "bg-green-100 dark:bg-green-950",
-    textColor: "text-green-800 dark:text-green-200",
+    color: "bg-[#f8cb10]",
+    textColor: "text-[#48301f]",
   },
   housing: {
-    color: "bg-yellow-100 dark:bg-yellow-950",
-    textColor: "text-yellow-900 dark:text-yellow-200",
+    color: "bg-[#fffefb]",
+    textColor: "text-[#48301f]",
   },
   financial: {
-    color: "bg-purple-100 dark:bg-purple-950",
-    textColor: "text-purple-800 dark:text-purple-200",
+    color: "bg-[#f4ad4b]",
+    textColor: "text-[#48301f]",
   },
   residence: {
-    color: "bg-indigo-100 dark:bg-indigo-950",
-    textColor: "text-indigo-800 dark:text-indigo-200",
+    color: "bg-[#83ced5]",
+    textColor: "text-[#48301f]",
   },
   international: {
-    color: "bg-pink-100 dark:bg-pink-950",
-    textColor: "text-pink-800 dark:text-pink-200",
+    color: "bg-[#6dacb1]",
+    textColor: "text-[#241a14]",
   },
 };
 
-const textColor = isPast ? "text-gray-700 dark:text-gray-300" : "text-gray-900 dark:text-gray-100";
-const descriptionColor = isPast ? "text-gray-600 dark:text-gray-400" : "text-gray-700 dark:text-gray-300";
+const textColor = isPast ? "text-muted dark:text-[#fffefb]/70" : "text-ink dark:text-paper";
+const descriptionColor = "text-muted dark:text-[#fffefb]/80";
 const categoryStyle = isPast
-  ? { color: "bg-gray-200 dark:bg-gray-700", textColor: "text-gray-800 dark:text-gray-100" }
+  ? { color: "bg-[#48301f]", textColor: "text-[#fffefb]" }
   : categoryStyleMap[deadline.category] ?? {
-      color: "bg-gray-200 dark:bg-gray-700",
-      textColor: "text-gray-800 dark:text-gray-100",
+      color: "bg-[#f8cb10]",
+      textColor: "text-[#48301f]",
     };
 
 // Check if it's an 'action' type and has a time component (length > 10) for countdown eligibility
 const isCountdownEligible = deadline.deadlineType === 'action' && deadline.startDate.length > 10;
 ---
 
-<article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md rounded-xl p-6 flex flex-col">
+<article class={`brand-card flex flex-col border-l-[6px] p-6 ${statusBorder}`}>
   <div class="flex justify-between items-start gap-4 mb-2">
-    <h3 class={`text-xl font-semibold ${textColor} min-w-0`}>
+    <h3 class={`min-w-0 text-xl font-black tracking-[-0.02em] ${textColor}`}>
       {deadline.title}
     </h3>
     <Badge text={deadline.category} color={categoryStyle.color} textColor={categoryStyle.textColor} />
   </div>
-  <p class={`text-sm mb-1 font-semibold ${descriptionColor}`}>
+  <p class={`mb-1 text-xs font-black uppercase tracking-[0.08em] ${descriptionColor}`}>
     {deadline.deadlineType === 'action' ? 'Action Required' : 'Event'}
   </p>
   <p class={`mb-4 ${descriptionColor}`}>
@@ -80,19 +85,19 @@ const isCountdownEligible = deadline.deadlineType === 'action' && deadline.start
   <p class={`text-sm mb-4 ${descriptionColor}`}>
     {deadline.description}
   </p>
-  <p class="text-xs mb-4 text-gray-600 dark:text-gray-400">Applies to: {deadline.appliesTo}</p>
+  <p class="mb-4 text-xs font-semibold text-muted dark:text-[#fffefb]/70">Applies to: {deadline.appliesTo}</p>
 
   <div class="mt-auto">
-    <p class="text-sm mb-2">
+    <p class="mb-2 text-sm">
       {deadline.sourceUrl ? (
-        <a href={deadline.sourceUrl} target="_blank" rel="noopener noreferrer" class="font-medium text-blue-700 dark:text-blue-300 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+        <a href={deadline.sourceUrl} target="_blank" rel="noopener noreferrer" class="brand-text-link font-black text-spruce dark:text-lime">
           {deadline.sourceLabel}
         </a>
       ) : (
-        <span class="font-medium text-red-700 dark:text-red-300">Official source not provided</span>
+        <span class="font-bold text-[#48301f] dark:text-[#f4ad4b]">Official source not provided</span>
       )}
     </p>
-    <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">
+    <p class="mb-3 text-[0.7rem] font-bold uppercase tracking-[0.07em] text-muted dark:text-[#fffefb]/70">
       Last checked {formatTorontoDate(deadline.lastVerified)}
     </p>
     {isCountdownEligible && status === "upcoming" && (
@@ -102,15 +107,15 @@ const isCountdownEligible = deadline.deadlineType === 'action' && deadline.start
     )}
     <div class="mt-3 flex flex-wrap gap-2">
       {isOngoing && (
-        <Badge text="Happening now" color="bg-cyan-100 dark:bg-cyan-950" textColor="text-cyan-900 dark:text-cyan-200" />
+        <Badge text="Happening now" color="bg-[#83ced5]" textColor="text-[#48301f]" />
       )}
       {deadline.priority === "high" && !isPast && (
-        <Badge text="High priority" color="bg-amber-100 dark:bg-amber-950" textColor="text-amber-900 dark:text-amber-200" />
+        <Badge text="High priority" color="bg-[#f8cb10]" textColor="text-[#48301f]" />
       )}
       {deadline.verified ? (
-        <Badge text="Source verified" color="bg-green-100 dark:bg-green-950" textColor="text-green-900 dark:text-green-200" />
+        <Badge text="Source verified" color="bg-[#83ced5]" textColor="text-[#48301f]" />
       ) : (
-        <Badge text="Unverified" color="bg-red-100 dark:bg-red-950" textColor="text-red-900 dark:text-red-200" />
+        <Badge text="Unverified" color="bg-[#f4ad4b]" textColor="text-[#48301f]" />
       )}
     </div>
   </div>

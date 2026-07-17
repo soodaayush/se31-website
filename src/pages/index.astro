@@ -2,94 +2,298 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import EmptyState from "../components/EmptyState.astro";
-import ResourceCard from "../components/ResourceCard.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import DeadlineCard from "../components/DeadlineCard.astro";
+import NowCard from "../components/NowCard.astro";
+import SectionHeading from "../components/SectionHeading.astro";
 import { SITE_CONFIG } from "../data/siteConfig";
+import { COURSES } from "../data/courses";
 import { DEADLINES } from "../data/deadlines";
 import { RESOURCES } from "../data/resources";
-import { PROJECTS } from "../data/projects";
-import { getDeadlineStartTime, getDeadlineStatus } from "../utils/date";
+import { TIMETABLE, TIMETABLE_META } from "../data/timetable";
+import {
+  formatTorontoDate,
+  formatTorontoDateTime,
+  getDeadlineStartTime,
+  getDeadlineStatus,
+} from "../utils/date";
 
 const base = import.meta.env.BASE_URL;
-
-// Sort deadlines by date
 const now = new Date();
-const allUpcoming = DEADLINES.filter(d => getDeadlineStatus(d, now) === "upcoming")
+
+const currentDeadlines = DEADLINES
+  .filter((deadline) => getDeadlineStatus(deadline, now) !== "past")
   .sort((a, b) => getDeadlineStartTime(a) - getDeadlineStartTime(b));
 
-const actionableDeadlines = allUpcoming
-  .filter(d => d.deadlineType === 'action')
-  .slice(0, 3); // Top 3 action items
+const nextMilestone = currentDeadlines.find((deadline) => deadline.deadlineType === "event");
+const nextAction = currentDeadlines.find((deadline) => deadline.deadlineType === "action");
+const verifiedDateCount = DEADLINES.filter((deadline) => deadline.verified).length;
+const missingLocationCount = TIMETABLE.filter((event) => !event.location).length;
 
-const featuredResources = RESOURCES.filter(r => r.official).slice(0, 3);
-const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3);
+const courseStyles: Record<string, string> = {
+  "MATH 135": "bg-paper text-brown",
+  "MATH 117": "bg-sky text-brown",
+  "MATH 115": "bg-signal text-brown",
+  "CS 137": "bg-pond-deep text-brown",
+  "CHE 102": "bg-hardhat text-brown",
+  "SE 101": "bg-brown text-paper",
+};
+
+const shortcutDefinitions = [
+  {
+    sourceTitle: "Waterloo Ready Important Dates",
+    title: "Waterloo Ready",
+    description: "Incoming-student dates and next steps.",
+  },
+  {
+    sourceTitle: "Undergraduate Important Dates",
+    title: "Important Dates",
+    description: "Fees, add/drop, Reading Week and exams.",
+  },
+  {
+    sourceTitle: "Engineering First Year",
+    title: "Engineering First Year",
+    description: "Automatic enrolment and academic advising.",
+  },
+  {
+    sourceTitle: "Current Students Hub",
+    title: "Current Students",
+    description: "Quest, LEARN, email, WatCard and The Centre.",
+  },
+];
+
+const officialShortcuts = shortcutDefinitions.flatMap((definition) => {
+  const resource = RESOURCES.find((item) => item.title === definition.sourceTitle);
+  return resource ? [{ ...definition, url: resource.url }] : [];
+});
 ---
 
-<Layout title="Home - SE31 Hub" description={SITE_CONFIG.tagline}>
+<Layout
+  title="SE31 Nest — Waterloo Software Engineering 2031"
+  description="A student-built home for Waterloo Software Engineering 2031: current dates, 1A course guides, an unofficial timetable, and trusted links."
+>
   <Navbar />
   <main id="main-content" tabindex="-1">
-    <section class="hero bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 px-4 text-center">
-      <div class="container mx-auto">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Waterloo Software Engineering Class of 2031</h1>
-        <p class="text-xl sm:text-2xl mb-6">{SITE_CONFIG.tagline}</p>
-        <p class="text-lg sm:text-xl mb-8">A student-built home for courses, deadlines, resources, projects and cohort contributions.</p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href={`${base}courses`} class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Explore 1A Courses</a>
-          <a href={`${base}deadlines`} class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">View Deadlines</a>
+    <section class="goose-pattern overflow-hidden border-b-2 border-brown bg-sky px-4 py-12 text-brown dark:border-hardhat dark:bg-[#284548] dark:text-paper sm:py-16 lg:py-20">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 sm:px-2 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:px-4">
+        <div class="max-w-3xl">
+          <p class="mb-5 inline-flex rounded-full border-2 border-brown bg-paper px-4 py-2 text-sm font-extrabold text-brown shadow-[3px_3px_0_#48301f] dark:bg-hardhat">
+            Waterloo Software Engineering · Class of 2031
+          </p>
+          <h1 class="max-w-3xl text-5xl font-black leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
+            Everything SE31 needs, in one place.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg font-medium leading-8 sm:text-xl">
+            Courses, dates, a draft timetable and the Waterloo links we keep reaching for—maintained by the cohort and clear about what is official.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#now" class="brand-button-primary">See what’s next <span aria-hidden="true">↓</span></a>
+            <a href={`${base}courses`} class="brand-button-secondary border-brown text-brown hover:bg-paper/50 dark:border-paper dark:text-paper">Explore 1A courses</a>
+          </div>
+          <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold" aria-label="Site commitments">
+            <li class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full bg-hardhat ring-1 ring-brown" aria-hidden="true"></span>Unofficial</li>
+            <li class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full bg-signal ring-1 ring-brown" aria-hidden="true"></span>Open source</li>
+            <li class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full bg-paper ring-1 ring-brown" aria-hidden="true"></span>Dates link to sources</li>
+          </ul>
+        </div>
+
+        <aside class="mx-auto w-full max-w-lg" aria-label="SE31 Nest identity and site snapshot">
+          <div class="brand-card rotate-1 overflow-hidden p-3 sm:p-4">
+            <img
+              src={`${base}favicon.png`}
+              alt="The SE31 goose in sunglasses and a yellow hard hat"
+              width="1172"
+              height="1172"
+              class="aspect-square w-full rounded-[0.8rem] object-cover"
+            />
+          </div>
+          <dl class="relative -mt-4 mx-4 grid grid-cols-3 divide-x-2 divide-brown overflow-hidden rounded-2xl border-2 border-brown bg-paper text-center text-brown shadow-[4px_4px_0_#48301f] dark:divide-night-border dark:bg-night-panel dark:text-paper">
+            <div class="px-2 py-4">
+              <dt class="text-xs font-bold">Course guides</dt>
+              <dd class="mt-1 text-lg font-black">{COURSES.length}</dd>
+            </div>
+            <div class="px-2 py-4">
+              <dt class="text-xs font-bold">Dates checked</dt>
+              <dd class="mt-1 text-lg font-black">{verifiedDateCount}</dd>
+            </div>
+            <div class="px-2 py-4">
+              <dt class="text-xs font-bold">Timetable</dt>
+              <dd class="mt-1 text-xs font-black text-brown dark:text-hardhat">Unofficial</dd>
+            </div>
+          </dl>
+          <p class="mt-4 text-center text-xs font-bold">Timetable last checked {formatTorontoDate(TIMETABLE_META.lastChecked)}</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="now" class="scroll-mt-24 px-4 py-14 sm:py-18 lg:py-20" aria-labelledby="now-heading">
+      <div class="mx-auto max-w-7xl sm:px-2 lg:px-4">
+        <SectionHeading
+          id="now-heading"
+          index="1"
+          label="Right now"
+          title="What’s coming up."
+          description="The next milestone, the next action, and what we still need to confirm."
+        />
+        <div class="mt-8 grid gap-5 lg:grid-cols-3">
+          {nextMilestone ? (
+            <NowCard
+              label={getDeadlineStatus(nextMilestone, now) === "ongoing" ? "Happening now" : "Next milestone"}
+              title={nextMilestone.title}
+              href={nextMilestone.sourceUrl}
+              linkLabel="Check the official source"
+              tone="sky"
+              external
+            >
+              <p class="font-bold text-ink dark:text-paper">{formatTorontoDateTime(nextMilestone.startDate)}</p>
+              <p class="mt-2">{nextMilestone.description}</p>
+              <p slot="meta" class="text-xs font-bold text-muted dark:text-[#d9d2ca]">
+                Source checked {formatTorontoDate(nextMilestone.lastVerified)}
+              </p>
+            </NowCard>
+          ) : (
+            <NowCard
+              label="Next milestone"
+              title="Nothing upcoming is currently listed."
+              href="https://uwaterloo.ca/important-dates/undergraduate"
+              linkLabel="Check Waterloo’s dates"
+              tone="sky"
+              external
+            >
+              <p>Use Waterloo’s official undergraduate dates before making plans.</p>
+            </NowCard>
+          )}
+
+          {nextAction ? (
+            <NowCard
+              label="Next action"
+              title={nextAction.title}
+              href={`${base}deadlines`}
+              linkLabel="See all deadlines"
+              tone="lime"
+            >
+              <p class="font-bold text-ink dark:text-paper">{formatTorontoDateTime(nextAction.startDate)}</p>
+              <p class="mt-2">{nextAction.description}</p>
+              <p slot="meta" class="text-xs font-bold text-muted dark:text-[#d9d2ca]">
+                {nextAction.priority === "high" ? "High priority" : "Action required"} · Source checked {formatTorontoDate(nextAction.lastVerified)}
+              </p>
+            </NowCard>
+          ) : (
+            <NowCard label="Next action" title="Nothing currently needs action." href={`${base}deadlines`} linkLabel="Review all dates" tone="lime">
+              <p>There is no action item in our current verified list.</p>
+            </NowCard>
+          )}
+
+          <NowCard
+            label="Timetable status"
+            title={`${TIMETABLE_META.term} planning timetable`}
+            href={`${base}timetable`}
+            linkLabel="View the draft"
+            tone="amber"
+          >
+            <p>{TIMETABLE_META.notice}</p>
+            <p slot="meta" class="text-xs font-bold text-muted dark:text-[#d9d2ca]">
+              {missingLocationCount} of {TIMETABLE.length} locations unconfirmed · Checked {formatTorontoDate(TIMETABLE_META.lastChecked)}
+            </p>
+          </NowCard>
         </div>
       </div>
     </section>
 
-    <section class="actionable-deadlines py-16 px-4">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10">Deadlines requiring action</h2>
-        {actionableDeadlines.length > 0 ? (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {actionableDeadlines.map((deadline) => (
-              <DeadlineCard deadline={deadline} />
+    <section class="feather-pattern border-y-2 border-brown bg-hardhat/15 px-4 py-14 dark:border-hardhat dark:bg-night-panel sm:py-18 lg:py-20" aria-labelledby="courses-heading">
+      <div class="mx-auto max-w-7xl sm:px-2 lg:px-4">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading
+            id="courses-heading"
+            index="2"
+            label="Our first six courses"
+            title="Your first-term courses."
+            description="Quick guides to the topics, workload, grading, materials and policies in six archived Fall 2025 outlines."
+          />
+          <p class="max-w-md rounded-2xl border-2 border-brown bg-signal px-4 py-3 text-sm font-bold leading-6 text-brown shadow-[3px_3px_0_#48301f] dark:bg-signal dark:text-brown">
+            A useful reference—not your Fall 2026 syllabus.
+          </p>
+        </div>
+
+        <div class="brand-card mt-8 overflow-hidden">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3">
+            {COURSES.map((course, index) => (
+              <a
+                href={`${base}courses/${course.slug}`}
+                class:list={[
+                  "group flex min-h-48 flex-col border-b-2 border-brown/20 p-5 transition-colors last:border-b-0 hover:bg-sky/20 focus-visible:z-10 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-brown dark:border-night-border dark:hover:bg-sky/10 dark:focus-visible:outline-hardhat",
+                  index % 2 === 0 ? "sm:border-r-2 sm:border-brown/20 dark:sm:border-night-border" : "sm:border-r-0",
+                  index < 4 ? "sm:border-b-2 sm:border-brown/20 dark:sm:border-night-border" : "sm:border-b-0",
+                  index % 3 !== 2 ? "lg:border-r-2 lg:border-brown/20 dark:lg:border-night-border" : "lg:border-r-0",
+                  index < 3 ? "lg:border-b-2 lg:border-brown/20 dark:lg:border-night-border" : "lg:border-b-0",
+                ]}
+              >
+                <span class={`w-fit rounded-full border-2 border-brown px-3 py-1 text-xs font-black ${courseStyles[course.code] ?? "bg-paper text-brown"}`}>
+                  {course.code}
+                </span>
+                <h3 class="mt-5 text-xl font-extrabold leading-tight tracking-[-0.025em] text-ink dark:text-paper">{course.title}</h3>
+                <div class="mt-auto flex items-end justify-between gap-4 pt-6">
+                  <span class="text-xs font-semibold text-muted dark:text-[#d9d2ca]">Fall 2025 outline guide</span>
+                  <span class="font-black text-brown transition-transform duration-150 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none dark:text-hardhat" aria-hidden="true">→</span>
+                </div>
+              </a>
             ))}
           </div>
-        ) : (
-          <EmptyState message="No current deadlines requiring action." />
-        )}
+        </div>
+
+        <div class="mt-7">
+          <a href={`${base}courses`} class="brand-button-primary">Explore all course guides</a>
+        </div>
       </div>
     </section>
 
-    <section class="featured-resources bg-gray-100 dark:bg-gray-800 py-16 px-4">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10">Featured Resources</h2>
-        {featuredResources.length > 0 ? (
-          <div class="grid md:grid-cols-3 gap-8">
-            {featuredResources.map((resource) => (
-              <ResourceCard resource={resource} />
+    {officialShortcuts.length > 0 && (
+      <section class="px-4 py-14 sm:py-18 lg:py-20" aria-labelledby="resources-heading">
+        <div class="mx-auto max-w-7xl sm:px-2 lg:px-4">
+          <SectionHeading
+            id="resources-heading"
+            index="3"
+            label="Waterloo shortcuts"
+            title="Useful Waterloo links."
+            description="Direct paths to the official pages behind the details on this site."
+          />
+          <div class="mt-8 grid gap-4 sm:grid-cols-2">
+            {officialShortcuts.map((resource, index) => (
+              <a
+                href={resource.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="brand-card group flex items-start justify-between gap-5 p-5 transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brown motion-reduce:transform-none dark:focus-visible:outline-hardhat"
+              >
+                <div>
+                  <p class={`mb-2 w-fit rounded-full border border-brown px-2.5 py-1 text-xs font-extrabold text-brown ${index % 2 === 0 ? "bg-sky" : "bg-hardhat"}`}>Official Waterloo source</p>
+                  <h3 class="text-lg font-extrabold text-ink dark:text-paper">{resource.title}</h3>
+                  <p class="mt-1 text-sm leading-6 text-muted dark:text-[#d9d2ca]">{resource.description}</p>
+                </div>
+                <span class="mt-1 text-lg font-black text-brown transition-transform duration-150 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none dark:text-hardhat" aria-hidden="true">↗</span>
+              </a>
             ))}
           </div>
-        ) : (
-          <EmptyState message="No featured resources found. Check back later for curated links!" />
-        )}
-      </div>
-    </section>
 
-    {featuredProjects.length > 0 && (
-      <section class="featured-projects py-16 px-4">
-        <div class="container mx-auto">
-          <h2 class="text-3xl font-bold text-center mb-10">Featured Projects</h2>
-          <div class="grid md:grid-cols-3 gap-8">
-            {featuredProjects.map((project) => (
-              <ProjectCard project={project} />
-            ))}
+          <div class="mt-7">
+            <a href={`${base}resources`} class="brand-button-secondary">Browse all {RESOURCES.length} resources</a>
           </div>
         </div>
       </section>
     )}
 
-    <section class="contribute-cta bg-blue-600 text-white py-16 px-4 text-center">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-4">Want to Contribute?</h2>
-        <p class="text-lg mb-8">This website is open-source and built by students, for students. Your contributions are welcome!</p>
-        <a href={`${base}contribute`} class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg text-lg transition duration-300">Learn How to Contribute</a>
+    <section class="goose-pattern border-t-8 border-hardhat bg-brown px-4 py-14 text-paper sm:py-18 lg:py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 sm:px-2 lg:grid-cols-[1fr_auto] lg:items-center lg:px-4">
+        <div class="max-w-3xl">
+          <p class="mb-4 inline-flex rounded-full bg-hardhat px-3 py-1 text-sm font-extrabold text-brown">Make it ours</p>
+          <h2 class="text-3xl font-black tracking-[-0.04em] sm:text-4xl">Help keep our cohort home useful.</h2>
+          <p class="mt-4 text-base leading-7 text-[#e8ddd3] sm:text-lg">
+            The Nest currently has {COURSES.length} archived course guides, {verifiedDateCount} checked dates, {RESOURCES.length} curated resources and one clearly labelled timetable draft. It gets better when SE31 students correct it, add to it and make it their own.
+          </p>
+          <p class="mt-4 font-semibold text-paper">Found an outdated date, a broken link or a clearer way to explain a course?</p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+          <a href={`${base}contribute`} class="brand-button-primary focus-visible:outline-hardhat">Pitch in</a>
+          <a href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" class="brand-button-secondary border-paper text-paper hover:bg-paper/10 focus-visible:outline-hardhat dark:text-paper">View the code ↗</a>
+        </div>
       </div>
     </section>
   </main>

@@ -1,19 +1,19 @@
 ---
 interface Props {
   text: string;
-  color?: string; // Tailwind color class, e.g., 'bg-blue-500'
+  color?: string;
   textColor?: string;
 }
 
 const {
   text,
-  color = "bg-gray-700 dark:bg-gray-200",
-  textColor = "text-white dark:text-gray-900",
+  color = "bg-[#f8cb10]",
+  textColor = "text-[#48301f]",
 } = Astro.props;
 ---
 
 <span
-  class={`inline-flex shrink-0 items-center px-2.5 py-1 rounded-full text-xs font-semibold ${color} ${textColor}`}
+  class={`inline-flex shrink-0 items-center rounded-full border border-[#48301f]/25 px-2.5 py-1 text-xs font-bold shadow-[1px_1px_0_rgb(72_48_31_/_0.22)] ${color} ${textColor}`}
 >
   {text}
 </span>

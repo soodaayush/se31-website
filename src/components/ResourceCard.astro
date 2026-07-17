@@ -9,33 +9,33 @@ interface Props {
 const { resource } = Astro.props;
 
 const categoryStyleMap: Record<string, { color: string; textColor: string }> = {
-  University: { color: "bg-indigo-100 dark:bg-indigo-950", textColor: "text-indigo-800 dark:text-indigo-200" },
-  Academics: { color: "bg-red-100 dark:bg-red-950", textColor: "text-red-800 dark:text-red-200" },
-  "Co-op": { color: "bg-blue-100 dark:bg-blue-950", textColor: "text-blue-800 dark:text-blue-200" },
-  "Student life": { color: "bg-green-100 dark:bg-green-950", textColor: "text-green-800 dark:text-green-200" },
-  "Developer tools": { color: "bg-purple-100 dark:bg-purple-950", textColor: "text-purple-800 dark:text-purple-200" },
-  Community: { color: "bg-yellow-100 dark:bg-yellow-950", textColor: "text-yellow-900 dark:text-yellow-200" },
+  University: { color: "bg-[#83ced5]", textColor: "text-[#48301f]" },
+  Academics: { color: "bg-[#f4ad4b]", textColor: "text-[#48301f]" },
+  "Co-op": { color: "bg-[#6dacb1]", textColor: "text-[#241a14]" },
+  "Student life": { color: "bg-[#f8cb10]", textColor: "text-[#48301f]" },
+  "Developer tools": { color: "bg-[#6dacb1]", textColor: "text-[#241a14]" },
+  Community: { color: "bg-[#fffefb]", textColor: "text-[#48301f]" },
 };
 
 const categoryStyle = categoryStyleMap[resource.category] ?? {
-  color: "bg-gray-200 dark:bg-gray-700",
-  textColor: "text-gray-800 dark:text-gray-100",
+  color: "bg-[#f8cb10]",
+  textColor: "text-[#48301f]",
 };
 ---
 
-<a href={resource.url} target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md rounded-xl p-6 hover:shadow-xl transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">
+<a href={resource.url} target="_blank" rel="noopener noreferrer" class="brand-card group flex flex-col border-l-[6px] border-l-[#6dacb1] p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-[#48301f] focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#48301f] motion-reduce:transform-none motion-reduce:transition-none dark:border-l-[#83ced5] dark:hover:border-[#83ced5] dark:focus-visible:outline-[#f8cb10]">
   <div class="flex justify-between items-start mb-2">
-    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mr-5 min-w-0">
+    <h3 class="mr-5 min-w-0 text-xl font-black tracking-[-0.02em] text-ink dark:text-paper">
       {resource.title}
     </h3>
     <Badge text={resource.category} color={categoryStyle.color} textColor={categoryStyle.textColor} />
   </div>
-  <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+  <p class="mb-4 flex-grow leading-7 text-muted dark:text-[#fffefb]/80">
     {resource.description}
   </p>
   {resource.official && (
     <div class="mt-2">
-      <Badge text="Official Waterloo source" color="bg-green-100 dark:bg-green-950" textColor="text-green-900 dark:text-green-200" />
+      <Badge text="Official Waterloo source" color="bg-[#83ced5]" textColor="text-[#48301f]" />
     </div>
   )}
 </a>
