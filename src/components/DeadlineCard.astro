@@ -31,7 +31,7 @@ const isCountdownEligible = deadline.deadlineType === 'action' && deadline.start
 
 <div class={`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 ${isPast ? "opacity-70" : ""} flex flex-col`}>
   <div class="flex justify-between items-start mb-2">
-    <h3 class={`text-xl font-semibold ${textColor}`}>
+    <h3 class={`text-xl font-semibold ${textColor} min-w-0`}>
       {deadline.title}
     </h3>
     <Badge text={deadline.category} color={badgeColor} />
@@ -47,7 +47,7 @@ const isCountdownEligible = deadline.deadlineType === 'action' && deadline.start
     {deadline.description}
   </p>
   <p class="text-xs italic mb-4 text-gray-500">Applies to: {deadline.appliesTo}</p>
-  
+
   <div class="mt-auto">
     {deadline.sourceUrl && (
       <p class="text-sm mb-2">
