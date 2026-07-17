@@ -22,7 +22,7 @@ Please verify all academic and administrative deadlines and information through 
 
 ## Features
 
--   **Identity:** A warm, goose-inspired palette drawn from the original SE31 favicon, plus a responsive light/dark interface.
+-   **Identity:** A cozy, teal-forward palette and friendly typography drawn from the original SE31 favicon, plus a responsive light/dark interface.
 -   **Home Page:** Current milestones, the next action, timetable status, all six 1A courses, official shortcuts, and a contribution CTA.
 -   **Courses:** Six detailed, navigable guides that summarize archived Fall 2025 Waterloo outlines and link back to the source.
 -   **Deadlines Page:** Chronological list of upcoming and past deadlines with live countdowns, categories, sources, and verification status.

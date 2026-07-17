@@ -42,41 +42,43 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 			title={`${TIMETABLE_META.term} weekly timetable.`}
 			description={TIMETABLE_META.audience}
 		>
-			<div class="mt-8 max-w-4xl rounded-2xl border-2 border-brown bg-hardhat/25 p-5 text-sm leading-6 text-brown shadow-[3px_3px_0_#48301f] dark:border-hardhat dark:bg-night-panel dark:text-feather dark:shadow-[3px_3px_0_#f8cb10]">
-				<p class="font-black">Unofficial schedule — do not rely on it yet.</p>
+			<div class="quiet-note mt-7 max-w-4xl text-sm leading-6">
+				<p class="font-bold">Unofficial schedule — do not rely on it yet.</p>
 				<p>{TIMETABLE_META.notice}</p>
 				<p class="mt-3 text-xs font-bold">
 					{missingLocationCount} of {TIMETABLE.length} locations unconfirmed · Last checked {formatTorontoDate(TIMETABLE_META.lastChecked)} ·
-					{" "}<a href={TIMETABLE_META.sourceUrl} target="_blank" rel="noopener noreferrer" class="brand-text-link focus-visible:outline-spruce dark:focus-visible:outline-lime">{TIMETABLE_META.sourceLabel}</a>
+					{" "}<a href={TIMETABLE_META.sourceUrl} target="_blank" rel="noopener noreferrer" class="brand-text-link">{TIMETABLE_META.sourceLabel}</a>
 				</p>
 			</div>
 		</PageIntro>
 
 		<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-		<section aria-labelledby="agenda-heading" class="lg:sr-only">
-			<h2 id="agenda-heading" class="mb-4 text-2xl font-bold">Daily agenda</h2>
-			<div class="space-y-6">
-				{days.map((day) => (
-					<section aria-labelledby={`agenda-${day.toLowerCase()}`}>
-						<h3 id={`agenda-${day.toLowerCase()}`} class="mb-2 text-xl font-bold">{day}</h3>
-						<ol class="space-y-2">
-							{TIMETABLE.filter((event) => event.day === day).map((event) => (
-								<li class={`rounded-xl border-2 p-3 shadow-[2px_2px_0_rgb(72_48_31_/_0.16)] ${event.color}`}>
-									<strong class="text-lg">{event.course} {event.type}</strong>
-									<p class="mt-1 text-sm">
-										<time datetime={event.start}>{event.start}</time>–<time datetime={event.end}>{event.end}</time>
-										<span aria-hidden="true"> · </span>
-										<span>{event.location || "Location not confirmed"}</span>
-									</p>
-								</li>
-							))}
-						</ol>
-					</section>
-				))}
-			</div>
-		</section>
+			<section aria-labelledby="agenda-heading" class="lg:sr-only">
+				<h2 id="agenda-heading" class="mb-4 text-2xl font-bold">Daily agenda</h2>
+				<div class="space-y-6">
+					{days.map((day) => (
+						<section aria-labelledby={`agenda-${day.toLowerCase()}`}>
+							<h3 id={`agenda-${day.toLowerCase()}`} class="mb-2 text-xl font-bold">{day}</h3>
+							<ol class="cozy-panel divide-y divide-teal-deep/10 overflow-hidden dark:divide-sky/15">
+								{TIMETABLE.filter((event) => event.day === day).map((event) => (
+									<li class="p-4 sm:p-5">
+										<strong class:list={["inline-flex rounded-lg border px-2.5 py-1 text-sm font-bold", event.color]}>
+											{event.course} {event.type}
+										</strong>
+										<p class="mt-1 text-sm">
+											<time datetime={event.start}>{event.start}</time>–<time datetime={event.end}>{event.end}</time>
+											<span aria-hidden="true"> · </span>
+											<span>{event.location || "Location not confirmed"}</span>
+										</p>
+									</li>
+								))}
+							</ol>
+						</section>
+					))}
+				</div>
+			</section>
 
-		<div class="hidden overflow-x-auto rounded-2xl border-2 border-brown bg-feather shadow-[4px_4px_0_#48301f] lg:block dark:border-night-border dark:bg-night dark:shadow-[4px_4px_0_#f8cb10]" aria-hidden="true">
+		<div class="hidden overflow-x-auto rounded-3xl border border-teal-deep/15 bg-feather lg:block dark:border-sky/20 dark:bg-night" aria-hidden="true">
 			<div
 				class="
 					grid
@@ -88,7 +90,7 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 					dark:bg-night
 				"
 			>
-				<div class="border-b-2 border-r-2 border-brown bg-hardhat dark:border-night-border"></div>
+				<div class="border-b border-r border-teal-deep/15 bg-soft-teal dark:border-sky/15 dark:bg-night-panel"></div>
 
 				{
 					days.map(day => (
@@ -98,13 +100,13 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 								h-11
 								items-center
 								justify-center
-								border-b-2
-								border-l-2
-								border-brown
+								border-b
+								border-l
+								border-teal-deep/15
 								bg-pond
 								font-bold
 								text-brown
-								dark:border-night-border
+								dark:border-sky/15
 								dark:bg-pond-deep
 								dark:text-brown
 							"
@@ -125,9 +127,9 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 									justify-center
 									border-b
 									border-r
-									border-brown/20
+									border-teal-deep/10
 									text-sm
-									dark:border-night-border/60
+									dark:border-sky/10
 								"
 							>
 								{time}
@@ -144,9 +146,9 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 								flex
 								flex-col
 								border-l
-								border-brown/30
+								border-teal-deep/12
 								bg-feather
-								dark:border-night-border
+								dark:border-sky/15
 								dark:bg-night
 							"
 						>
@@ -156,9 +158,9 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 										class="
 											h-10
 											border-b
-											border-brown/15
+											border-teal-deep/8
 											box-border
-											dark:border-night-border/45
+											dark:border-sky/10
 										"
 									></div>
 								))
@@ -179,14 +181,13 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 													flex
 													flex-col
 													justify-center
-													overflow-hidden
-													rounded-lg
-													border-2
+												overflow-hidden
+												rounded-lg
+												border
 													px-2
 													py-1
 													text-[0.8rem]
 													leading-tight
-													shadow-[2px_2px_0_rgb(72_48_31_/_0.16)]
 												`,
 											event.color,
 											]}
@@ -196,9 +197,9 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 											`}
 										>
 											<div class="mb-1 font-bold">
-												{event.course} {event.type}
-											</div>
-							
+											{event.course} {event.type}
+										</div>
+
 											<div class="mt-0.5 text-[0.72rem] font-semibold">
 												{event.location || "Location TBD"}
 											</div>

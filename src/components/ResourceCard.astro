@@ -1,41 +1,25 @@
 ---
 import type { Resource } from "../data/types";
-import Badge from "./Badge.astro";
 
 interface Props {
   resource: Resource;
 }
 
 const { resource } = Astro.props;
-
-const categoryStyleMap: Record<string, { color: string; textColor: string }> = {
-  University: { color: "bg-[#83ced5]", textColor: "text-[#48301f]" },
-  Academics: { color: "bg-[#f4ad4b]", textColor: "text-[#48301f]" },
-  "Co-op": { color: "bg-[#6dacb1]", textColor: "text-[#241a14]" },
-  "Student life": { color: "bg-[#f8cb10]", textColor: "text-[#48301f]" },
-  "Developer tools": { color: "bg-[#6dacb1]", textColor: "text-[#241a14]" },
-  Community: { color: "bg-[#fffefb]", textColor: "text-[#48301f]" },
-};
-
-const categoryStyle = categoryStyleMap[resource.category] ?? {
-  color: "bg-[#f8cb10]",
-  textColor: "text-[#48301f]",
-};
 ---
 
-<a href={resource.url} target="_blank" rel="noopener noreferrer" class="brand-card group flex flex-col border-l-[6px] border-l-[#6dacb1] p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-[#48301f] focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#48301f] motion-reduce:transform-none motion-reduce:transition-none dark:border-l-[#83ced5] dark:hover:border-[#83ced5] dark:focus-visible:outline-[#f8cb10]">
-  <div class="flex justify-between items-start mb-2">
-    <h3 class="mr-5 min-w-0 text-xl font-black tracking-[-0.02em] text-ink dark:text-paper">
-      {resource.title}
-    </h3>
-    <Badge text={resource.category} color={categoryStyle.color} textColor={categoryStyle.textColor} />
-  </div>
-  <p class="mb-4 flex-grow leading-7 text-muted dark:text-[#fffefb]/80">
-    {resource.description}
-  </p>
-  {resource.official && (
-    <div class="mt-2">
-      <Badge text="Official Waterloo source" color="bg-[#83ced5]" textColor="text-[#48301f]" />
+<a
+  href={resource.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group flex items-center justify-between gap-5 p-5 transition-colors hover:bg-sky/12 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-brown dark:hover:bg-sky/8 dark:focus-visible:outline-hardhat sm:p-6"
+>
+  <div class="min-w-0">
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+      <h3 class="text-xl font-semibold text-ink dark:text-paper">{resource.title}</h3>
+      {resource.official && <span class="text-xs font-semibold text-teal-deep dark:text-sky">Official Waterloo source</span>}
     </div>
-  )}
+    <p class="mt-2 leading-7 text-muted dark:text-paper/70">{resource.description}</p>
+  </div>
+  <span class="shrink-0 text-lg font-bold text-teal-deep dark:text-sky" aria-hidden="true">↗</span>
 </a>

@@ -21,8 +21,8 @@ const categoryId = (category: string) => `resources-${category.toLowerCase().rep
       title="Cohort resources."
       description="A short, maintained index of the Waterloo services, academic references and practical tools worth keeping nearby."
     >
-      <div class="mt-8 max-w-4xl rounded-2xl border-2 border-brown bg-paper px-5 py-4 text-sm leading-6 text-brown shadow-[3px_3px_0_#48301f] dark:border-hardhat dark:bg-night-panel dark:text-paper">
-        <strong class="font-black">Curated, not exhaustive.</strong> Verify important information with official sources. Have a link worth keeping? <a href={`${base}contribute`} class="brand-text-link font-black">Share it with the cohort.</a>
+      <div class="mt-7 max-w-4xl text-sm leading-6 text-brown/80">
+        <strong class="font-bold">Curated, not exhaustive.</strong> Verify important information with official sources. Have a link worth keeping? <a href={`${base}contribute`} class="brand-text-link font-bold">Share it with the cohort.</a>
       </div>
     </PageIntro>
 
@@ -30,8 +30,8 @@ const categoryId = (category: string) => `resources-${category.toLowerCase().rep
       {allCategories.length > 0 ? (
         allCategories.map(category => (
           <section class="mb-14 last:mb-0" aria-labelledby={categoryId(category)}>
-            <h2 id={categoryId(category)} class="mb-6 text-3xl font-black capitalize tracking-[-0.035em] text-ink dark:text-paper">{category}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 id={categoryId(category)} class="mb-5 text-3xl font-semibold capitalize text-ink dark:text-paper">{category}</h2>
+            <div class="cozy-panel divide-y divide-teal-deep/10 overflow-hidden dark:divide-sky/15">
               {RESOURCES.filter(r => r.category === category).map(resource => (
                 <ResourceCard resource={resource} />
               ))}

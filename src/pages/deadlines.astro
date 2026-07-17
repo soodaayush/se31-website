@@ -28,17 +28,17 @@ const pastDeadlines = DEADLINES.filter(d => getDeadlineStatus(d, now) === "past"
       title="Important deadlines."
       description="A public record of the dates that shape our transition into 1A, with the official source attached to every entry."
     >
-      <div class="mt-8 max-w-4xl rounded-2xl border-2 border-brown bg-hardhat px-5 py-4 text-sm leading-6 text-brown shadow-[3px_3px_0_#48301f] dark:border-hardhat dark:bg-hardhat dark:text-brown">
-        <p class="font-black">Use the official source for final confirmation.</p>
+      <div class="quiet-note mt-7 max-w-4xl text-sm leading-6">
+        <p class="font-bold">Use the official source for final confirmation.</p>
         <p>Every entry shows when its source was last checked. Statuses are refreshed daily.</p>
       </div>
     </PageIntro>
 
-    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div class="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       {ongoingDeadlines.length > 0 && (
         <section class="mb-14" aria-labelledby="ongoing-heading">
-          <h2 id="ongoing-heading" class="mb-6 text-3xl font-black tracking-[-0.035em] text-ink dark:text-paper">Happening now</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 id="ongoing-heading" class="mb-6 text-3xl font-semibold text-ink dark:text-paper">Happening now</h2>
+          <div class="cozy-panel divide-y divide-teal-deep/10 overflow-hidden dark:divide-sky/15">
             {ongoingDeadlines.map((deadline) => (
               <DeadlineCard deadline={deadline} status="ongoing" />
             ))}
@@ -47,9 +47,9 @@ const pastDeadlines = DEADLINES.filter(d => getDeadlineStatus(d, now) === "past"
       )}
 
       <section class="mb-14" aria-labelledby="upcoming-heading">
-        <h2 id="upcoming-heading" class="mb-6 text-3xl font-black tracking-[-0.035em] text-ink dark:text-paper">Coming up</h2>
+        <h2 id="upcoming-heading" class="mb-6 text-3xl font-semibold text-ink dark:text-paper">Coming up</h2>
         {upcomingDeadlines.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="cozy-panel divide-y divide-teal-deep/10 overflow-hidden dark:divide-sky/15">
           {upcomingDeadlines.map((deadline) => (
             <DeadlineCard deadline={deadline} status="upcoming" />
           ))}
@@ -60,9 +60,9 @@ const pastDeadlines = DEADLINES.filter(d => getDeadlineStatus(d, now) === "past"
       </section>
 
       <section aria-labelledby="past-heading">
-        <h2 id="past-heading" class="mb-6 text-3xl font-black tracking-[-0.035em] text-ink dark:text-paper">Archive</h2>
+        <h2 id="past-heading" class="mb-6 text-3xl font-semibold text-ink dark:text-paper">Archive</h2>
         {pastDeadlines.length > 0 ? (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="cozy-panel divide-y divide-teal-deep/10 overflow-hidden dark:divide-sky/15">
             {pastDeadlines.map((deadline) => (
               <DeadlineCard deadline={deadline} status="past" />
             ))}

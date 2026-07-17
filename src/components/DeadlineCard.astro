@@ -18,105 +18,54 @@ const { deadline, status: suppliedStatus } = Astro.props;
 const status = suppliedStatus ?? getDeadlineStatus(deadline);
 const isPast = status === "past";
 const isOngoing = status === "ongoing";
-const statusBorder = isPast
-  ? "border-l-[#48301f]/55"
-  : isOngoing
-    ? "border-l-[#83ced5]"
-    : "border-l-[#f4ad4b]";
-
-const categoryStyleMap: Record<string, { color: string; textColor: string }> = {
-  academic: {
-    color: "bg-[#f4ad4b]",
-    textColor: "text-[#48301f]",
-  },
-  "co-op": {
-    color: "bg-[#83ced5]",
-    textColor: "text-[#48301f]",
-  },
-  orientation: {
-    color: "bg-[#f8cb10]",
-    textColor: "text-[#48301f]",
-  },
-  housing: {
-    color: "bg-[#fffefb]",
-    textColor: "text-[#48301f]",
-  },
-  financial: {
-    color: "bg-[#f4ad4b]",
-    textColor: "text-[#48301f]",
-  },
-  residence: {
-    color: "bg-[#83ced5]",
-    textColor: "text-[#48301f]",
-  },
-  international: {
-    color: "bg-[#6dacb1]",
-    textColor: "text-[#241a14]",
-  },
-};
-
-const textColor = isPast ? "text-muted dark:text-[#fffefb]/70" : "text-ink dark:text-paper";
-const descriptionColor = "text-muted dark:text-[#fffefb]/80";
-const categoryStyle = isPast
-  ? { color: "bg-[#48301f]", textColor: "text-[#fffefb]" }
-  : categoryStyleMap[deadline.category] ?? {
-      color: "bg-[#f8cb10]",
-      textColor: "text-[#48301f]",
-    };
-
-// Check if it's an 'action' type and has a time component (length > 10) for countdown eligibility
-const isCountdownEligible = deadline.deadlineType === 'action' && deadline.startDate.length > 10;
+const isCountdownEligible = deadline.deadlineType === "action" && deadline.startDate.length > 10;
 ---
 
-<article class={`brand-card flex flex-col border-l-[6px] p-6 ${statusBorder}`}>
-  <div class="flex justify-between items-start gap-4 mb-2">
-    <h3 class={`min-w-0 text-xl font-black tracking-[-0.02em] ${textColor}`}>
-      {deadline.title}
-    </h3>
-    <Badge text={deadline.category} color={categoryStyle.color} textColor={categoryStyle.textColor} />
+<article class="grid gap-4 p-6 sm:p-7 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-7">
+  <div>
+    <p class:list={["font-semibold leading-6", isPast ? "text-muted dark:text-paper/60" : "text-ink dark:text-paper"]}>
+      {formatTorontoDateTime(deadline.startDate)}
+      {deadline.endDate && <><br /><span class="text-sm">to {formatTorontoDateTime(deadline.endDate)}</span></>}
+    </p>
+    <p class="mt-2 text-xs font-semibold capitalize text-teal-deep dark:text-sky">
+      {deadline.category} · {deadline.deadlineType === "action" ? "Action" : "Event"}
+    </p>
   </div>
-  <p class={`mb-1 text-xs font-black uppercase tracking-[0.08em] ${descriptionColor}`}>
-    {deadline.deadlineType === 'action' ? 'Action Required' : 'Event'}
-  </p>
-  <p class={`mb-4 ${descriptionColor}`}>
-    {formatTorontoDateTime(deadline.startDate)}
-    {deadline.endDate && ` – ${formatTorontoDateTime(deadline.endDate)}`}
-  </p>
-  <p class={`text-sm mb-4 ${descriptionColor}`}>
-    {deadline.description}
-  </p>
-  <p class="mb-4 text-xs font-semibold text-muted dark:text-[#fffefb]/70">Applies to: {deadline.appliesTo}</p>
 
-  <div class="mt-auto">
-    <p class="mb-2 text-sm">
+  <div class="min-w-0">
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <h3 class:list={["text-xl font-semibold leading-tight sm:text-2xl", isPast ? "text-muted dark:text-paper/65" : "text-ink dark:text-paper"]}>
+        {deadline.title}
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        {isOngoing && <Badge text="Happening now" color="bg-sky" textColor="text-brown" />}
+        {deadline.priority === "high" && !isPast && <Badge text="High priority" color="bg-hardhat" textColor="text-brown" />}
+        {!deadline.verified && <Badge text="Unverified" color="bg-signal" textColor="text-brown" />}
+      </div>
+    </div>
+
+    <p class:list={["mt-3 leading-7", isPast ? "text-muted dark:text-paper/60" : "text-muted dark:text-paper/75"]}>
+      {deadline.description}
+    </p>
+    <p class="mt-2 text-sm text-muted dark:text-paper/65">Applies to: {deadline.appliesTo}</p>
+
+    <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
       {deadline.sourceUrl ? (
-        <a href={deadline.sourceUrl} target="_blank" rel="noopener noreferrer" class="brand-text-link font-black text-spruce dark:text-lime">
-          {deadline.sourceLabel}
+        <a href={deadline.sourceUrl} target="_blank" rel="noopener noreferrer" class="brand-text-link font-bold text-teal-deep dark:text-sky">
+          {deadline.sourceLabel} ↗
         </a>
       ) : (
-        <span class="font-bold text-[#48301f] dark:text-[#f4ad4b]">Official source not provided</span>
+        <span class="font-semibold text-signal">Official source not provided</span>
       )}
-    </p>
-    <p class="mb-3 text-[0.7rem] font-bold uppercase tracking-[0.07em] text-muted dark:text-[#fffefb]/70">
-      Last checked {formatTorontoDate(deadline.lastVerified)}
-    </p>
+      <span class="text-xs font-semibold text-muted dark:text-paper/60">
+        Checked {formatTorontoDate(deadline.lastVerified)}
+      </span>
+    </div>
+
     {isCountdownEligible && status === "upcoming" && (
-      <div class="mt-2">
+      <div class="mt-3">
         <Countdown targetDate={deadline.startDate} client:load />
       </div>
     )}
-    <div class="mt-3 flex flex-wrap gap-2">
-      {isOngoing && (
-        <Badge text="Happening now" color="bg-[#83ced5]" textColor="text-[#48301f]" />
-      )}
-      {deadline.priority === "high" && !isPast && (
-        <Badge text="High priority" color="bg-[#f8cb10]" textColor="text-[#48301f]" />
-      )}
-      {deadline.verified ? (
-        <Badge text="Source verified" color="bg-[#83ced5]" textColor="text-[#48301f]" />
-      ) : (
-        <Badge text="Unverified" color="bg-[#f4ad4b]" textColor="text-[#48301f]" />
-      )}
-    </div>
   </div>
 </article>

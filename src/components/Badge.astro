@@ -7,13 +7,13 @@ interface Props {
 
 const {
   text,
-  color = "bg-[#f8cb10]",
-  textColor = "text-[#48301f]",
+  color = "bg-hardhat",
+  textColor = "text-brown",
 } = Astro.props;
 ---
 
 <span
-  class={`inline-flex shrink-0 items-center rounded-full border border-[#48301f]/25 px-2.5 py-1 text-xs font-bold shadow-[1px_1px_0_rgb(72_48_31_/_0.22)] ${color} ${textColor}`}
+  class={`inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-semibold ${color} ${textColor}`}
 >
   {text}
 </span>

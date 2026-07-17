@@ -6,41 +6,41 @@ const currentYear = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
 ---
 
-<footer class="mt-auto border-t-8 border-hardhat bg-brown text-paper">
+<footer class="brand-surface mt-auto bg-sky text-brown">
   <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
     <div class="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr]">
       <div class="max-w-md">
         <div class="flex items-center gap-3">
           <BrandMark class="h-11 w-11" />
           <div>
-            <p class="text-lg font-black tracking-[-0.03em]">SE31 Nest</p>
-            <p class="text-sm font-bold text-hardhat">Our cohort, all in one place.</p>
+            <p class="font-display text-lg font-bold">SE31 Nest</p>
+            <p class="text-sm font-semibold text-brown/80">Our cohort, all in one place.</p>
           </div>
         </div>
-        <p class="mt-5 text-sm leading-6 text-[#e8ddd3]">{SITE_CONFIG.disclaimer}</p>
+        <p class="mt-5 text-sm leading-6 text-brown/80">{SITE_CONFIG.disclaimer}</p>
       </div>
 
       <div>
-        <p class="text-sm font-extrabold text-hardhat">Explore</p>
+        <p class="text-sm font-bold text-brown">Explore</p>
         <ul class="mt-4 space-y-2 text-sm">
-          <li><a class="brand-text-link focus-visible:outline-lime" href={`${base}courses`}>Courses</a></li>
-          <li><a class="brand-text-link focus-visible:outline-lime" href={`${base}deadlines`}>Deadlines</a></li>
-          <li><a class="brand-text-link focus-visible:outline-lime" href={`${base}timetable`}>Timetable</a></li>
-          <li><a class="brand-text-link focus-visible:outline-lime" href={`${base}resources`}>Resources</a></li>
+          <li><a class="brand-text-link focus-visible:outline-brown" href={`${base}courses`}>Courses</a></li>
+          <li><a class="brand-text-link focus-visible:outline-brown" href={`${base}deadlines`}>Deadlines</a></li>
+          <li><a class="brand-text-link focus-visible:outline-brown" href={`${base}timetable`}>Timetable</a></li>
+          <li><a class="brand-text-link focus-visible:outline-brown" href={`${base}resources`}>Resources</a></li>
         </ul>
       </div>
 
       <div>
-        <p class="text-sm font-extrabold text-hardhat">About this site</p>
+        <p class="text-sm font-bold text-brown">About this site</p>
         <ul class="mt-4 space-y-2 text-sm">
-          <li><a class="brand-text-link focus-visible:outline-lime" href={`${base}contribute`}>Contribute</a></li>
-          <li><a class="brand-text-link focus-visible:outline-lime" href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer">View the code ↗</a></li>
-          <li><a class="brand-text-link focus-visible:outline-lime" href={`${SITE_CONFIG.githubUrl}/blob/main/LICENSE`} target="_blank" rel="noopener noreferrer">MIT licence ↗</a></li>
+          <li><a class="brand-text-link focus-visible:outline-brown" href={`${base}contribute`}>Contribute</a></li>
+          <li><a class="brand-text-link focus-visible:outline-brown" href={SITE_CONFIG.githubUrl} target="_blank" rel="noopener noreferrer">View the code ↗</a></li>
+          <li><a class="brand-text-link focus-visible:outline-brown" href={`${SITE_CONFIG.githubUrl}/blob/main/LICENSE`} target="_blank" rel="noopener noreferrer">MIT licence ↗</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="mt-10 flex flex-col gap-2 border-t border-sky/35 pt-5 text-xs text-[#e8ddd3] sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-10 flex flex-col gap-2 border-t border-brown/15 pt-5 text-xs text-brown/80 sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; {currentYear} SE31 Nest contributors.</p>
       <p>Maintained by students · Sources linked</p>
     </div>

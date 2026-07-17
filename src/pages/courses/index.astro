@@ -18,26 +18,14 @@ import { COURSES } from "../../data/courses";
       title="Your first term, course by course."
       description="Get the essential topics, grading breakdown, workload, materials and policies for all six courses—then open the original Waterloo outline when you need the full source."
     >
-      <div class="mt-8 max-w-4xl rounded-2xl border-2 border-brown bg-hardhat px-5 py-4 text-sm leading-6 text-brown shadow-[3px_3px_0_#48301f] dark:border-hardhat dark:bg-hardhat dark:text-brown">
-        <strong class="font-black">Archived reference:</strong> These guides summarize Fall 2025 outlines. Course content, grading, dates and policies can change, so always follow your current instructor and LEARN.
+      <div class="quiet-note mt-7 max-w-4xl text-sm leading-6">
+        <strong class="font-bold">Archived reference:</strong> These guides summarize Fall 2025 outlines. Course content, grading, dates and policies can change, so always follow your current instructor and LEARN.
       </div>
     </PageIntro>
 
-    <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8" aria-labelledby="course-list-heading">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
-        <div>
-          <p class="mb-2 inline-flex rounded-full border-2 border-brown bg-sky px-3 py-1 text-sm font-extrabold text-brown dark:border-hardhat">Six required courses</p>
-          <h2 id="course-list-heading" class="text-3xl font-black tracking-[-0.035em] text-ink dark:text-paper">
-            Explore the term
-          </h2>
-        </div>
-        <p class="text-sm text-muted dark:text-[#d9d2ca]">
-          Select a guide or open its archived outline directly.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-        {COURSES.map((course) => <CourseCard course={course} />)}
+    <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8" aria-label="First-term course guides">
+      <div class="cozy-panel grid overflow-hidden md:grid-cols-2">
+        {COURSES.map((course, index) => <CourseCard course={course} index={index} total={COURSES.length} />)}
       </div>
     </section>
   </main>

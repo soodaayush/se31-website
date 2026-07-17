@@ -21,9 +21,9 @@ const base = import.meta.env.BASE_URL;
     />
 
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <div class="mb-10 rounded-[1.125rem] border-2 border-[#48301f]/30 border-l-[6px] border-l-[#f8cb10] bg-[#f8cb10]/20 p-5 text-[#48301f] shadow-[4px_4px_0_rgb(72_48_31_/_0.1)] dark:border-[#735a47] dark:border-l-[#f8cb10] dark:bg-[#302219] dark:text-[#fffefb]">
-        <p class="font-black">Showcase your work</p>
-        <p class="mt-1 leading-7">Have you built something cool? Add your project to the showcase. <a href={`${base}contribute`} class="brand-text-link font-black text-brown dark:text-hardhat">Learn how to contribute.</a></p>
+      <div class="quiet-note mb-10 p-5">
+        <p class="font-bold">Showcase your work</p>
+        <p class="mt-1 leading-7">Have you built something cool? Add your project to the showcase. <a href={`${base}contribute`} class="brand-text-link font-bold text-brown dark:text-hardhat">Learn how to contribute.</a></p>
       </div>
 
       {PROJECTS.length > 0 ? (

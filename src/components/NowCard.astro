@@ -18,23 +18,24 @@ const {
 } = Astro.props;
 
 const toneClasses = {
-  lime: "border-l-hardhat",
-  sky: "border-l-sky",
-  amber: "border-l-signal",
+  lime: "bg-hardhat",
+  sky: "bg-sky",
+  amber: "bg-signal",
 };
 ---
 
-<article class={`brand-card flex h-full flex-col border-l-[0.65rem] p-5 sm:p-6 ${toneClasses[tone]}`}>
-  <p class="mb-3 text-sm font-extrabold text-brown dark:text-hardhat">
+<article class="flex h-full flex-col p-6 sm:p-7">
+  <p class="mb-3 flex items-center gap-2 text-sm font-bold text-teal-deep dark:text-sky">
+    <span class={`h-2.5 w-2.5 rounded-full ${toneClasses[tone]}`} aria-hidden="true"></span>
     {label}
   </p>
-  <h3 class="text-xl font-extrabold leading-tight tracking-[-0.02em] text-ink dark:text-paper sm:text-2xl">
+  <h3 class="text-xl font-semibold leading-tight text-ink dark:text-paper sm:text-2xl">
     {title}
   </h3>
-  <div class="mt-4 flex-grow text-sm leading-6 text-muted dark:text-[#d9d2ca]">
+  <div class="mt-4 flex-grow text-sm leading-6 text-muted dark:text-paper/70">
     <slot />
   </div>
-  <div class="mt-5 border-t-2 border-brown/15 pt-4 dark:border-night-border">
+  <div class="mt-5 pt-1">
     <slot name="meta" />
     <a
       href={href}

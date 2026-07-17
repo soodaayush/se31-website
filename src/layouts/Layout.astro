@@ -1,5 +1,7 @@
 ---
 import { SITE_CONFIG } from "../data/siteConfig";
+import "@fontsource-variable/fredoka/wght.css";
+import "@fontsource-variable/atkinson-hyperlegible-next/wght.css";
 import "../styles/global.css";
 
 const base = import.meta.env.BASE_URL;
@@ -59,7 +61,7 @@ const socialImageUrl = new URL("social-card.png", SITE_CONFIG.siteUrl).toString(
       })();
     </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-paper text-ink dark:bg-night dark:text-paper transition-colors duration-200 motion-reduce:transition-none">
+  <body class="min-h-screen flex flex-col bg-mist text-ink dark:bg-night dark:text-paper transition-colors duration-200 motion-reduce:transition-none">
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-lime focus:px-4 focus:py-3 focus:font-bold focus:text-ink focus:shadow-lg focus:outline focus:outline-3 focus:outline-offset-2 focus:outline-spruce dark:focus:outline-lime"

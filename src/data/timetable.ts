@@ -20,12 +20,12 @@ export const TIMETABLE_META = {
 } as const;
 
 const COURSE_COLORS = {
-  math135: "border-[#48301f] bg-[#fffefb] text-[#48301f]",
+  math135: "border-[#48301f] bg-[#fefdfa] text-[#48301f]",
   math117: "border-[#48301f] bg-[#6dacb1] text-[#48301f]",
   math115: "border-[#48301f] bg-[#f4ad4b] text-[#48301f]",
   cs137: "border-[#48301f] bg-[#83ced5] text-[#48301f]",
   che102: "border-[#48301f] bg-[#f8cb10] text-[#48301f]",
-  se101: "border-[#fffefb] bg-[#48301f] text-[#fffefb]",
+  se101: "border-[#fefdfa] bg-[#48301f] text-[#fefdfa]",
 } as const;
 
 export const TIMETABLE: TimetableEntry[] = [

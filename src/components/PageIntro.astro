@@ -8,16 +8,16 @@ interface Props {
 const { eyebrow, title, description } = Astro.props;
 ---
 
-<section class="goose-pattern border-b-2 border-brown bg-sky px-4 py-12 dark:border-hardhat dark:bg-night-panel sm:py-16">
+<section class="brand-surface goose-pattern bg-sky px-4 py-12 text-brown dark:bg-sky dark:text-brown sm:py-16">
   <div class="mx-auto max-w-7xl sm:px-2 lg:px-4">
-    <p class="sticker-label mb-4">
+    <p class="mb-3 text-sm font-bold text-brown/80">
       {eyebrow}
     </p>
-    <h1 class="max-w-4xl text-4xl font-black leading-[1.02] tracking-[-0.045em] text-ink dark:text-paper sm:text-5xl lg:text-6xl">
+    <h1 class="max-w-4xl text-4xl font-bold leading-[1.04] text-brown sm:text-5xl lg:text-6xl">
       {title}
     </h1>
     {description && (
-      <p class="mt-5 max-w-3xl text-lg leading-8 text-brown dark:text-[#d9d2ca]">
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-brown/85">
         {description}
       </p>
     )}
