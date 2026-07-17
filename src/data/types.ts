@@ -1,7 +1,7 @@
 export interface Deadline {
   id: string;
   title: string;
-  category: "financial" | "housing" | "academic" | "orientation" | "residence" | "international";
+  category: "financial" | "housing" | "academic" | "co-op" | "orientation" | "residence" | "international";
   startDate: string;
   endDate?: string;
   deadlineType: "action" | "event";

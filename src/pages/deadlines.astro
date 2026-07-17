@@ -4,34 +4,48 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import DeadlineCard from "../components/DeadlineCard.astro";
 import EmptyState from "../components/EmptyState.astro";
-import { SITE_CONFIG } from "../data/siteConfig";
 import { DEADLINES } from "../data/deadlines";
+import { getDeadlineStartTime, getDeadlineStatus } from "../utils/date";
 
 const now = new Date();
 
-const upcomingDeadlines = DEADLINES.filter(d => new Date(d.startDate) > now)
-  .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+const ongoingDeadlines = DEADLINES.filter(d => getDeadlineStatus(d, now) === "ongoing")
+  .sort((a, b) => getDeadlineStartTime(a) - getDeadlineStartTime(b));
 
-const pastDeadlines = DEADLINES.filter(d => new Date(d.startDate) <= now)
-  .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()); // Sort past deadlines newest first
+const upcomingDeadlines = DEADLINES.filter(d => getDeadlineStatus(d, now) === "upcoming")
+  .sort((a, b) => getDeadlineStartTime(a) - getDeadlineStartTime(b));
+
+const pastDeadlines = DEADLINES.filter(d => getDeadlineStatus(d, now) === "past")
+  .sort((a, b) => getDeadlineStartTime(b) - getDeadlineStartTime(a));
 ---
 
 <Layout title="Deadlines - SE31 Hub" description="Important public cohort deadlines for SE31.">
   <Navbar />
-  <main class="container mx-auto px-4 py-8">
+  <main id="main-content" class="container mx-auto px-4 py-8" tabindex="-1">
     <h1 class="text-4xl font-bold text-center mb-8">Important Deadlines</h1>
 
-    <div class="bg-yellow-100 dark:bg-yellow-900 border-l-4 border-yellow-500 text-yellow-700 dark:text-yellow-300 p-4 mb-8" role="alert">
-      <p class="font-bold">Notice:</p>
-      <p>Always confirm academic and administrative deadlines through official University of Waterloo sources.</p>
+    <div class="bg-yellow-50 dark:bg-yellow-950/50 border-l-4 border-yellow-500 text-yellow-950 dark:text-yellow-100 p-4 mb-8">
+      <p class="font-bold">Use the official source for final confirmation.</p>
+      <p>Every entry shows when its source was last checked. Deadline status is refreshed through a daily site build.</p>
     </div>
 
-    <section class="mb-12">
-      <h2 class="text-3xl font-bold mb-6">Upcoming Deadlines</h2>
+    {ongoingDeadlines.length > 0 && (
+      <section class="mb-12" aria-labelledby="ongoing-heading">
+        <h2 id="ongoing-heading" class="text-3xl font-bold mb-6">Happening Now</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ongoingDeadlines.map((deadline) => (
+            <DeadlineCard deadline={deadline} status="ongoing" />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="mb-12" aria-labelledby="upcoming-heading">
+      <h2 id="upcoming-heading" class="text-3xl font-bold mb-6">Coming Up</h2>
       {upcomingDeadlines.length > 0 ? (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {upcomingDeadlines.map((deadline) => (
-            <DeadlineCard deadline={deadline} />
+            <DeadlineCard deadline={deadline} status="upcoming" />
           ))}
         </div>
       ) : (
@@ -39,12 +53,12 @@ const pastDeadlines = DEADLINES.filter(d => new Date(d.startDate) <= now)
       )}
     </section>
 
-    <section>
-      <h2 class="text-3xl font-bold mb-6">Past Deadlines</h2>
+    <section aria-labelledby="past-heading">
+      <h2 id="past-heading" class="text-3xl font-bold mb-6">Archive</h2>
       {pastDeadlines.length > 0 ? (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pastDeadlines.map((deadline) => (
-            <DeadlineCard deadline={deadline} isPast={true} />
+            <DeadlineCard deadline={deadline} status="past" />
           ))}
         </div>
       ) : (

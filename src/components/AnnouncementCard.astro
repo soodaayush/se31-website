@@ -1,4 +1,6 @@
 ---
+import { formatTorontoDate } from "../utils/date";
+
 interface Props {
   announcement: {
     title: string;
@@ -13,8 +15,8 @@ const { announcement } = Astro.props;
 <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 shadow">
   <div class="flex justify-between items-start mb-2">
     <h2 class="text-2xl font-semibold">{announcement.title}</h2>
-    <span class="text-sm text-gray-500">
-      {new Date(announcement.date).toLocaleDateString()}
+    <span class="text-sm text-gray-600 dark:text-gray-300">
+      {formatTorontoDate(announcement.date)}
     </span>
   </div>
 

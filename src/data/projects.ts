@@ -1,18 +1,8 @@
 import type { Project } from "./types";
 
-export const PROJECTS: Project[] = [
-  {
-    name: "SE31 Hub",
-    description: "Open-source website for the Waterloo Software Engineering Class of 2031. Built by SE31, for SE31.",
-    authors: ["Your Name/GitHub Handle"], // Placeholder
-    repoUrl: "https://github.com/A-coder152/se31-website",
-    demoUrl: "https://a-coder152.github.io/se31-website/",
-    tags: ["web", "open-source", "community", "astro", "tailwind", "typescript"],
-    featured: true,
-  },
-  // Add more example projects here.
-  // Ensure names or GitHub handles are only used when voluntarily provided.
-];
+// Projects should only be published with the contributors' consent and working links.
+// The showcase remains hidden from primary navigation until genuine submissions arrive.
+export const PROJECTS: Project[] = [];
 
 // Example of an empty array with comments for production readiness:
 /*

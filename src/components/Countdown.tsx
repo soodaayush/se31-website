@@ -1,14 +1,22 @@
-// src/components/Countdown.tsx
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState, type ReactNode } from "react";
 
 interface CountdownProps {
   targetDate: string;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+const UNITS: Array<keyof TimeLeft> = ["days", "hours", "minutes", "seconds"];
+
+const Countdown = ({ targetDate }: CountdownProps) => {
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
-    let timeLeft = {
+    let timeLeft: TimeLeft = {
       days: 0,
       hours: 0,
       minutes: 0,
@@ -31,36 +39,29 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
   useEffect(() => {
     setIsClient(true);
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    setTimeLeft(calculateTimeLeft());
+    const timer = window.setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
 
-    return () => clearTimeout(timer);
-  }, [timeLeft]);
-
-  const timerComponents: JSX.Element[] = [];
+    return () => window.clearInterval(timer);
+  }, [targetDate]);
 
   if (!isClient) {
     return <span className="text-gray-500">Loading countdown...</span>;
   }
 
-  Object.keys(timeLeft).forEach((interval) => {
-    // @ts-ignore
-    if (timeLeft[interval] > 0 || interval === "seconds") { // Display seconds even if 0 if there are other units left
-      // @ts-ignore
-      timerComponents.push(
-        <span key={interval} className="mr-1">
-          {/* @ts-ignore */}
-          {timeLeft[interval]} {interval}{" "}
+  const hasTimeRemaining = UNITS.some((unit) => timeLeft[unit] > 0);
+  const timerComponents: ReactNode[] = hasTimeRemaining
+    ? UNITS.filter((unit) => timeLeft[unit] > 0 || unit === "seconds").map((unit) => (
+        <span key={unit} className="mr-1">
+          {timeLeft[unit]} {unit}{" "}
         </span>
-      );
-    }
-  });
+      ))
+    : [];
 
   return (
-    <div className="text-sm font-medium text-blue-600 dark:text-blue-400">
-      {timerComponents.length ? timerComponents : <span className="text-gray-500">Deadline passed</span>}
-    </div>
+    <time dateTime={targetDate} className="text-sm font-medium text-blue-700 dark:text-blue-300">
+      {timerComponents.length > 0 ? timerComponents : <span className="text-gray-600 dark:text-gray-400">Deadline passed</span>}
+    </time>
   );
 };
 

@@ -115,17 +115,17 @@ export const RESOURCES: Resource[] = [
   },
   {
     title: "Software Engineering News",
-    description: "Official news page for the Software Engineering prorgam.",
+    description: "Official news page for the Software Engineering program.",
     category: "Academics",
     url: "https://uwaterloo.ca/software-engineering/news",
     official: true,
   },
   {
-    title: "Degree Planning and Enhancement ",
+    title: "Degree Planning and Enhancement",
     description:
       "Official page for Software Engineering degree specializations and other options.",
     category: "Academics",
-    url: "https://uwaterloo.ca/software-engineering/news",
+    url: "https://uwaterloo.ca/software-engineering/undergraduate-students/degree-planning-and-enhancement",
     official: true,
   },
 ];

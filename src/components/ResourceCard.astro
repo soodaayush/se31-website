@@ -8,29 +8,34 @@ interface Props {
 
 const { resource } = Astro.props;
 
-const categoryColorMap: { [key: string]: string } = {
-  "University": "bg-indigo-500",
-  "Academics": "bg-red-500",
-  "Co-op": "bg-blue-500",
-  "Student life": "bg-green-500",
-  "Developer tools": "bg-purple-500",
-  "Community": "bg-yellow-500",
+const categoryStyleMap: Record<string, { color: string; textColor: string }> = {
+  University: { color: "bg-indigo-100 dark:bg-indigo-950", textColor: "text-indigo-800 dark:text-indigo-200" },
+  Academics: { color: "bg-red-100 dark:bg-red-950", textColor: "text-red-800 dark:text-red-200" },
+  "Co-op": { color: "bg-blue-100 dark:bg-blue-950", textColor: "text-blue-800 dark:text-blue-200" },
+  "Student life": { color: "bg-green-100 dark:bg-green-950", textColor: "text-green-800 dark:text-green-200" },
+  "Developer tools": { color: "bg-purple-100 dark:bg-purple-950", textColor: "text-purple-800 dark:text-purple-200" },
+  Community: { color: "bg-yellow-100 dark:bg-yellow-950", textColor: "text-yellow-900 dark:text-yellow-200" },
+};
+
+const categoryStyle = categoryStyleMap[resource.category] ?? {
+  color: "bg-gray-200 dark:bg-gray-700",
+  textColor: "text-gray-800 dark:text-gray-100",
 };
 ---
 
-<a href={resource.url} target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
+<a href={resource.url} target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md rounded-xl p-6 hover:shadow-xl transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">
   <div class="flex justify-between items-start mb-2">
     <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mr-5 min-w-0">
       {resource.title}
     </h3>
-    <Badge text={resource.category} color={categoryColorMap[resource.category] || "bg-gray-500"} />
+    <Badge text={resource.category} color={categoryStyle.color} textColor={categoryStyle.textColor} />
   </div>
   <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
     {resource.description}
   </p>
   {resource.official && (
     <div class="mt-2">
-      <Badge text="Official" color="bg-green-600" />
+      <Badge text="Official Waterloo source" color="bg-green-100 dark:bg-green-950" textColor="text-green-900 dark:text-green-200" />
     </div>
   )}
 </a>
