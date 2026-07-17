@@ -8,7 +8,7 @@ import { formatTorontoDate } from "../utils/date";
 const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 const START = 8 * 60 + 30;
-const SLOT_HEIGHT = 48;
+const SLOT_HEIGHT = 40;
 function toMinutes(time: string) {
 	const [h, m] = time.split(":").map(Number);
 	return h * 60 + m;
@@ -54,16 +54,16 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 		</div>
 
 		<section aria-labelledby="agenda-heading" class="lg:sr-only">
-			<h2 id="agenda-heading" class="mb-5 text-2xl font-bold">Daily agenda</h2>
-			<div class="space-y-8">
+			<h2 id="agenda-heading" class="mb-4 text-2xl font-bold">Daily agenda</h2>
+			<div class="space-y-6">
 				{days.map((day) => (
 					<section aria-labelledby={`agenda-${day.toLowerCase()}`}>
-						<h3 id={`agenda-${day.toLowerCase()}`} class="mb-3 text-xl font-bold">{day}</h3>
-						<ol class="space-y-3">
+						<h3 id={`agenda-${day.toLowerCase()}`} class="mb-2 text-xl font-bold">{day}</h3>
+						<ol class="space-y-2">
 							{TIMETABLE.filter((event) => event.day === day).map((event) => (
-								<li class={`rounded-xl border border-black/10 p-4 shadow-sm dark:border-white/15 ${event.color}`}>
+								<li class={`rounded-xl border border-black/10 p-3 shadow-sm dark:border-white/15 ${event.color}`}>
 									<strong class="text-lg">{event.course} {event.type}</strong>
-									<p class="mt-2 text-sm">
+									<p class="mt-1 text-sm">
 										<time datetime={event.start}>{event.start}</time>–<time datetime={event.end}>{event.end}</time>
 										<span aria-hidden="true"> · </span>
 										<span>{event.location || "Location not confirmed"}</span>
@@ -82,7 +82,7 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 					grid
 					min-w-[930px]
 					grid-cols-[80px_repeat(5,minmax(170px,1fr))]
-					grid-rows-[48px_auto]
+					grid-rows-[44px_auto]
 					border
 					border-gray-300
 					bg-white
@@ -97,7 +97,7 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 						<div
 							class="
 								flex
-								h-12
+								h-11
 								items-center
 								justify-center
 								border-b
@@ -121,7 +121,7 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 							<div
 								class="
 									flex
-									h-12
+									h-10
 									items-center
 									justify-center
 									border-b
@@ -156,7 +156,7 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 								times.map(() => (
 									<div
 										class="
-											h-12
+											h-10
 											border-b
 											border-gray-200
 											box-border
@@ -185,7 +185,8 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 													rounded-lg
 													border
 													border-black/10
-													p-2
+													px-2
+													py-1
 													text-[0.8rem]
 													leading-tight
 													shadow-sm
@@ -202,7 +203,7 @@ const missingLocationCount = TIMETABLE.filter((event) => !event.location).length
 												{event.course} {event.type}
 											</div>
 							
-											<div class="mt-1 text-[0.72rem] opacity-80">
+											<div class="mt-0.5 text-[0.72rem] opacity-80">
 												{event.location || "Location TBD"}
 											</div>
 										</div>

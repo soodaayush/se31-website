@@ -13,7 +13,7 @@ export const DEADLINES: Deadline[] = [
     sourceLabel: "Campus Housing — First-Year and Transfer Students",
     sourceUrl: "https://uwaterloo.ca/campus-housing/first-year-transfer",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "high"
   },
   {
@@ -28,7 +28,7 @@ export const DEADLINES: Deadline[] = [
     sourceLabel: "Campus Housing — Housing Accommodations",
     sourceUrl: "https://uwaterloo.ca/campus-housing/applications/housing-accommodations",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "high"
   },
   {
@@ -43,7 +43,7 @@ export const DEADLINES: Deadline[] = [
     sourceLabel: "Waterloo Ready — Important Dates",
     sourceUrl: "https://uwaterloo.ca/welcome-warriors/waterloo-ready/important-dates",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "high"
   },
   {
@@ -57,7 +57,7 @@ export const DEADLINES: Deadline[] = [
     sourceLabel: "Waterloo Ready — Important Dates",
     sourceUrl: "https://uwaterloo.ca/welcome-warriors/waterloo-ready/important-dates",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "normal"
   },
   {
@@ -73,7 +73,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/view-next-terms-schedule-and-appointments",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "normal"
   },
   {
@@ -89,7 +89,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/tuition-and-fees-due",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "high"
   },
   {
@@ -105,7 +105,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/welcome-warriors/orientation/first-year-orientation",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "normal"
   },
   {
@@ -120,7 +120,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-begin",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "normal"
   },
   {
@@ -135,7 +135,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/add-period-ends",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "high"
   },
   {
@@ -151,7 +151,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/last-day-to-drop-a-class-from-the-academic-record",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "high"
   },
   {
@@ -167,7 +167,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/reading-week",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "normal"
   },
   {
@@ -183,7 +183,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/drop-with-wd-ends",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "high"
   },
   {
@@ -198,7 +198,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/classes-end",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "normal"
   },
   {
@@ -214,7 +214,7 @@ export const DEADLINES: Deadline[] = [
     sourceUrl:
       "https://uwaterloo.ca/important-dates/undergraduate/2026-2027/final-examinations-begin",
     verified: true,
-    lastVerified: "2026-06-02",
+    lastVerified: "2026-07-16",
     priority: "normal"
   },
   {
