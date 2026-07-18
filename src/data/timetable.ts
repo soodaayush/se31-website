@@ -13,10 +13,19 @@ export const TIMETABLE_META = {
   status: "Unofficial planning draft",
   audience: "Incoming SE31 students",
   lastChecked: "2026-07-16",
-  sourceLabel: "Check Quest when official schedules are released",
+  sourceLabel: "Check your official schedule in Quest",
   sourceUrl: "https://uwaterloo.ca/quest/",
   notice:
-    "Official Fall 2026 schedules are not yet available in Quest. This community-created draft is unofficial, may change, and should not be used for enrolment or travel decisions.",
+    "This community-created draft was assembled before official schedules were released. Check Quest for your current official schedule; this draft may differ and should not be used for enrolment or travel decisions.",
+} as const;
+
+const COURSE_COLORS = {
+  math135: "border-[#48301f] bg-[#fefdfa] text-[#48301f]",
+  math117: "border-[#48301f] bg-[#6dacb1] text-[#48301f]",
+  math115: "border-[#48301f] bg-[#f4ad4b] text-[#48301f]",
+  cs137: "border-[#48301f] bg-[#83ced5] text-[#48301f]",
+  che102: "border-[#48301f] bg-[#f8cb10] text-[#48301f]",
+  se101: "border-[#fefdfa] bg-[#48301f] text-[#fefdfa]",
 } as const;
 
 export const TIMETABLE: TimetableEntry[] = [
@@ -28,7 +37,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "08:30",
     end: "09:20",
     location: "RCH 302",
-    color: "bg-stone-200 dark:bg-stone-700 text-black dark:text-white",
+    color: COURSE_COLORS.math135,
   },
   {
     course: "MATH 117",
@@ -37,7 +46,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "09:30",
     end: "10:20",
     location: "",
-    color: "bg-green-200 dark:bg-green-700 text-black dark:text-white",
+    color: COURSE_COLORS.math117,
   },
   {
     course: "CHE 102",
@@ -46,7 +55,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "10:30",
     end: "11:20",
     location: "",
-    color: "bg-yellow-200 dark:bg-yellow-700 text-black dark:text-white",
+    color: COURSE_COLORS.che102,
   },
   {
     course: "MATH 115",
@@ -55,7 +64,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "12:30",
     end: "13:20",
     location: "",
-    color: "bg-red-300 dark:bg-red-700 text-black dark:text-white",
+    color: COURSE_COLORS.math115,
   },
   {
     course: "CHE 102",
@@ -64,7 +73,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "14:30",
     end: "16:20",
     location: "",
-    color: "bg-yellow-100 dark:bg-yellow-600 text-black dark:text-white",
+    color: COURSE_COLORS.che102,
   },
 
   // Tuesday
@@ -75,7 +84,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "10:00",
     end: "11:20",
     location: "STC 0040",
-    color: "bg-blue-200 dark:bg-blue-700 text-black dark:text-white",
+    color: COURSE_COLORS.cs137,
   },
   {
     course: "CS 137",
@@ -84,7 +93,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "12:30",
     end: "14:20",
     location: "",
-    color: "bg-sky-100 dark:bg-sky-700 text-black dark:text-white",
+    color: COURSE_COLORS.cs137,
   },
   {
     course: "MATH 115",
@@ -93,7 +102,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "14:30",
     end: "16:20",
     location: "",
-    color: "bg-red-200 dark:bg-red-600 text-black dark:text-white",
+    color: COURSE_COLORS.math115,
   },
 
   // Wednesday
@@ -104,7 +113,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "08:30",
     end: "09:20",
     location: "RCH 302",
-    color: "bg-stone-200 dark:bg-stone-700 text-black dark:text-white",
+    color: COURSE_COLORS.math135,
   },
   {
     course: "MATH 117",
@@ -113,7 +122,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "09:30",
     end: "10:20",
     location: "",
-    color: "bg-green-200 dark:bg-green-700 text-black dark:text-white",
+    color: COURSE_COLORS.math117,
   },
   {
     course: "CHE 102",
@@ -122,7 +131,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "10:30",
     end: "11:20",
     location: "",
-    color: "bg-yellow-200 dark:bg-yellow-700 text-black dark:text-white",
+    color: COURSE_COLORS.che102,
   },
   {
     course: "MATH 115",
@@ -131,7 +140,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "12:30",
     end: "13:20",
     location: "",
-    color: "bg-red-300 dark:bg-red-700 text-black dark:text-white",
+    color: COURSE_COLORS.math115,
   },
   {
     course: "SE 101",
@@ -140,7 +149,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "15:30",
     end: "16:20",
     location: "",
-    color: "bg-fuchsia-300 text-black dark:bg-fuchsia-700 dark:text-white",
+    color: COURSE_COLORS.se101,
   },
   {
     course: "MATH 135",
@@ -149,7 +158,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "16:30",
     end: "17:20",
     location: "",
-    color: "bg-stone-300 dark:bg-stone-600 text-black dark:text-white",
+    color: COURSE_COLORS.math135,
   },
 
   // Thursday
@@ -160,7 +169,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "10:00",
     end: "11:20",
     location: "STC 0040",
-    color: "bg-blue-200 dark:bg-blue-700 text-black dark:text-white",
+    color: COURSE_COLORS.cs137,
   },
   {
     course: "SE 101",
@@ -169,7 +178,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "12:30",
     end: "14:20",
     location: "E2 1792",
-    color: "bg-fuchsia-200 text-black dark:bg-fuchsia-700 dark:text-white",
+    color: COURSE_COLORS.se101,
   },
   {
     course: "MATH 117",
@@ -178,7 +187,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "14:30",
     end: "16:20",
     location: "",
-    color: "bg-green-100 dark:bg-green-600 text-black dark:text-white",
+    color: COURSE_COLORS.math117,
   },
 
   // Friday
@@ -189,7 +198,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "08:30",
     end: "09:20",
     location: "RCH 302",
-    color: "bg-stone-200 dark:bg-stone-700 text-black dark:text-white",
+    color: COURSE_COLORS.math135,
   },
   {
     course: "MATH 117",
@@ -198,7 +207,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "09:30",
     end: "10:20",
     location: "",
-    color: "bg-green-200 dark:bg-green-700 text-black dark:text-white",
+    color: COURSE_COLORS.math117,
   },
   {
     course: "CHE 102",
@@ -207,7 +216,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "10:30",
     end: "11:20",
     location: "",
-    color: "bg-yellow-200 dark:bg-yellow-700 text-black dark:text-white",
+    color: COURSE_COLORS.che102,
   },
   {
     course: "MATH 115",
@@ -216,7 +225,7 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "12:30",
     end: "13:20",
     location: "",
-    color: "bg-red-300 dark:bg-red-700 text-black dark:text-white",
+    color: COURSE_COLORS.math115,
   },
   {
     course: "SE 101",
@@ -225,6 +234,6 @@ export const TIMETABLE: TimetableEntry[] = [
     start: "14:30",
     end: "15:20",
     location: "",
-    color: "bg-fuchsia-200 text-black dark:bg-fuchsia-600 dark:text-white",
+    color: COURSE_COLORS.se101,
   },
 ];

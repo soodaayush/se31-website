@@ -46,7 +46,7 @@ const Countdown = ({ targetDate }: CountdownProps) => {
   }, [targetDate]);
 
   if (!isClient) {
-    return <span className="text-gray-500">Loading countdown...</span>;
+    return <span className="text-muted dark:text-paper/70">Loading countdown...</span>;
   }
 
   const hasTimeRemaining = UNITS.some((unit) => timeLeft[unit] > 0);
@@ -59,8 +59,8 @@ const Countdown = ({ targetDate }: CountdownProps) => {
     : [];
 
   return (
-    <time dateTime={targetDate} className="text-sm font-medium text-blue-700 dark:text-blue-300">
-      {timerComponents.length > 0 ? timerComponents : <span className="text-gray-600 dark:text-gray-400">Deadline passed</span>}
+    <time dateTime={targetDate} className="text-sm font-bold text-ink dark:text-hardhat">
+      {timerComponents.length > 0 ? timerComponents : <span className="text-muted dark:text-paper/70">Deadline passed</span>}
     </time>
   );
 };

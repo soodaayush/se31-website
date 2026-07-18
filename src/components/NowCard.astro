@@ -1,0 +1,49 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  href: string;
+  linkLabel: string;
+  tone?: "lime" | "sky" | "amber";
+  external?: boolean;
+}
+
+const {
+  label,
+  title,
+  href,
+  linkLabel,
+  tone = "lime",
+  external = false,
+} = Astro.props;
+
+const toneClasses = {
+  lime: "bg-hardhat",
+  sky: "bg-sky",
+  amber: "bg-signal",
+};
+---
+
+<article class="flex h-full flex-col p-6 sm:p-7">
+  <p class="mb-3 flex items-center gap-2 text-sm font-bold text-teal-deep dark:text-sky">
+    <span class={`h-2.5 w-2.5 rounded-full ${toneClasses[tone]}`} aria-hidden="true"></span>
+    {label}
+  </p>
+  <h3 class="text-xl font-semibold leading-tight text-ink dark:text-paper sm:text-2xl">
+    {title}
+  </h3>
+  <div class="mt-4 flex-grow text-sm leading-6 text-muted dark:text-paper/70">
+    <slot />
+  </div>
+  <div class="mt-5 pt-1">
+    <slot name="meta" />
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      class="brand-text-link mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-ink dark:text-paper"
+    >
+      {linkLabel}<span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

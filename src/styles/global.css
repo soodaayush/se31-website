@@ -1,18 +1,62 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #111827;
-  --color-dark-text: #f9fafb;
+  --color-ink: #48301f;
+  --color-paper: #fefdfa;
+  --color-panel: #fefdfa;
+  --color-spruce: #356f72;
+  --color-lime: #f8cb10;
+  --color-sky: #83ced5;
+  --color-signal: #f4ad4b;
+  --color-muted: #665b51;
+  --color-night: #17383b;
+  --color-night-panel: #204b4f;
+  --color-night-border: #4f7b7d;
+  --color-pond: #83ced5;
+  --color-pond-deep: #6dacb1;
+  --color-feather: #fefdfa;
+  --color-hardhat: #f8cb10;
+  --color-beak: #f4ad4b;
+  --color-brown: #48301f;
+  --color-teal: #83ced5;
+  --color-teal-deep: #356f72;
+  --color-mist: #eaf7f6;
+  --color-soft-teal: #d8efee;
+  --font-sans: "Atkinson Hyperlegible Next Variable", "Trebuchet MS", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --font-display: "Fredoka Variable", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
 }
 
-/* Force dark mode class usage in Tailwind v4 */
+/* Force dark mode class usage in Tailwind v4. */
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
+  html {
+    font-family: var(--font-sans);
+    color-scheme: light dark;
+  }
+
+  body {
+    background: var(--color-mist);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 650;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: var(--color-hardhat);
+    color: var(--color-ink);
+  }
+
   html.theme-transition-ready *,
   html.theme-transition-ready *::before,
   html.theme-transition-ready *::after {
-    transition-duration: 300ms;
+    transition-duration: 260ms;
     transition-property: background-color, border-color, box-shadow, color, fill, stroke,
       text-decoration-color;
     transition-timing-function: ease;
@@ -24,5 +68,149 @@
     html.theme-transition-ready *::after {
       transition-duration: 0ms;
     }
+  }
+}
+
+@layer components {
+  .goose-pattern {
+    background-image:
+      radial-gradient(circle at 88% 12%, rgb(254 253 250 / 0.26) 0 9rem, transparent 9.1rem),
+      radial-gradient(circle at 8% 95%, rgb(109 172 177 / 0.3) 0 7rem, transparent 7.1rem);
+  }
+
+  .cozy-panel {
+    border: 1px solid rgb(72 48 31 / 0.08);
+    border-radius: 1.75rem;
+    background: var(--color-panel);
+    box-shadow: 0 14px 36px rgb(53 111 114 / 0.09);
+  }
+
+  .dark .cozy-panel {
+    border-color: rgb(131 206 213 / 0.16);
+    background: var(--color-night-panel);
+    box-shadow: 0 14px 36px rgb(0 0 0 / 0.14);
+  }
+
+  .quiet-note {
+    border-radius: 1.25rem;
+    background: rgb(248 203 16 / 0.2);
+    color: var(--color-ink);
+    padding: 1rem 1.15rem;
+  }
+
+  .dark .quiet-note {
+    background: rgb(248 203 16 / 0.14);
+    color: var(--color-paper);
+  }
+
+  /* Brand surfaces stay bright in both themes, so their controls keep dark ink. */
+  .dark .brand-surface .quiet-note {
+    background: rgb(248 203 16 / 0.2);
+    color: var(--color-ink);
+  }
+
+  .brand-button-primary,
+  .brand-button-highlight,
+  .brand-button-secondary {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.9rem;
+    padding: 0.72rem 1.15rem;
+    font-weight: 700;
+    transition: background-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+  }
+
+  .brand-button-primary {
+    background: var(--color-hardhat);
+    color: var(--color-ink);
+    box-shadow: 0 8px 20px rgb(72 48 31 / 0.12);
+  }
+
+  .brand-button-primary:hover {
+    background: #ffda3c;
+    box-shadow: 0 10px 24px rgb(72 48 31 / 0.16);
+  }
+
+  .brand-button-highlight {
+    background: var(--color-teal-deep);
+    color: var(--color-paper);
+    box-shadow: 0 8px 20px rgb(53 111 114 / 0.16);
+  }
+
+  .brand-button-highlight:hover {
+    background: #285d60;
+  }
+
+  .brand-button-secondary {
+    border: 1px solid rgb(72 48 31 / 0.18);
+    background: rgb(254 253 250 / 0.62);
+    color: var(--color-ink);
+  }
+
+  .dark .brand-button-secondary {
+    border-color: rgb(131 206 213 / 0.32);
+    background: rgb(131 206 213 / 0.08);
+    color: var(--color-paper);
+  }
+
+  .brand-button-secondary:hover {
+    background: rgb(254 253 250 / 0.9);
+  }
+
+  .dark .brand-button-secondary:hover {
+    background: rgb(131 206 213 / 0.16);
+  }
+
+  .dark .brand-surface .brand-button-secondary {
+    border-color: rgb(72 48 31 / 0.18);
+    background: rgb(254 253 250 / 0.62);
+    color: var(--color-ink);
+  }
+
+  .dark .brand-surface .brand-button-secondary:hover {
+    background: rgb(254 253 250 / 0.9);
+  }
+
+  .brand-button-primary:focus-visible,
+  .brand-button-highlight:focus-visible,
+  .brand-button-secondary:focus-visible,
+  .brand-text-link:focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  .dark .brand-button-primary:focus-visible,
+  .dark .brand-button-highlight:focus-visible,
+  .dark .brand-button-secondary:focus-visible,
+  .dark .brand-text-link:focus-visible {
+    outline-color: var(--color-hardhat);
+  }
+
+  .dark .brand-surface .brand-button-primary:focus-visible,
+  .dark .brand-surface .brand-button-highlight:focus-visible,
+  .dark .brand-surface .brand-button-secondary:focus-visible,
+  .dark .brand-surface .brand-text-link:focus-visible {
+    outline-color: var(--color-ink);
+  }
+
+  .brand-text-link {
+    text-decoration-color: var(--color-pond-deep);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.22rem;
+  }
+
+  .brand-text-link:hover {
+    text-decoration-line: underline;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-button-primary,
+  .brand-button-highlight,
+  .brand-button-secondary {
+    transition-duration: 0ms;
   }
 }

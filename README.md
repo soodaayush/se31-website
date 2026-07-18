@@ -1,19 +1,19 @@
-# SE31 Hub
+# SE31 Nest
 
-**Tagline:** Built by SE31, for SE31.
+**Tagline:** Our cohort, all in one place.
 
 ## Visit Site
 
-Access the live site here: [SE31 Hub](https://advancedforge.github.io/se31-website/)
+Access the live site here: [SE31 Nest](https://advancedforge.github.io/se31-website/)
 
 ## Purpose
 
-The SE31 Hub is an open-source, unofficial cohort website for the University of Waterloo Software Engineering Class of 2031. It serves as:
+SE31 Nest is an open-source, unofficial home for the University of Waterloo Software Engineering Class of 2031. It brings together:
 - A public landing page for the cohort.
-- A central resource hub for important links and information.
-- A showcase for student projects.
-- A dynamic countdown for important deadlines.
-- A platform for students to contribute and practice web development skills.
+- A source-linked record of important dates and trusted Waterloo links.
+- A skimmable guide to the six 1A courses, based on archived outlines.
+- A clearly labelled planning draft that always points students back to their official Quest schedule.
+- A shared cohort home that students can improve as we grow.
 
 ## Important Disclaimer
 
@@ -22,16 +22,17 @@ Please verify all academic and administrative deadlines and information through 
 
 ## Features
 
--   **Global Layout:** Responsive navigation and footer.
--   **Home Page:** Hero section, upcoming deadlines preview, featured resources, featured projects, contribution CTA.
+-   **Identity:** A cozy, teal-forward palette and friendly typography drawn from the original SE31 favicon, plus a responsive light/dark interface.
+-   **Home Page:** Current milestones, the next action, timetable status, all six 1A courses, official shortcuts, and a contribution CTA.
+-   **Courses:** Six detailed, navigable guides that summarize archived Fall 2025 Waterloo outlines and link back to the source.
 -   **Deadlines Page:** Chronological list of upcoming and past deadlines with live countdowns, categories, sources, and verification status.
+-   **Timetable Page:** An explicitly unofficial Fall 2026 planning draft with unconfirmed locations called out.
 -   **Resources Page:** Curated directory of links grouped by category, with clear source indicators.
--   **Projects Page:** Showcase of cohort projects with details, links, and tags.
--   **Contribute Page:** Detailed guide on how to contribute to the project.
+-   **Contribute:** A practical guide to improving content, features, design, and accessibility.
 -   **Tech Stack:** Astro, TypeScript, Tailwind CSS.
 -   **Deployment:** Static site generation, compatible with GitHub Pages.
 -   **Maintainability:** Easy for incoming students to contribute via GitHub pull requests.
--   **Design:** Clean, modern, responsive, accessible, dark mode support.
+-   **Design:** Responsive, accessible, dark-mode ready, and shaped around a playful identity that belongs to the cohort.
 
 ## Local Setup Instructions
 
