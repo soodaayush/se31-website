@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { DEADLINES } from "../src/data/deadlines.ts";
-import { RESOURCES } from "../src/data/resources.ts";
+import { QUICK_LAUNCH, RESOURCES } from "../src/data/resources.ts";
 import { SITE_CONFIG } from "../src/data/siteConfig.ts";
 
 test("deadline IDs are unique", () => {
@@ -21,6 +21,20 @@ test("resource URLs are valid and unique", () => {
   const urls = RESOURCES.map((resource) => resource.url);
   for (const url of urls) assert.doesNotThrow(() => new URL(url));
   assert.equal(new Set(urls).size, urls.length);
+});
+
+test("quick launch contains unique official platform resources", () => {
+  const titles = QUICK_LAUNCH.map((item) => item.resourceTitle);
+  const labels = QUICK_LAUNCH.map((item) => item.label);
+  assert.equal(new Set(titles).size, titles.length);
+  assert.equal(new Set(labels).size, labels.length);
+
+  for (const title of titles) {
+    const resource = RESOURCES.find((item) => item.title === title);
+    assert.ok(resource, `${title} needs a matching resource`);
+    assert.equal(resource.official, true, `${title} should be an official platform`);
+    assert.equal(new URL(resource.url).protocol, "https:", `${title} should use HTTPS`);
+  }
 });
 
 test("site ownership points to the canonical AdvancedForge locations", () => {
