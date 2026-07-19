@@ -1,5 +1,13 @@
 import type { Resource } from "./types";
 
+export const QUICK_LAUNCH = [
+  { resourceTitle: "LEARN", label: "LEARN", mark: "L" },
+  { resourceTitle: "Waterloo email", label: "Email", mark: "@" },
+  { resourceTitle: "Quest", label: "Quest", mark: "Q" },
+  { resourceTitle: "Portal", label: "Portal", mark: "P" },
+  { resourceTitle: "WaterlooWorks", label: "Waterloo Works", mark: "W" },
+] as const;
+
 export const RESOURCES: Resource[] = [
   {
     title: "Waterloo Ready Important Dates",
@@ -94,7 +102,7 @@ export const RESOURCES: Resource[] = [
     description:
       "Waterloo's student information system for course enrolment, grades, schedules and tuition.",
     category: "University",
-    url: "https://uwaterloo.ca/the-centre/quest",
+    url: "https://quest.pecs.uwaterloo.ca/psp/SS/ACADEMIC/SA/?cmd=login&languageCd=ENG",
     official: true,
   },
   {
@@ -103,6 +111,14 @@ export const RESOURCES: Resource[] = [
       "Waterloo's student portal for quick access to email, LEARN, Quest and other campus systems.",
     category: "University",
     url: "https://portal.uwaterloo.ca/",
+    official: true,
+  },
+  {
+    title: "Waterloo email",
+    description:
+      "Your Waterloo Outlook inbox for course messages, announcements and university email.",
+    category: "University",
+    url: "https://outlook.office365.com/mail/",
     official: true,
   },
   {
@@ -253,7 +269,7 @@ export const RESOURCES: Resource[] = [
     description:
       "Official co-op portal for job postings, applications, interviews and work term coordination.",
     category: "University",
-    url: "https://waterlooworks.uwaterloo.ca/",
+    url: "https://waterlooworks.uwaterloo.ca/waterloo.htm?action=login",
     official: true,
   },
   {
